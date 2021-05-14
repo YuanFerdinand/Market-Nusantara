@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/views/bottom_navigation.dart';
 import 'package:market_nusantara/views/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -145,20 +146,28 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                         ),
                         Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            height: 33,
-                            width: 153,
-                            child: Center(
-                              child: Text(
-                                "MASUK",
-                                style: TextStyle(
-                                    color: Color(0xff894BF9),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w900),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return BottomNavigation();
+                              }));
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              height: 33,
+                              width: 153,
+                              child: Center(
+                                child: Text(
+                                  "MASUK",
+                                  style: TextStyle(
+                                      color: Color(0xff894BF9),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900),
+                                ),
                               ),
                             ),
                           ),
