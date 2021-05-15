@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   form_field_validator: ^1.0.1
   image_picker:
+  bubble: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +53,12 @@ flutter:
     - assets/diterima.png
     - assets/dikirim.jpg
     - assets/intel9.png
-    - assets/corei7.png
+    - assets/processor/corei3.jpg
+    - assets/processor/corei5.jpg
+    - assets/processor/corei7.jpg
+    - assets/processor/corei9.jpg
+    - assets/etc/user.png
+    - assets/etc/wa.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
