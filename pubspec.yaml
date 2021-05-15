@@ -51,6 +51,7 @@ flutter:
     - assets/diproses.png
     - assets/diterima.png
     - assets/dikirim.jpg
+    - assets/intel9.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
