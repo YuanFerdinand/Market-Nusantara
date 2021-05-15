@@ -59,6 +59,9 @@ flutter:
     - assets/processor/corei9.jpg
     - assets/etc/user.png
     - assets/etc/wa.png
+    - assets/corei7.png
+    - assets/logo.png
+    - assets/nama.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

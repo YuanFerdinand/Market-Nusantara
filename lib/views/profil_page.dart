@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/views/about_page.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
@@ -27,6 +28,17 @@ class _ProfilPageState extends State<ProfilPage> {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return AddItemPage();
+                }));
+              }),
+          IconButton(
+              icon: Icon(
+                Icons.assignment_ind_sharp,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) {
+                  return AboutPage();
                 }));
               }),
           IconButton(
@@ -82,7 +94,7 @@ class _ProfilPageState extends State<ProfilPage> {
             Container(
               padding: EdgeInsets.all(10),
               width: MediaQuery.of(context).size.width * 0.5,
-              margin: EdgeInsets.only(bottom: 70),
+              margin: EdgeInsets.only(bottom: 50),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   color: Color(0xffFF1192)),
@@ -96,6 +108,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 ),
               ),
             ),
+            Container(height: MediaQuery.of(context).size.height * 0.09),
             Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
