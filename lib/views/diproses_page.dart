@@ -13,80 +13,128 @@ class _DiprosesPageState extends State<DiprosesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Color(0xff2CCACA),
-          title: Text("Barang Diproses"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(
-                  Icons.exit_to_app,
-                  size: 35,
-                ),
-                onPressed: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
-                    return ProfilPage();
-                  }));
-                }),
-          ],
-        ),
-        body: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Color(0xff2CCACA),
-            Color(0xFF11A0FF),
-            Color(0xE5FF11D7),
-            Color(0xE5FF1194)
-          ])),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                height: 10,
+      appBar: AppBar(
+        title: Text("Proses"),
+        elevation: 0.0,
+        backgroundColor: Color(0xff2CCACA),
+      ),
+      extendBodyBehindAppBar: false,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            width: MediaQuery.of(context).size.width * 1,
+            height: MediaQuery.of(context).size.height * 1,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: <Color>[Color(0xff2CCACA), Color(0xffFF1192)])),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.97,
+                    height: MediaQuery.of(context).size.height * 0.55,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15))),
+                  ),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
+            ],
+          ),
+          Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Prosesor",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                Text(
+                  "CORE i7-10700K",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+                Container(
+                    margin: EdgeInsets.only(bottom: 20, top: 50, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage("assets/corei7.png"),
+                          // height: MediaQuery.of(context).size.height * 0.4,
+                          width: MediaQuery.of(context).size.width * 0.4,
+                        )
+                      ],
+                    )),
+                Container(
+                    child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Processor",
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    SizedBox(
-                      height: 0,
-                    ),
-                    Text(
-                      "CORE i9-190900KF",
+                      "Status : SEDANG DIKEMAS",
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 18,
+                          fontFamily: "Poppins",
                           fontWeight: FontWeight.bold),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                            child:
-                                Image(image: AssetImage("assets/intel9.png")))
-                      ],
-                    )
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "Last Status Update : 06 - Mei - 2021",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 10),
+                      child: Text(
+                        "Price : 9.200.00",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: "Poppins",
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 60),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.blueAccent,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        height: 33,
+                        width: 153,
+                        child: Center(
+                          child: Text(
+                            "Chat Penjual",
+                            style: TextStyle(
+                                color: Color(0xFFFFFFFF),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
-                ),
-              ),
-              SizedBox(
-                height: 150,
-              ),
-              Expanded(
-                  child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60))),
-              ))
-            ],
+                ))
+              ],
+            ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
