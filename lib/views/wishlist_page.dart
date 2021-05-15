@@ -44,35 +44,6 @@ class _WishListPageState extends State<WishListPage> {
               ),
             ),
           ),
-          actions: <Widget>[
-            new IconButton(
-                icon: Icon(
-                  Icons.message,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new MessagePage()));
-                }),
-            new IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new WishListPage()));
-                }),
-            new IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new CartPage()));
-                })
-          ],
         ),
         body: ListView(
           children: <Widget>[
@@ -82,7 +53,7 @@ class _WishListPageState extends State<WishListPage> {
                 top: 10,
               ),
               child: Text(
-                "Favorite",
+                "FAVOURITE",
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),

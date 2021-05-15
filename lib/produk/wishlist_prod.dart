@@ -9,25 +9,25 @@ class WishlishProdPage extends StatefulWidget {
 class _WishlishProdPageState extends State<WishlishProdPage> {
   var processor_list = [
     {
-      "picture": "assets/processor/corei3.jpg",
+      "picture": "assets/corei3.png",
     },
     {
-      "picture": "assets/processor/corei5.jpg",
+      "picture": "assets/corei5.png",
     },
     {
-      "picture": "assets/processor/corei7.jpg",
+      "picture": "assets/corei7.png",
     },
     {
-      "picture": "assets/processor/corei9.jpg",
+      "picture": "assets/corei9.png",
     },
     {
-      "picture": "assets/processor/corei9.jpg",
+      "picture": "assets/corei3.png",
     },
     {
-      "picture": "assets/processor/corei9.jpg",
+      "picture": "assets/corei5.png",
     },
     {
-      "picture": "assets/processor/corei9.jpg",
+      "picture": "assets/core2.png",
     },
   ];
   @override

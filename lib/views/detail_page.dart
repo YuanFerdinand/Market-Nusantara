@@ -121,21 +121,39 @@ class _DetailPageState extends State<DetailPage> {
                         children: <Widget>[
                           GestureDetector(
                             onTap: () {
-                              setState(() {
-                                counter -= 1;
-                              });
+                              if (counter > 1) {
+                                setState(() {
+                                  counter -= 1;
+                                });
+                              } else {
+                                setState(() {
+                                  counter = 0;
+                                });
+                              }
                             },
-                            child: Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: GestureDetector(
-                                    onTap: () {
-                                      setState(() {
-                                        counter -= 1;
-                                      });
-                                    },
-                                    child: Icon(Icons.remove))),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.black)),
+                              child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        if (counter > 0) {
+                                          setState(() {
+                                            counter -= 1;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            counter = 0;
+                                          });
+                                        }
+                                      },
+                                      child: Icon(Icons.remove))),
+                            ),
                           ),
-                          Text(counter.toString(),
+                          Text("  " + counter.toString() + "  ",
                               style: TextStyle(fontSize: 25)),
                           GestureDetector(
                             onTap: () {
@@ -149,7 +167,7 @@ class _DetailPageState extends State<DetailPage> {
                                   side: BorderSide(
                                       width: 1, color: Colors.black)),
                               child: Container(
-                                  margin: EdgeInsets.only(left: 10),
+                                  margin: EdgeInsets.all(10),
                                   child: GestureDetector(
                                       onTap: () {
                                         setState(() {
@@ -163,7 +181,7 @@ class _DetailPageState extends State<DetailPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 75),
+                      margin: EdgeInsets.only(top: 60),
                       child: Row(
                         children: [
                           Card(
