@@ -52,11 +52,11 @@ flutter:
     - assets/diproses.png
     - assets/diterima.png
     - assets/dikirim.jpg
-    - assets/intel9.png
-    - assets/processor/corei3.jpg
-    - assets/processor/corei5.jpg
-    - assets/processor/corei7.jpg
-    - assets/processor/corei9.jpg
+    - assets/core2.png
+    - assets/corei3.png
+    - assets/corei5.png
+    - assets/corei7.png
+    - assets/corei9.png
     - assets/etc/user.png
     - assets/etc/wa.png
     - assets/corei7.png

@@ -9,7 +9,7 @@ class _ProdukCartState extends State<ProdukCart> {
   var cart_produk = [
     {
       "name": "core i9",
-      "picture": "assets/processor/corei9.jpg",
+      "picture": "assets/corei9.png",
       "price": "IDR 9.200.000",
       "type": "processor",
       "Brand": "Intel",
@@ -17,7 +17,7 @@ class _ProdukCartState extends State<ProdukCart> {
     },
     {
       "name": "core i7",
-      "picture": "assets/processor/corei7.jpg",
+      "picture": "assets/corei7.png",
       "price": "IDR 9.200.000",
       "type": "processor",
       "Brand": "Intel",
@@ -41,7 +41,7 @@ class _ProdukCartState extends State<ProdukCart> {
   }
 }
 
-class Single_cart_prod extends StatelessWidget {
+class Single_cart_prod extends StatefulWidget {
   final cart_picture;
   final cart_name;
   final cart_price;
@@ -59,12 +59,18 @@ class Single_cart_prod extends StatelessWidget {
   });
 
   @override
+  _Single_cart_prodState createState() => _Single_cart_prodState();
+}
+
+class _Single_cart_prodState extends State<Single_cart_prod> {
+  @override
   Widget build(BuildContext context) {
+    int counter;
     return Card(
         margin: EdgeInsets.only(top: 25, left: 15, right: 15),
         child: ListTile(
-          leading: new Image.asset(cart_picture),
-          title: new Text(cart_name),
+          leading: new Image.asset(widget.cart_picture),
+          title: new Text(widget.cart_name),
           // title: new Image.asset(
           //   cart_picture,
           //   height: 70,
@@ -74,28 +80,84 @@ class Single_cart_prod extends StatelessWidget {
             children: <Widget>[
               new Row(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(0.0),
-                    child: new Text("Type:"),
-                  ),
+                  new Text("Type:"),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: new Text(
-                      cart_tipe,
+                      widget.cart_tipe,
                     ),
                   ),
 
-                  new Container(
-                      padding: EdgeInsets.only(left: 125),
-                      child: Row(
-                        children: [
-                          new IconButton(
-                              icon: Icon(Icons.add), onPressed: () {}),
-                          new Text("$cart_qty"),
-                          new IconButton(
-                              icon: Icon(Icons.remove), onPressed: () {}),
-                        ],
-                      ))
+                  Container(
+                    margin: EdgeInsets.only(top: 4, left: 40),
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            if (counter > 1) {
+                              setState(() {
+                                counter -= 1;
+                              });
+                            } else {
+                              setState(() {
+                                counter = 0;
+                              });
+                            }
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side:
+                                    BorderSide(width: 1, color: Colors.black)),
+                            child: Container(
+                                margin: EdgeInsets.all(7),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      if (counter > 0) {
+                                        setState(() {
+                                          counter -= 1;
+                                        });
+                                      } else {
+                                        setState(() {
+                                          counter = 0;
+                                        });
+                                      }
+                                    },
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 14,
+                                    ))),
+                          ),
+                        ),
+                        Text(" 4 ", style: TextStyle(fontSize: 18)),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              counter += 1;
+                            });
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side:
+                                    BorderSide(width: 1, color: Colors.black)),
+                            child: Container(
+                                margin: EdgeInsets.all(7),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        counter += 1;
+                                      });
+                                    },
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 14,
+                                    ))),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   // Expanded(child: new Text("Type: ")),
                   // Expanded(child: new Text("QTY: ")),
                 ],
@@ -109,12 +171,12 @@ class Single_cart_prod extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: new Text(
-                      cart_brand,
+                      widget.cart_brand,
                     ),
                   ),
                   new Container(
-                    padding: EdgeInsets.only(left: 170),
-                    child: new Text(cart_price),
+                    padding: EdgeInsets.only(left: 80),
+                    child: new Text(widget.cart_price),
                   )
                 ],
               ),

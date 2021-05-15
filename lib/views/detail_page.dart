@@ -7,6 +7,7 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int counter = 0;
+  bool fav = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,8 +66,27 @@ class _DetailPageState extends State<DetailPage> {
                 Container(
                     margin: EdgeInsets.only(bottom: 20, top: 50, right: 20),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 170),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  fav = !fav;
+                                });
+                              },
+                              child: (fav)
+                                  ? Icon(
+                                      Icons.favorite_border_outlined,
+                                      size: 45,
+                                    )
+                                  : Icon(
+                                      Icons.favorite,
+                                      color: Colors.pink,
+                                      size: 45,
+                                    )),
+                        ),
                         Image(
                           image: AssetImage("assets/corei7.png"),
                           // height: MediaQuery.of(context).size.height * 0.4,
@@ -99,14 +119,100 @@ class _DetailPageState extends State<DetailPage> {
                       margin: EdgeInsets.only(top: 60),
                       child: Row(
                         children: <Widget>[
-                          Container(
-                              margin: EdgeInsets.only(right: 5),
-                              child: Icon(Icons.remove)),
-                          Text(counter.toString(),
+                          GestureDetector(
+                            onTap: () {
+                              if (counter > 1) {
+                                setState(() {
+                                  counter -= 1;
+                                });
+                              } else {
+                                setState(() {
+                                  counter = 0;
+                                });
+                              }
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.black)),
+                              child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        if (counter > 0) {
+                                          setState(() {
+                                            counter -= 1;
+                                          });
+                                        } else {
+                                          setState(() {
+                                            counter = 0;
+                                          });
+                                        }
+                                      },
+                                      child: Icon(Icons.remove))),
+                            ),
+                          ),
+                          Text("  " + counter.toString() + "  ",
                               style: TextStyle(fontSize: 25)),
-                          Container(
-                              margin: EdgeInsets.only(left: 5),
-                              child: Icon(Icons.add))
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                counter += 1;
+                              });
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.black)),
+                              child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          counter += 1;
+                                        });
+                                      },
+                                      child: Icon(Icons.add))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(top: 60),
+                      child: Row(
+                        children: [
+                          Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      width: 1, color: Colors.black)),
+                              child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  child:
+                                      Icon(Icons.add_shopping_cart_rounded))),
+                          Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                // side: BorderSide(
+                                //     width: 1, color: Colors.black)
+                              ),
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.75,
+                                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                                  child: Center(
+                                    child: Text("BELI SEKARANG",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15)),
+                                  ))),
                         ],
                       ),
                     )

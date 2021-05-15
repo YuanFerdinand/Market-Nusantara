@@ -43,51 +43,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          actions: <Widget>[
-            new IconButton(
-                icon: Icon(
-                  Icons.message,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new MessagePage()));
-                }),
-            new IconButton(
-                icon: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new WishListPage()));
-                }),
-            new IconButton(
-                icon: Icon(
-                  Icons.shopping_cart,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(
-                      builder: (context) => new CartPage()));
-                })
-          ],
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(100.0),
-            child: TabBar(
-              isScrollable: true,
-              tabs: [
-                Text('Processor'),
-                Text('VGA Cards'),
-                Text('Memory'),
-                Text('Motherboard'),
-                Text('Disk'),
-                Text('Case'),
-              ],
-            ),
-          ),
         ),
-        drawer: new Drawer(),
         body: ListView(
           children: <Widget>[
             Container(

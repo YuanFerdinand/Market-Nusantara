@@ -47,7 +47,7 @@ class _BayarPageState extends State<BayarPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: Text(
                 "Yuan Ferdinand",
                 style: TextStyle(
@@ -81,7 +81,7 @@ class _BayarPageState extends State<BayarPage> {
               children: [
                 Center(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
+                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
                   child: Text(
                     "Please transfer to following number with amount below: ",
                     textAlign: TextAlign.center,
@@ -118,17 +118,14 @@ class _BayarPageState extends State<BayarPage> {
                     ),
                   ),
                 ),
-                Row(children: [
-                  SizedBox(
-                    width: 120,
-                  ),
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CircleAvatar(
                     radius: 20,
                     backgroundImage: AssetImage("assets/etc/wa.png"),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, left: 20, right: 10),
+                    padding: const EdgeInsets.only(
+                        top: 15, left: 20, right: 10, bottom: 13),
                     child: Text(
                       "082189839012",
                       textAlign: TextAlign.center,
