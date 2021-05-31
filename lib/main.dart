@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/bottom_navigation.dart';
-import 'package:market_nusantara/views/detail_page.dart';
 import 'package:market_nusantara/views/login_page.dart';
 
-void main() {
+import 'views/add_item_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
