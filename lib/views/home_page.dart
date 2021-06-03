@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                   elevation: 7,
                   child: Container(
                     padding: EdgeInsets.all(20),
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.25,
                     width: MediaQuery.of(context).size.width * 0.95,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -292,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                height: MediaQuery.of(context).size.height * 0.55,
+                height: MediaQuery.of(context).size.height * 0.45,
                 width: MediaQuery.of(context).size.width * 0.95,
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance

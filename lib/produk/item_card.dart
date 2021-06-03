@@ -31,8 +31,12 @@ class _ItemCardState extends State<ItemCard> {
           children: [
             ClipRRect(
                 borderRadius: BorderRadius.circular(150),
-                child:
-                    Image(fit: BoxFit.fill, image: NetworkImage(widget.gambar)))
+                child: Image(
+                    fit: BoxFit.fill, image: NetworkImage(widget.gambar))),
+            Text(
+              widget.nama,
+              style: TextStyle(fontSize: 12),
+            )
           ],
         ),
       ),

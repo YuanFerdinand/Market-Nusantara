@@ -78,7 +78,7 @@ class _ProfilPageState extends State<ProfilPage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(bottom: 20, top: 30),
+              margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
                 color: Color(0xff2CCACA),
@@ -93,6 +93,7 @@ class _ProfilPageState extends State<ProfilPage> {
             ),
             Container(
               padding: EdgeInsets.all(10),
+              margin: EdgeInsets.only(bottom: 10),
               width: MediaQuery.of(context).size.width * 0.5,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
@@ -107,9 +108,9 @@ class _ProfilPageState extends State<ProfilPage> {
                 ),
               ),
             ),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.09,
-            ),
+            // Container(
+            //   height: MediaQuery.of(context).size.height * 0.09,
+            // ),
             Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

@@ -35,8 +35,9 @@ class _AddItemPageState extends State<AddItemPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: [
-        Form(
+      body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: Form(
           child: Center(
             child: Container(
               width: MediaQuery.of(context).size.width * 1,
@@ -53,7 +54,7 @@ class _AddItemPageState extends State<AddItemPage> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: EdgeInsets.only(bottom: 10),
                     padding: EdgeInsets.only(
                       bottom: 5, // Space between underline and text
                     ),
@@ -72,318 +73,228 @@ class _AddItemPageState extends State<AddItemPage> {
                           fontWeight: FontWeight.w900),
                     ),
                   ),
-                  Flexible(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                          color: Colors.white),
-                      //0xff2CCACA : 0xff5D11FF
-                      width: MediaQuery.of(context).size.width * 0.95,
-                      height: MediaQuery.of(context).size.height * 0.85,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Nama",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (namaBarang) {
-                                    nama =
-                                        DatabaseMethods().getNama(namaBarang);
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Nama",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Deskripsi",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (detailBarang) {
-                                    this.detail = DatabaseMethods()
-                                        .getDetail(detailBarang);
-                                  },
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Detail",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Harga",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (hargaBarang) {
-                                    this.harga =
-                                        DatabaseMethods().getHarga(hargaBarang);
-                                  },
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.number,
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Harga",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Tipe",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (tipeBarang) {
-                                    this.tipe =
-                                        DatabaseMethods().getTipe(tipeBarang);
-                                  },
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.name,
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Tipe",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Merek",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (merekBarang) {
-                                    this.merek =
-                                        DatabaseMethods().getMerek(merekBarang);
-                                  },
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.name,
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Merek",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                // Align(
-                                //   alignment: Alignment.topLeft,
-                                //   child: Text(
-                                //     "Jumlah",
-                                //     style: TextStyle(
-                                //         fontSize: 22,
-                                //         fontWeight: FontWeight.bold,
-                                //         color: Color(0xff2CCACA)),
-                                //   ),
-                                // ),
-                                TextFormField(
-                                  onChanged: (jumlahBarang) {
-                                    this.jumlah = DatabaseMethods()
-                                        .getJumlah(jumlahBarang);
-                                  },
-                                  textInputAction: TextInputAction.next,
-                                  keyboardType: TextInputType.number,
-                                  cursorColor: Colors.black,
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(left: 5),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50)),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      hintText: "Jumlah",
-                                      hintStyle: TextStyle(
-                                          fontFamily: 'Poppins', fontSize: 12)),
-                                )
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Color(0xff2CCACA),
-                                        borderRadius:
-                                            BorderRadius.circular(50)),
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.43,
-                                    child: (imageDir == null)
-                                        ? Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text("Upload file",
-                                                  style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18)),
-                                              IconButton(
-                                                  icon: Icon(Icons.upload_file),
+                  Container(
+                    padding: EdgeInsets.only(left: 15, right: 15, top: 15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        color: Colors.white),
+                    //0xff2CCACA : 0xff5D11FF
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    height: MediaQuery.of(context).size.height * 0.8,
+                    child: ListView(
+                      children: [
+                        TextFormField(
+                          onChanged: (namaBarang) {
+                            nama = DatabaseMethods().getNama(namaBarang);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Nama",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                        ),
+                        TextFormField(
+                          onChanged: (detailBarang) {
+                            this.detail =
+                                DatabaseMethods().getDetail(detailBarang);
+                          },
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Detail",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                        ),
+                        TextFormField(
+                          onChanged: (hargaBarang) {
+                            this.harga =
+                                DatabaseMethods().getHarga(hargaBarang);
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Harga",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                        ),
+                        TextFormField(
+                          onChanged: (tipeBarang) {
+                            this.tipe = DatabaseMethods().getTipe(tipeBarang);
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Tipe",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                        ),
+                        TextFormField(
+                          onChanged: (merekBarang) {
+                            this.merek =
+                                DatabaseMethods().getMerek(merekBarang);
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.name,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Merek",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 25,
+                        ),
+                        TextFormField(
+                          onChanged: (jumlahBarang) {
+                            this.jumlah =
+                                DatabaseMethods().getJumlah(jumlahBarang);
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.number,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Jumlah",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 25,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                decoration: BoxDecoration(
+                                    color: Color(0xff2CCACA),
+                                    borderRadius: BorderRadius.circular(50)),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                width: MediaQuery.of(context).size.width * 0.43,
+                                child: (imageDir == null)
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text("Upload file",
+                                              style: TextStyle(
                                                   color: Colors.white,
-                                                  iconSize: 30,
-                                                  onPressed: () {
-                                                    getImage();
-                                                  })
-                                            ],
-                                          )
-                                        : Text(
-                                            imageDir.toString(),
-                                            maxLines: 1,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12),
-                                          )),
-                                GestureDetector(
-                                  onTap: () async {
-                                    Navigator.of(context).pushReplacement(
-                                        MaterialPageRoute(builder: (context) {
-                                      return BottomNavigation();
-                                    }));
-                                    if (imageDir != null) {
-                                      imagePath =
-                                          await DatabaseMethods.getGambar(
-                                              imageDir);
-                                    }
-                                    Map<String, dynamic> infoBarang = {
-                                      "nama": nama,
-                                      "detail": detail,
-                                      "tipe": tipe,
-                                      "dibuat": DateTime.now(),
-                                      "gambar": imagePath,
-                                      "harga": int.tryParse(this.harga),
-                                      "jumlah": int.tryParse(this.jumlah),
-                                      "merek": merek,
-                                      "terjual": null
-                                    };
-
-                                    DatabaseMethods().tambahBarang(infoBarang);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.43,
-                                    child: Center(
-                                      child: Text(
-                                        "Tambah",
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18)),
+                                          IconButton(
+                                              icon: Icon(Icons.upload_file),
+                                              color: Colors.white,
+                                              iconSize: 30,
+                                              onPressed: () {
+                                                getImage();
+                                              })
+                                        ],
+                                      )
+                                    : Text(
+                                        imageDir.toString(),
+                                        maxLines: 1,
                                         style: TextStyle(
                                             color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w900),
-                                      ),
-                                    ),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12),
+                                      )),
+                            GestureDetector(
+                              onTap: () async {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(builder: (context) {
+                                  return BottomNavigation();
+                                }));
+                                if (imageDir != null) {
+                                  imagePath =
+                                      await DatabaseMethods.getGambar(imageDir);
+                                }
+                                Map<String, dynamic> infoBarang = {
+                                  "nama": nama,
+                                  "detail": detail,
+                                  "tipe": tipe,
+                                  "dibuat": DateTime.now(),
+                                  "gambar": imagePath,
+                                  "harga": int.tryParse(this.harga),
+                                  "jumlah": int.tryParse(this.jumlah),
+                                  "merek": merek,
+                                  "terjual": null
+                                };
+
+                                DatabaseMethods().tambahBarang(infoBarang);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                width: MediaQuery.of(context).size.width * 0.43,
+                                child: Center(
+                                  child: Text(
+                                    "Tambah",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 25,
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -391,7 +302,7 @@ class _AddItemPageState extends State<AddItemPage> {
             ),
           ),
         ),
-      ]),
+      ),
     );
   }
 }
