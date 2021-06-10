@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/about_page.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
@@ -47,10 +48,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 size: 35,
               ),
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return LoginPage();
-                }));
+                Auth().signOut();
               }),
         ],
       ),

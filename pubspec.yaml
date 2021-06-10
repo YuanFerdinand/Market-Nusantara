@@ -33,6 +33,7 @@ dependencies:
   firebase_core:
   cloud_firestore:
   firebase_storage:
+  firebase_auth:
 
 dev_dependencies:
   flutter_test:
@@ -55,14 +56,9 @@ flutter:
     - assets/diproses.png
     - assets/diterima.png
     - assets/dikirim.jpg
-    - assets/core2.png
-    - assets/corei3.png
-    - assets/corei5.png
-    - assets/corei7.png
-    - assets/corei9.png
     - assets/etc/user.png
     - assets/etc/wa.png
-    - assets/corei7.png
+
     - assets/logo.png
     - assets/nama.png
     - assets/icon_processor.png
