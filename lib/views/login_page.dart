@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/bottom_navigation.dart';
+import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -9,6 +9,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   String email, password;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   bool _obsecureText = true;
   void _toggle() {
     setState(() {
@@ -19,6 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Form(
           child: Center(
@@ -78,9 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             TextFormField(
-                              onChanged: (value) {
-                                email = value.trim();
-                              },
+                              controller: emailController,
                               textInputAction: TextInputAction.next,
                               keyboardType: TextInputType.emailAddress,
                               cursorColor: Colors.black,
@@ -114,9 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             TextFormField(
-                              onChanged: (value) {
-                                password = value.trim();
-                              },
+                              controller: passwordController,
                               obscureText: _obsecureText,
                               textInputAction: TextInputAction.done,
                               keyboardType: TextInputType.emailAddress,
@@ -148,10 +147,8 @@ class _LoginPageState extends State<LoginPage> {
                         Center(
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return BottomNavigation();
-                              }));
+                              Auth().signIn(emailController.text,
+                                  passwordController.text, context);
                             },
                             child: Container(
                               decoration: BoxDecoration(

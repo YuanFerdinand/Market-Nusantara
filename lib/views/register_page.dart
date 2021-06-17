@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -8,6 +9,9 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   String email, password, username;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController usernameController = new TextEditingController();
   bool _obsecureText = true;
   void _toggle() {
     setState(() {
@@ -18,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(children: [
         Form(
           child: Center(
@@ -82,9 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               TextFormField(
-                                onChanged: (value) {
-                                  username = value.trim();
-                                },
+                                controller: usernameController,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.name,
                                 cursorColor: Colors.black,
@@ -118,9 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               TextFormField(
-                                onChanged: (value) {
-                                  email = value.trim();
-                                },
+                                controller: emailController,
                                 textInputAction: TextInputAction.next,
                                 keyboardType: TextInputType.emailAddress,
                                 cursorColor: Colors.black,
@@ -155,9 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               TextFormField(
-                                onChanged: (value) {
-                                  password = value.trim();
-                                },
+                                controller: passwordController,
                                 obscureText: _obsecureText,
                                 textInputAction: TextInputAction.done,
                                 keyboardType: TextInputType.emailAddress,
@@ -233,21 +232,32 @@ class _RegisterPageState extends State<RegisterPage> {
                               )
                             ],
                           ),
-                          Center(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Color(0xff2CCACA),
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              height: 33,
-                              width: 153,
-                              child: Center(
-                                child: Text(
-                                  "DAFTAR",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w900),
+                          GestureDetector(
+                            onTap: () {
+                              (passwordController.text == password)
+                                  ? Auth().signUp(
+                                      emailController.text,
+                                      passwordController.text,
+                                      usernameController.text,
+                                      context)
+                                  : print("Password yang dimasukan berbeda");
+                            },
+                            child: Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Color(0xff2CCACA),
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                height: 33,
+                                width: 153,
+                                child: Center(
+                                  child: Text(
+                                    "DAFTAR",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w900),
+                                  ),
                                 ),
                               ),
                             ),
