@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/model/auth.dart';
-import 'package:market_nusantara/views/bottom_navigation.dart';
 import 'package:market_nusantara/views/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -149,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: GestureDetector(
                             onTap: () {
                               Auth().signIn(emailController.text,
-                                  passwordController.text);
+                                  passwordController.text, context);
                             },
                             child: Container(
                               decoration: BoxDecoration(

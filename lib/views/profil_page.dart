@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/about_page.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
@@ -14,6 +16,21 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
+  String myOriginName, myUserName, myEmail, myId;
+
+  getMyInfoFromSharedPreferences() async {
+    myUserName = await SharedPreferenceHelper().getUserName();
+    myEmail = await SharedPreferenceHelper().getUserEmail();
+    myId = await SharedPreferenceHelper().getUserId();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +65,16 @@ class _ProfilPageState extends State<ProfilPage> {
                 size: 35,
               ),
               onPressed: () {
-                Auth().signOut();
+                FirebaseFirestore _firestore = FirebaseFirestore.instance;
+                CollectionReference _users = _firestore.collection('users');
+                _users
+                    .doc(myId)
+                    .update({
+                      'logedIn': "false",
+                    })
+                    .then((value) => print("User logout"))
+                    .catchError((error) => print("Gagal logout"));
+                Auth().toSignOut(context);
               }),
         ],
       ),

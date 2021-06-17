@@ -238,7 +238,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? Auth().signUp(
                                       emailController.text,
                                       passwordController.text,
-                                      usernameController.text)
+                                      usernameController.text,
+                                      context)
                                   : print("Password yang dimasukan berbeda");
                             },
                             child: Center(

@@ -1,15 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
 import 'package:market_nusantara/views/login_page.dart';
-
-import 'views/add_item_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(RestartWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,11 +17,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(fontFamily: "Poppins"),
-      home: StreamBuilder<Object>(
-          stream: auth.authStateChanges(),
-          builder: (context, snapshot) {
-            return (snapshot.data == null) ? LoginPage() : BottomNavigation();
-          }),
+      debugShowCheckedModeBanner: false,
+      home: FutureBuilder(
+        future: Auth().getCurrentUser(),
+        builder: (context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasData) {
+            return BottomNavigation();
+          } else {
+            return LoginPage();
+          }
+        },
+      ),
     );
   }
 }
