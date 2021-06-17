@@ -60,6 +60,8 @@ flutter:
     - assets/etc/user.png
     - assets/etc/wa.png
 
+    - assets/corei7.png
+    - assets/corei9.png
     - assets/logo.png
     - assets/nama.png
     - assets/icon_processor.png

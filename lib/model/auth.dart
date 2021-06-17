@@ -87,7 +87,7 @@ class Auth {
         String myBool = "LOGEDIN";
         SharedPreferenceHelper().saveUserEmail(userDetail.email);
         SharedPreferenceHelper().saveUserId(userDetail.uid);
-        SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]["name"]);
+        SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]['name']);
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
 
         myBool = await SharedPreferenceHelper().getLogedIn();
