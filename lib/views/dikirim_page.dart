@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'add_item_page.dart';
-
 class DikirimPage extends StatefulWidget {
   @override
   _DikirimPageState createState() => _DikirimPageState();

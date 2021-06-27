@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DetailPage extends StatefulWidget {
+  final String nama;
+  final String tipe;
+  final String gambar;
+  final String detail;
+
+  //// Pointer to Update Function
+  // final Function onUpdate;
+  // //// Pointer to Delete Function
+  // final Function onDelete;
+
+  DetailPage(
+    this.nama,
+    this.tipe,
+    this.gambar,
+    this.detail,
+  );
+
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -53,11 +71,11 @@ class _DetailPageState extends State<DetailPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Prosesor",
+                  widget.tipe,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 Text(
-                  "CORE i7-10700K",
+                  widget.nama,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
@@ -88,7 +106,7 @@ class _DetailPageState extends State<DetailPage> {
                                     )),
                         ),
                         Image(
-                          image: AssetImage("assets/corei7.png"),
+                          image: NetworkImage(widget.gambar),
                           // height: MediaQuery.of(context).size.height * 0.4,
                           width: MediaQuery.of(context).size.width * 0.4,
                         )
@@ -108,7 +126,7 @@ class _DetailPageState extends State<DetailPage> {
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       child: Text(
-                        "Only Compatible With Intel 400 Series Chipset Unlocked Multiplier, Fan Not Included Intel Core i7, Clock / Turbo: 3.8GHz / 5.1GHz, 18.0MB Total CacheOcta Core, Comet Lake-S, 125W, LGA 1200",
+                        widget.detail,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: "Poppins",

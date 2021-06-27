@@ -1,14 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
+import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/about_page.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
-import 'package:market_nusantara/views/login_page.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -17,12 +20,29 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  String myOriginName, myUserName, myEmail, myId;
+  String myUserName = "", myEmail = "", myId = "";
+  String myPict = "DEFAULT";
+  var imageDir;
+
+  Future<File> getImage() async {
+    var imageFile;
+    final picker = ImagePicker();
+    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+      return imageDir = imageFile;
+    } else {
+      return imageDir = imageFile;
+    }
+  }
 
   getMyInfoFromSharedPreferences() async {
     myUserName = await SharedPreferenceHelper().getUserName();
     myEmail = await SharedPreferenceHelper().getUserEmail();
     myId = await SharedPreferenceHelper().getUserId();
+    myPict = await SharedPreferenceHelper().getUserProfilePicture();
     setState(() {});
   }
 
@@ -85,61 +105,91 @@ class _ProfilPageState extends State<ProfilPage> {
             children: [
               Container(
                 margin: EdgeInsets.only(top: 30, bottom: 40, left: 20),
-                child: Row(children: <Widget>[
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(50.0),
-                    child: Container(
-                      //margin: EdgeInsets.only(top: 60, bottom: 30),
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage("assets/magnus.jpg"),
-                              fit: BoxFit.cover)),
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.only(bottom: 10, top: 2),
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color: Color(0xff2CCACA),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Magnus Carlsen",
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(50.0),
+                          child: (myPict != "DEFAULT")
+                              ? Container(
+                                  //margin: EdgeInsets.only(top: 60, bottom: 30),
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(myPict),
+                                          fit: BoxFit.cover)),
+                                )
+                              : GestureDetector(
+                                  onTap: () async {
+                                    File file = await getImage();
+                                    myPict = await DatabaseMethods.uploadGambar(
+                                        file);
+                                    FirebaseFirestore _firestore =
+                                        FirebaseFirestore.instance;
+                                    CollectionReference _users =
+                                        _firestore.collection('users');
+                                    _users.doc(myId).update({
+                                      'profilePict': myPict,
+                                    });
+                                    SharedPreferenceHelper()
+                                        .saveProfilePicture(myPict);
+                                    getMyInfoFromSharedPreferences();
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    //margin: EdgeInsets.only(top: 60, bottom: 30),
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image:
+                                                AssetImage("assets/add_pp.png"),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                )),
+                      Container(
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(bottom: 10, top: 2),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40),
+                                color: Color(0xff2CCACA),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  myUserName,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          margin: EdgeInsets.only(bottom: 10),
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(0xffFF1192)),
-                          child: Center(
-                            child: Text(
-                              " AIRO Corps. ",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.only(bottom: 10),
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(0xffFF1192)),
+                              child: Center(
+                                child: Text(
+                                  " AIRO Corps. ",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ]),
+                      ),
+                    ]),
               ),
               GestureDetector(
                 child: Card(
@@ -153,6 +203,7 @@ class _ProfilPageState extends State<ProfilPage> {
                         left: 15, right: 15, top: 10, bottom: 10),
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Center(
                           child: Container(
@@ -160,7 +211,12 @@ class _ProfilPageState extends State<ProfilPage> {
                           ),
                         ),
                         IconButton(
-                          padding: EdgeInsets.only(left: 280),
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return TokoPage();
+                            }));
+                          },
                           icon: Icon(
                             Icons.arrow_forward,
                           ),

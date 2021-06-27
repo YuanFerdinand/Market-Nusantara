@@ -31,6 +31,7 @@ class Auth {
           "email": userDetail.email,
           "name": username,
           "logedIn": "false",
+          "profilePict": "DEFAULT"
         };
 
         DatabaseMethods().tambahAkun(userDetail.uid, userInfoMap).then((value) {
@@ -84,33 +85,35 @@ class Auth {
 
       if (userCredential != null) {
         CollectionReference _users = _firestore.collection('users');
-        String myBool = "LOGEDIN";
+        String myBool = "false";
         SharedPreferenceHelper().saveUserEmail(userDetail.email);
         SharedPreferenceHelper().saveUserId(userDetail.uid);
         SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]['name']);
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
+        SharedPreferenceHelper()
+            .saveProfilePicture(querySnapshot.docs[0]['profilePict']);
 
         myBool = await SharedPreferenceHelper().getLogedIn();
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => BottomNavigation()));
 
-        print('XXXXXXXXXX disini');
-        print(myBool);
-        print('XXXXXXXXXX disini');
+        // print('XXXXXXXXXX disini');
+        // print(myBool);
+        // print('XXXXXXXXXX disini');
 
-        if (myBool == 'false') {
-          print("1 login");
-          Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (context) => BottomNavigation()));
-        } else {
-          print("2 login");
-          Auth().toSignOut(context);
-        }
-        _users
-            .doc(userDetail.uid)
-            .update({
-              'logedIn': "true",
-            })
-            .then((value) => print("User Login"))
-            .catchError((error) => print("Gagal login"));
+        // if (myBool == 'false') {
+        //   print("1 login");
+        // } else {
+        //   print("2 login");
+        //   Auth().toSignOut(context);
+        // }
+        // _users
+        //     .doc(userDetail.uid)
+        //     .update({
+        //       'logedIn': "true",
+        //     })
+        //     .then((value) => print("User Login"))
+        //     .catchError((error) => print("Gagal login"));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

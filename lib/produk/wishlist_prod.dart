@@ -58,8 +58,7 @@ class Single_prod extends StatelessWidget {
           tag: prod_picture,
           child: Material(
             child: InkWell(
-              onTap: () => Navigator.of(context).push(new MaterialPageRoute(
-                  builder: (context) => new DetailPage())),
+              onTap: () {},
               child: Stack(
                 children: <Widget>[
                   Image.asset(

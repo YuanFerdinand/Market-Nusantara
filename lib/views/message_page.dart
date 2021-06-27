@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/login_page.dart';
 import 'package:market_nusantara/produk/chat_messages.dart';
 
 class MessagePage extends StatefulWidget {

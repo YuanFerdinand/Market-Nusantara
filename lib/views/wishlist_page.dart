@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/produk/wishlist_prod.dart';
-import 'package:market_nusantara/views/cart_page.dart';
-import 'package:market_nusantara/views/message_page.dart';
-import 'package:market_nusantara/views/wishlist_page.dart';
 
 class WishListPage extends StatefulWidget {
   @override

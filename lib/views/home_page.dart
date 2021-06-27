@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/produk/item_card.dart';
-import 'package:market_nusantara/views/cart_page.dart';
 import 'package:market_nusantara/views/list_case.dart';
 import 'package:market_nusantara/views/list_disk.dart';
 import 'package:market_nusantara/views/list_memory.dart';
 import 'package:market_nusantara/views/list_motherboard.dart';
 import 'package:market_nusantara/views/list_processor.dart';
 import 'package:market_nusantara/views/list_vga.dart';
-import 'package:market_nusantara/views/message_page.dart';
-import 'package:market_nusantara/views/wishlist_page.dart';
 
 class HomePage extends StatefulWidget {
   @override

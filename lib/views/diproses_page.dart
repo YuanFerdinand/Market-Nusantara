@@ -1,8 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import 'add_item_page.dart';
-import 'profil_page.dart';
 
 class DiprosesPage extends StatefulWidget {
   @override

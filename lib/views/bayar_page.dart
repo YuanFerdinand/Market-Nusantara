@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/login_page.dart';
 
 class BayarPage extends StatefulWidget {
   @override

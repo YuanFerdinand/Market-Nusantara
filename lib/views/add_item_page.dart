@@ -1,5 +1,4 @@
 //import 'dart:ffi';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -254,7 +253,8 @@ class _AddItemPageState extends State<AddItemPage> {
                                 }));
                                 if (imageDir != null) {
                                   imagePath =
-                                      await DatabaseMethods.getGambar(imageDir);
+                                      await DatabaseMethods.uploadGambar(
+                                          imageDir);
                                 }
                                 Map<String, dynamic> infoBarang = {
                                   "nama": nama,

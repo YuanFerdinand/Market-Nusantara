@@ -51,7 +51,7 @@ class DatabaseMethods {
     return this.detail = detailBarang;
   }
 
-  static Future<String> getGambar(File imageFIle) async {
+  static Future<String> uploadGambar(File imageFIle) async {
     String fileName = basename(imageFIle.path);
     Reference ref = FirebaseStorage.instance.ref().child(fileName);
     UploadTask task = ref.putFile(imageFIle);
