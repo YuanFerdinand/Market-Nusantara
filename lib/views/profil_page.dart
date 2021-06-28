@@ -12,6 +12,7 @@ import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
+import 'package:market_nusantara/views/setting.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -20,9 +21,15 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  String myUserName = "", myEmail = "", myId = "";
-  String myPict = "DEFAULT";
-  var imageDir;
+  var imageDir = "DEFAULT";
+  String myPict = "DEFAULT", def = "DEFAULT";
+  String myUserName = "DEFAULT", myEmail = "DEFAULT", myId = "DEFAULT";
+
+  @override
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
 
   Future<File> getImage() async {
     var imageFile;
@@ -44,12 +51,6 @@ class _ProfilPageState extends State<ProfilPage> {
     myId = await SharedPreferenceHelper().getUserId();
     myPict = await SharedPreferenceHelper().getUserProfilePicture();
     setState(() {});
-  }
-
-  @override
-  void initState() {
-    getMyInfoFromSharedPreferences();
-    super.initState();
   }
 
   @override
@@ -75,9 +76,8 @@ class _ProfilPageState extends State<ProfilPage> {
                 size: 35,
               ),
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return AboutPage();
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SettingPage();
                 }));
               }),
           IconButton(
@@ -110,21 +110,45 @@ class _ProfilPageState extends State<ProfilPage> {
                     children: <Widget>[
                       ClipRRect(
                           borderRadius: BorderRadius.circular(50.0),
-                          child: (myPict != "DEFAULT")
-                              ? Container(
-                                  //margin: EdgeInsets.only(top: 60, bottom: 30),
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(myPict),
-                                          fit: BoxFit.cover)),
+                          child: (def != myPict)
+                              ? GestureDetector(
+                                  onTap: () async {
+                                    File file = await getImage();
+                                    (file != null)
+                                        ? myPict =
+                                            await DatabaseMethods.uploadGambar(
+                                                file)
+                                        : myPict = def;
+                                    FirebaseFirestore _firestore =
+                                        FirebaseFirestore.instance;
+                                    CollectionReference _users =
+                                        _firestore.collection('users');
+                                    _users.doc(myId).update({
+                                      'profilePict': myPict,
+                                    });
+                                    SharedPreferenceHelper()
+                                        .saveProfilePicture(myPict);
+                                    getMyInfoFromSharedPreferences();
+                                    setState(() {});
+                                  },
+                                  child: Container(
+                                    //margin: EdgeInsets.only(top: 60, bottom: 30),
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(myPict),
+                                            fit: BoxFit.cover)),
+                                  ),
                                 )
                               : GestureDetector(
                                   onTap: () async {
                                     File file = await getImage();
-                                    myPict = await DatabaseMethods.uploadGambar(
-                                        file);
+                                    (file != null)
+                                        ? myPict =
+                                            await DatabaseMethods.uploadGambar(
+                                                file)
+                                        : myPict = def;
                                     FirebaseFirestore _firestore =
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
@@ -161,7 +185,7 @@ class _ProfilPageState extends State<ProfilPage> {
                               ),
                               child: Center(
                                 child: Text(
-                                  myUserName,
+                                  myUserName ?? 'Wait',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
