@@ -12,6 +12,7 @@ import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
+import 'package:market_nusantara/views/Setting_page.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -77,7 +78,7 @@ class _ProfilPageState extends State<ProfilPage> {
               onPressed: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) {
-                  return AboutPage();
+                  return SettingPage();
                 }));
               }),
           IconButton(
@@ -161,7 +162,7 @@ class _ProfilPageState extends State<ProfilPage> {
                               ),
                               child: Center(
                                 child: Text(
-                                  myUserName,
+                                  myUserName ?? "Tunggu..",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,

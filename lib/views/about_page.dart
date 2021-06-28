@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/views/Setting_page.dart';
 
 class AboutPage extends StatefulWidget {
   @override
@@ -9,6 +10,17 @@ class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return SettingPage();
+            }));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
