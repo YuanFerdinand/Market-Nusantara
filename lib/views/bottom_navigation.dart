@@ -38,23 +38,23 @@ class _BottomNavigationState extends State<BottomNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: ('Home'),
+            label: ('Beranda'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: ('Wish'),
+            label: ('Harapan'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
-            label: ('Message'),
+            label: ('Pesan'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.card_travel),
-            label: ('Cart'),
+            label: ('Keranjang'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: ('Profile'),
+            label: ('Profil'),
           ),
         ],
         currentIndex: _selectedNavbar,

@@ -243,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 30,
                                       child: Image(
                                           image: AssetImage(
-                                              "assets/icon_RAM.png"))),
+                                              "assets/icon_monitor.png"))),
                                 ),
                                 GestureDetector(
                                     onTap: () {
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                                         return ListProcessor();
                                       }));
                                     },
-                                    child: Text("RAM")),
+                                    child: Text("Monitor")),
                               ],
                             ),
                             Column(
@@ -269,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 30,
                                       child: Image(
                                           image: AssetImage(
-                                              "assets/icon_case.png"))),
+                                              "assets/icon_speaker.png"))),
                                 ),
                                 GestureDetector(
                                     onTap: () {
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                                         return ListProcessor();
                                       }));
                                     },
-                                    child: Text("Case")),
+                                    child: Text("Speaker")),
                               ],
                             ),
                           ],

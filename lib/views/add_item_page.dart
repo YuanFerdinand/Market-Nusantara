@@ -15,6 +15,7 @@ class _AddItemPageState extends State<AddItemPage> {
   String nama = "NAMA", merek = "MEREK", tipe = "TIPE";
   String harga = "1000000", jumlah = "1";
   String imagePath = "GAMBAR", detail = "Detail";
+  String _chosenValue;
   var imageDir;
 
   Future<File> getImage() async {
@@ -143,23 +144,51 @@ class _AddItemPageState extends State<AddItemPage> {
                           height: 50,
                           width: 50,
                         ),
-                        TextFormField(
-                          onChanged: (tipeBarang) {
-                            this.tipe = DatabaseMethods().getTipe(tipeBarang);
+                        DropdownButtonFormField(
+                          decoration: InputDecoration.collapsed(hintText: ''),
+                          validator: (value) =>
+                              value == null ? 'Kantor belum dipilih' : null,
+                          value: _chosenValue,
+                          items: [
+                            'Prosesor',
+                            'VGA',
+                            'RAM',
+                            'Case',
+                            'Disk',
+                            'Motherboard',
+                            'Monitor',
+                            'Speaker'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem(
+                              child: Text(value),
+                              value: value,
+                            );
+                          }).toList(),
+                          hint: Text("Pilih Tipe"),
+                          onChanged: (value) {
+                            setState(() {
+                              _chosenValue = value;
+                              this.tipe = _chosenValue;
+                            });
                           },
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.name,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 5),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: "Tipe",
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 12)),
                         ),
+                        // TextFormField(
+                        //   onChanged: (tipeBarang) {
+                        //     this.tipe = DatabaseMethods().getTipe(tipeBarang);
+                        //   },
+                        //   textInputAction: TextInputAction.next,
+                        //   keyboardType: TextInputType.name,
+                        //   cursorColor: Colors.black,
+                        //   decoration: InputDecoration(
+                        //       contentPadding: EdgeInsets.only(left: 5),
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(50)),
+                        //       fillColor: Colors.white,
+                        //       filled: true,
+                        //       hintText: "Tipe",
+                        //       hintStyle: TextStyle(
+                        //           fontFamily: 'Poppins', fontSize: 12)),
+                        // ),
                         SizedBox(
                           height: 50,
                           width: 50,

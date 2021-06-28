@@ -2,17 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/produk/item_card.dart';
 
-class ListMemory extends StatefulWidget {
+class ListSpeaker extends StatefulWidget {
   @override
-  _ListMemoryState createState() => _ListMemoryState();
+  _ListSpeakerState createState() => _ListSpeakerState();
 }
 
-class _ListMemoryState extends State<ListMemory> {
+class _ListSpeakerState extends State<ListSpeaker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("RAM Komputer"),
+        title: Text("Speaker Komputer"),
       ),
       body: Center(
         child: Container(
@@ -21,7 +21,7 @@ class _ListMemoryState extends State<ListMemory> {
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("barang")
-                  .where('tipe', isEqualTo: "RAM")
+                  .where('tipe', isEqualTo: "Speaker")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {

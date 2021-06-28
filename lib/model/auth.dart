@@ -84,8 +84,8 @@ class Auth {
           await DatabaseMethods().getUserInfo(userDetail.email);
 
       if (userCredential != null) {
-        CollectionReference _users = _firestore.collection('users');
-        String myBool = "false";
+        // CollectionReference _users = _firestore.collection('users');
+        // String myBool = "false";
         SharedPreferenceHelper().saveUserEmail(userDetail.email);
         SharedPreferenceHelper().saveUserId(userDetail.uid);
         SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]['name']);
@@ -93,7 +93,7 @@ class Auth {
         SharedPreferenceHelper()
             .saveProfilePicture(querySnapshot.docs[0]['profilePict']);
 
-        myBool = await SharedPreferenceHelper().getLogedIn();
+        // myBool = await SharedPreferenceHelper().getLogedIn();
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => BottomNavigation()));
 
