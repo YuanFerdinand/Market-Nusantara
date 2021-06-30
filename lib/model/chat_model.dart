@@ -2,6 +2,7 @@ import 'package:market_nusantara/model/userChat_model.dart';
 
 class Message {
   final User sender;
+  final User sent;
   final String time;
   final String text;
   final bool baru;
@@ -10,6 +11,7 @@ class Message {
 
   Message({
     this.sender,
+    this.sent,
     this.time,
     this.text,
     this.baru,
@@ -62,6 +64,44 @@ final User steven = User(
   imageUrl: 'assets/magnus.jpg',
 );
 
+List<User> orang = [
+  User(
+    id: 1,
+    name: 'greg',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 2,
+    name: 'james',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 3,
+    name: 'john',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 4,
+    name: 'olivia',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 5,
+    name: 'sam',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 6,
+    name: 'shopia',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+  User(
+    id: 7,
+    name: 'steven',
+    imageUrl: 'assets/magnus.jpg',
+  ),
+];
+
 // FAVORITE CONTACTS
 List<User> favorites = [sam, steven, olivia, john, greg];
 
@@ -70,7 +110,7 @@ List<Message> chats = [
   Message(
     sender: james,
     time: '5:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     baru: true,
     isLiked: false,
     unread: true,
@@ -78,7 +118,7 @@ List<Message> chats = [
   Message(
     sender: olivia,
     time: '4:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     baru: true,
     isLiked: false,
     unread: true,
@@ -86,14 +126,14 @@ List<Message> chats = [
   Message(
     sender: john,
     time: '3:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
     unread: false,
   ),
   Message(
     sender: sophia,
     time: '2:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     baru: true,
     isLiked: false,
     unread: true,
@@ -101,21 +141,21 @@ List<Message> chats = [
   Message(
     sender: steven,
     time: '1:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
     unread: false,
   ),
   Message(
     sender: sam,
     time: '12:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
     unread: false,
   ),
   Message(
     sender: greg,
     time: '11:30 AM',
-    text: 'Hey, how\'s it going? What did you do today?',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
     unread: false,
   ),
@@ -125,43 +165,26 @@ List<Message> chats = [
 List<Message> messages = [
   Message(
     sender: james,
+    sent: currentUser,
+    time: '6:45 PM',
+    text: 'Terimakasih!',
+    isLiked: true,
+    unread: true,
+  ),
+  Message(
+    sender: currentUser,
+    sent: james,
+    time: '5:35 PM',
+    text:
+        'Terimakasih sudah berkunjung!, silahkan pilih barang yang ada di home! semua barang tersedia, dengan harga yang sama',
+    isLiked: false,
+    unread: true,
+  ),
+  Message(
+    sender: james,
+    sent: currentUser,
     time: '5:30 PM',
-    text: 'Hey, how\'s it going? What did you do today?',
-    isLiked: true,
-    unread: true,
-  ),
-  Message(
-    sender: currentUser,
-    time: '4:30 PM',
-    text: 'Just walked my doge. She was super duper cute. The best pupper!!',
-    isLiked: false,
-    unread: true,
-  ),
-  Message(
-    sender: james,
-    time: '3:45 PM',
-    text: 'How\'s the doggo?',
-    isLiked: false,
-    unread: true,
-  ),
-  Message(
-    sender: james,
-    time: '3:15 PM',
-    text: 'All the food',
-    isLiked: true,
-    unread: true,
-  ),
-  Message(
-    sender: currentUser,
-    time: '2:30 PM',
-    text: 'Nice! What kind of food did you eat?',
-    isLiked: false,
-    unread: true,
-  ),
-  Message(
-    sender: james,
-    time: '2:00 PM',
-    text: 'I ate so much food today.',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
     unread: true,
   ),

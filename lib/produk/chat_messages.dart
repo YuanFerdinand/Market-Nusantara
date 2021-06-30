@@ -28,44 +28,47 @@ class _ChatMessageState extends State<ChatMessage> {
             ),
       padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
       width: MediaQuery.of(context).size.width * 0.75,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Bubble(
-            margin: isMe
-                ? BubbleEdges.only(
-                    right: 0.0,
-                    left: 65.0,
-                  )
-                : BubbleEdges.only(
-                    right: 0.0,
-                    left: 165.0,
+      child: message.sender.name == widget.user.name || isMe
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Bubble(
+                  margin: isMe
+                      ? BubbleEdges.only(
+                          right: 0.0,
+                          left: 65.0,
+                        )
+                      : BubbleEdges.only(
+                          right: 0.0,
+                          left: 165.0,
+                        ),
+                  child: Text(
+                    message.time,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-            child: Text(
-              message.time,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Bubble(
-            color: isMe ? Color.fromRGBO(212, 234, 244, 1.0) : Colors.white,
-            margin: BubbleEdges.only(
-              top: 10,
-            ),
-            child: Text(
-              message.text,
-              style: TextStyle(
-                color: Colors.blueGrey,
-                fontSize: 16.0,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
+                ),
+                Bubble(
+                  color:
+                      isMe ? Color.fromRGBO(212, 234, 244, 1.0) : Colors.white,
+                  margin: BubbleEdges.only(
+                    top: 10,
+                  ),
+                  child: Text(
+                    message.text,
+                    style: TextStyle(
+                      color: Colors.blueGrey,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          : Column(),
     );
     if (isMe) {
       return msg;
@@ -171,6 +174,7 @@ class _ChatMessageState extends State<ChatMessage> {
                     itemBuilder: (BuildContext context, int index) {
                       final Message message = messages[index];
                       final bool isMe = message.sender.id == currentUser.id;
+
                       return _buildMessage(message, isMe);
                     },
                   ),
