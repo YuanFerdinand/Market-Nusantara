@@ -118,7 +118,7 @@ List<Message> chats = [
   Message(
     sender: olivia,
     time: '4:30 PM',
-    text: 'Hey, Apakah core i-9 masih tersedia?',
+    text: 'Hey, Apakah core i-7 masih tersedia?',
     baru: true,
     isLiked: false,
     unread: true,
@@ -185,6 +185,14 @@ List<Message> messages = [
     sent: currentUser,
     time: '5:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
+    isLiked: false,
+    unread: true,
+  ),
+  Message(
+    sender: olivia,
+    sent: currentUser,
+    time: '4:30 PM',
+    text: 'Hey, Apakah core i-7 masih tersedia?',
     isLiked: false,
     unread: true,
   ),
