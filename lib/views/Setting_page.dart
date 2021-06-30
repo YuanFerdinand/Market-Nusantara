@@ -16,15 +16,15 @@ class _SettingPageState extends State<SettingPage> {
           backgroundColor: Color(0xff2CCACA),
           title: Text("Setting"),
           leading: IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return ProfilPage();
-              }));
-            },
             icon: Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
+            onPressed: () {
+              Navigator.pop(context, MaterialPageRoute(builder: (context) {
+                return ProfilPage();
+              }));
+            },
           ),
         ),
         body: Container(

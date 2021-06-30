@@ -6,17 +6,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
+import 'package:market_nusantara/views/Setting_page.dart';
 import 'package:market_nusantara/views/about_page.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
-<<<<<<< HEAD
-import 'package:market_nusantara/views/Setting_page.dart';
-=======
-import 'package:market_nusantara/views/setting.dart';
->>>>>>> 06da57d07800f6b22b3d87efa3dc8b743f8b3067
+
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -66,26 +63,11 @@ class _ProfilPageState extends State<ProfilPage> {
         actions: <Widget>[
           IconButton(
               icon: Icon(
-                Icons.add,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddItemPage();
-                }));
-              }),
-          IconButton(
-              icon: Icon(
                 Icons.settings,
                 size: 35,
               ),
               onPressed: () {
-<<<<<<< HEAD
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-=======
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
->>>>>>> 06da57d07800f6b22b3d87efa3dc8b743f8b3067
                   return SettingPage();
                 }));
               }),
@@ -194,11 +176,7 @@ class _ProfilPageState extends State<ProfilPage> {
                               ),
                               child: Center(
                                 child: Text(
-<<<<<<< HEAD
                                   myUserName ?? "Tunggu..",
-=======
-                                  myUserName ?? 'Wait',
->>>>>>> 06da57d07800f6b22b3d87efa3dc8b743f8b3067
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600,
