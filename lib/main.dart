@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,17 @@ import 'package:market_nusantara/views/login_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(RestartWidget(child: MyApp()));
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+        supportedLocales: [Locale('en'), Locale('id'), Locale("pl")],
+        path:
+            'assets/translates', // <-- change the path of the translation files
+        //fallbackLocale: Locale('en', 'US'),
+        child: MyApp()),
+  );
+  RestartWidget(child: MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +29,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: "Poppins"),
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       home: FutureBuilder(
         future: Auth().getCurrentUser(),
         builder: (context, AsyncSnapshot<dynamic> snapshot) {
