@@ -109,6 +109,7 @@ List<User> favorites = [sam, steven, olivia, john, greg];
 List<Message> chats = [
   Message(
     sender: james,
+    sent: currentUser,
     time: '5:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     baru: true,
@@ -117,6 +118,7 @@ List<Message> chats = [
   ),
   Message(
     sender: olivia,
+    sent: currentUser,
     time: '4:30 PM',
     text: 'Hey, Apakah core i-7 masih tersedia?',
     baru: true,
@@ -125,6 +127,7 @@ List<Message> chats = [
   ),
   Message(
     sender: john,
+    sent: currentUser,
     time: '3:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
@@ -132,6 +135,7 @@ List<Message> chats = [
   ),
   Message(
     sender: sophia,
+    sent: currentUser,
     time: '2:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     baru: true,
@@ -140,6 +144,7 @@ List<Message> chats = [
   ),
   Message(
     sender: steven,
+    sent: currentUser,
     time: '1:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
@@ -147,6 +152,7 @@ List<Message> chats = [
   ),
   Message(
     sender: sam,
+    sent: currentUser,
     time: '12:30 PM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
@@ -154,6 +160,7 @@ List<Message> chats = [
   ),
   Message(
     sender: greg,
+    sent: currentUser,
     time: '11:30 AM',
     text: 'Hey, Apakah core i-9 masih tersedia?',
     isLiked: false,
@@ -195,5 +202,46 @@ List<Message> messages = [
     text: 'Hey, Apakah core i-7 masih tersedia?',
     isLiked: false,
     unread: true,
+  ),
+  Message(
+    sender: john,
+    sent: currentUser,
+    time: '3:30 PM',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
+    isLiked: false,
+    unread: false,
+  ),
+  Message(
+    sender: sophia,
+    sent: currentUser,
+    time: '2:30 PM',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
+    baru: true,
+    isLiked: false,
+    unread: true,
+  ),
+  Message(
+    sender: steven,
+    sent: currentUser,
+    time: '1:30 PM',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
+    isLiked: false,
+    unread: false,
+  ),
+  Message(
+    sender: sam,
+    sent: currentUser,
+    time: '12:30 PM',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
+    isLiked: false,
+    unread: false,
+  ),
+  Message(
+    sender: greg,
+    sent: currentUser,
+    time: '11:30 AM',
+    text: 'Hey, Apakah core i-9 masih tersedia?',
+    isLiked: false,
+    unread: false,
   ),
 ];

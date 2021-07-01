@@ -28,7 +28,8 @@ class _ChatMessageState extends State<ChatMessage> {
             ),
       padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
       width: MediaQuery.of(context).size.width * 0.75,
-      child: message.sender.name == widget.user.name || isMe
+      child: message.sender.name == widget.user.name ||
+              message.sender.name == currentUser.name
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
