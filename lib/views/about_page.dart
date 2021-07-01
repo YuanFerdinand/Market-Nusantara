@@ -14,7 +14,7 @@ class _AboutPageState extends State<AboutPage> {
         backgroundColor: Colors.transparent,
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
+            Navigator.pop(context, MaterialPageRoute(builder: (context) {
               return SettingPage();
             }));
           },

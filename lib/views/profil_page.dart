@@ -6,13 +6,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
-import 'package:market_nusantara/views/about_page.dart';
-import 'package:market_nusantara/views/add_item_page.dart';
+import 'package:market_nusantara/views/Setting_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
-import 'package:market_nusantara/views/setting.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -60,16 +58,6 @@ class _ProfilPageState extends State<ProfilPage> {
         backgroundColor: Color(0xff2CCACA),
         title: Text("Profile"),
         actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.add,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddItemPage();
-                }));
-              }),
           IconButton(
               icon: Icon(
                 Icons.settings,
