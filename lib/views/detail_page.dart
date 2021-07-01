@@ -1,24 +1,27 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/model/database.dart';
 
 class DetailPage extends StatefulWidget {
   final String nama;
+  final String merek;
   final String tipe;
+  final int harga;
+  final int jumlah;
   final String gambar;
   final String detail;
+  final Timestamp dibuat;
+  final Timestamp terjual;
 
   //// Pointer to Update Function
   // final Function onUpdate;
   // //// Pointer to Delete Function
   // final Function onDelete;
 
-  DetailPage(
-    this.nama,
-    this.tipe,
-    this.gambar,
-    this.detail,
-  );
-
+  DetailPage(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
+      this.gambar, this.detail, this.dibuat, this.terjual);
+  @override
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -26,6 +29,17 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   int counter = 0;
   bool fav = false;
+  String myUserName;
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
+
+  getMyInfoFromSharedPreferences() async {
+    myUserName = await SharedPreferenceHelper().getUserName();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +105,20 @@ class _DetailPageState extends State<DetailPage> {
                           child: GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  fav = !fav;
+                                  Map<String, dynamic> favoritInfoMap = {
+                                    "nama": widget.nama,
+                                    "detail": widget.detail,
+                                    "tipe": widget.tipe,
+                                    "dibuat": DateTime.now(),
+                                    "gambar": widget.gambar,
+                                    "harga": widget.harga,
+                                    "jumlah": widget.jumlah,
+                                    "merek": widget.merek,
+                                    "terjual": null
+                                  };
+                                  DatabaseMethods().tambahFavorit(
+                                      myUserName, favoritInfoMap);
+                                  showToast(context);
                                 });
                               },
                               child: (fav)
@@ -242,5 +269,16 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
     );
+  }
+
+  void showToast(BuildContext context) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: const Text('Berhasil ditambahkan ke favorit!'),
+      duration: const Duration(seconds: 1),
+      action: SnackBarAction(
+        label: 'ACTION',
+        onPressed: () {},
+      ),
+    ));
   }
 }

@@ -22,6 +22,14 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
+  Future tambahFavorit(
+      String userId, Map<String, dynamic> favoritInfoMap) async {
+    return FirebaseFirestore.instance
+        .collection("favorit")
+        .doc(userId)
+        .set(favoritInfoMap);
+  }
+
   Future<QuerySnapshot> getUserInfo(String email) async {
     return await FirebaseFirestore.instance
         .collection("users")
