@@ -46,7 +46,7 @@ class _ItemCardState extends State<ItemCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image(fit: BoxFit.contain, image: NetworkImage(widget.gambar)),
+              Image(fit: BoxFit.fitHeight, image: NetworkImage(widget.gambar)),
               Text(
                 widget.nama,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),

@@ -22,14 +22,13 @@ class DetailPage extends StatefulWidget {
   DetailPage(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
       this.gambar, this.detail, this.dibuat, this.terjual);
   @override
-  @override
   _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
   int counter = 0;
   bool fav = false;
-  String myUserName;
+  String myUserName, myEmail, myUserCredential;
   void initState() {
     getMyInfoFromSharedPreferences();
     super.initState();
@@ -37,6 +36,8 @@ class _DetailPageState extends State<DetailPage> {
 
   getMyInfoFromSharedPreferences() async {
     myUserName = await SharedPreferenceHelper().getUserName();
+    myEmail = await SharedPreferenceHelper().getUserEmail();
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
     setState(() {});
   }
 
@@ -117,8 +118,7 @@ class _DetailPageState extends State<DetailPage> {
                                     "terjual": null
                                   };
                                   DatabaseMethods().tambahFavorit(
-                                      myUserName, favoritInfoMap);
-                                  showToast(context);
+                                      myUserCredential, favoritInfoMap);
                                 });
                               },
                               child: (fav)
@@ -269,16 +269,5 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
     );
-  }
-
-  void showToast(BuildContext context) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: const Text('Berhasil ditambahkan ke favorit!'),
-      duration: const Duration(seconds: 1),
-      action: SnackBarAction(
-        label: 'ACTION',
-        onPressed: () {},
-      ),
-    ));
   }
 }

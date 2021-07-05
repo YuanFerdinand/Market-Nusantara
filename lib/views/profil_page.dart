@@ -19,7 +19,7 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  var imageDir = "DEFAULT";
+  var imageDir;
   String myPict = "DEFAULT", def = "DEFAULT";
   String myUserName = "DEFAULT", myEmail = "DEFAULT", myId = "DEFAULT";
 

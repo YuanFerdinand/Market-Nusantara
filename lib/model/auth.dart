@@ -34,7 +34,9 @@ class Auth {
           "profilePict": "DEFAULT"
         };
 
-        DatabaseMethods().tambahAkun(userDetail.uid, userInfoMap).then((value) {
+        DatabaseMethods()
+            .tambahAkun(userCredential.user.uid, userInfoMap)
+            .then((value) {
           Navigator.pop(context);
         });
       }
@@ -88,6 +90,7 @@ class Auth {
         // String myBool = "false";
         SharedPreferenceHelper().saveUserEmail(userDetail.email);
         SharedPreferenceHelper().saveUserId(userDetail.uid);
+        SharedPreferenceHelper().saveUserCredentialId(userCredential.user.uid);
         SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]['name']);
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
         SharedPreferenceHelper()
