@@ -35,6 +35,7 @@ dependencies:
   firebase_storage:
   firebase_auth:
   shared_preferences:
+  easy_localization: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
     - assets/icon_RAM.png
     - assets/icon_speaker.png
     - assets/icon_monitor.png
+    - assets/translates/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
