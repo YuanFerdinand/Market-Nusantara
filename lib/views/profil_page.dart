@@ -21,7 +21,7 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   var imageDir;
   String myPict = "DEFAULT", def = "DEFAULT";
-  String myUserName = "DEFAULT", myEmail = "DEFAULT", myId = "DEFAULT";
+  String myUserName, myEmail = "DEFAULT", myCredentialId = "DEFAULT";
 
   @override
   void initState() {
@@ -46,7 +46,7 @@ class _ProfilPageState extends State<ProfilPage> {
   getMyInfoFromSharedPreferences() async {
     myUserName = await SharedPreferenceHelper().getUserName();
     myEmail = await SharedPreferenceHelper().getUserEmail();
-    myId = await SharedPreferenceHelper().getUserId();
+    myCredentialId = await SharedPreferenceHelper().getUserCredentialId();
     myPict = await SharedPreferenceHelper().getUserProfilePicture();
     setState(() {});
   }
@@ -77,7 +77,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 FirebaseFirestore _firestore = FirebaseFirestore.instance;
                 CollectionReference _users = _firestore.collection('users');
                 _users
-                    .doc(myId)
+                    .doc(myCredentialId)
                     .update({
                       'logedIn': "false",
                     })
@@ -111,7 +111,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myId).update({
+                                    _users.doc(myCredentialId).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()
@@ -141,7 +141,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myId).update({
+                                    _users.doc(myCredentialId).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()

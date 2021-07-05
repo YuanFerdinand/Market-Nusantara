@@ -28,7 +28,7 @@ class DatabaseMethods {
     return FirebaseFirestore.instance
         .collection("favorit")
         .doc(userCredential)
-        .collection('user')
+        .collection('barangFavoriteUser')
         .add(favoritInfoMap);
   }
 

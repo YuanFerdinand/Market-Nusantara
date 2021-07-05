@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
-import 'package:flutter/material.dart';
 import 'package:market_nusantara/model/chat_model.dart';
 import 'package:market_nusantara/model/userChat_model.dart';
 

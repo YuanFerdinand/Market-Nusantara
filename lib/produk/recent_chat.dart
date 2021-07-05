@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:market_nusantara/model/chat_model.dart';
-import 'package:market_nusantara/views/message_page.dart';
 import 'package:market_nusantara/produk/chat_messages.dart';
 
 class RecentChats extends StatelessWidget {

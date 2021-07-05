@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/Detail_Page.dart';
 
 class WishlishProdPage extends StatefulWidget {
   @override

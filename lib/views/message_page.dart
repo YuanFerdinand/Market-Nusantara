@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/produk/recent_chat.dart';
 import 'package:market_nusantara/produk/category_chat.dart';
-import 'package:market_nusantara/model/userChat_model.dart';
-import 'package:market_nusantara/views/login_page.dart';
 
 class MessagePage extends StatefulWidget {
   @override

@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
   static String userIdKey = "USERKEY";
-  static String userCredentialIdKey = "USERKEY";
+  static String userCredentialIdKey = "USERCREDENTIALKEY";
   static String userNameKey = "USERNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
   static String userProfilePict = "USERPROFILEKEY";
