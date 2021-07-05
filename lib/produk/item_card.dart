@@ -27,7 +27,15 @@ class _ItemCardState extends State<ItemCard> {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return DetailPage(
-              widget.nama, widget.tipe, widget.gambar, widget.detail);
+              widget.nama,
+              widget.merek,
+              widget.tipe,
+              widget.harga,
+              widget.jumlah,
+              widget.gambar,
+              widget.detail,
+              widget.dibuat,
+              widget.terjual);
         }));
       },
       child: Card(
