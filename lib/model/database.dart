@@ -15,11 +15,21 @@ class DatabaseMethods {
 
   /// Menambah Info User ke Cloud Firestore
 
-  Future tambahAkun(String userId, Map<String, dynamic> userInfoMap) async {
+  Future tambahAkun(
+      String userCredential, Map<String, dynamic> userInfoMap) async {
     return FirebaseFirestore.instance
         .collection("users")
-        .doc(userId)
+        .doc(userCredential)
         .set(userInfoMap);
+  }
+
+  Future tambahFavorit(
+      String userCredential, Map<String, dynamic> favoritInfoMap) async {
+    return FirebaseFirestore.instance
+        .collection("favorit")
+        .doc(userCredential)
+        .collection('barangFavoriteUser')
+        .add(favoritInfoMap);
   }
 
   Future<QuerySnapshot> getUserInfo(String email) async {

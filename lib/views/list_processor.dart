@@ -21,7 +21,7 @@ class _ListProcessorState extends State<ListProcessor> {
           child: StreamBuilder(
               stream: FirebaseFirestore.instance
                   .collection("barang")
-                  .where('tipe', isEqualTo: "Processor")
+                  .where('tipe', isEqualTo: "Prosesor")
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {

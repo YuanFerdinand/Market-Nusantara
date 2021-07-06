@@ -294,6 +294,7 @@ class _HomePageState extends State<HomePage> {
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection("barang")
+                        .orderBy("dibuat", descending: true)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {

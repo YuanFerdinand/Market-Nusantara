@@ -2,6 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
   static String userIdKey = "USERKEY";
+  static String userCredentialIdKey = "USERCREDENTIALKEY";
   static String userNameKey = "USERNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
   static String userProfilePict = "USERPROFILEKEY";
@@ -11,6 +12,11 @@ class SharedPreferenceHelper {
   Future<bool> saveUserId(String getUserId) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setString(userIdKey, getUserId);
+  }
+
+  Future<bool> saveUserCredentialId(String getUserCredentialId) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userCredentialIdKey, getUserCredentialId);
   }
 
   Future<bool> saveUserName(String getUserName) async {
@@ -37,6 +43,11 @@ class SharedPreferenceHelper {
   Future<String> getUserId() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(userIdKey);
+  }
+
+  Future<String> getUserCredentialId() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userCredentialIdKey);
   }
 
   Future<String> getUserName() async {

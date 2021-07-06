@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/produk/wishlist_prod.dart';
+import 'package:market_nusantara/produk/item_card.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
 
 class WishListPage extends StatefulWidget {
   @override
@@ -7,58 +9,65 @@ class WishListPage extends StatefulWidget {
 }
 
 class _WishListPageState extends State<WishListPage> {
+  String myUserCredential;
+  @override
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
+
+  getMyInfoFromSharedPreferences() async {
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 6,
-      initialIndex: 0,
-      child: Scaffold(
-        appBar: new AppBar(
-          backgroundColor: Colors.lightBlue,
-          title: Container(
-            height: 30,
-            child: TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-                labelText: "Search Product...",
-                enabledBorder: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: const BorderSide(
-                    color: Colors.white,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                contentPadding: EdgeInsets.all(2),
-              ),
-            ),
-          ),
-        ),
-        body: ListView(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 20,
-                top: 10,
-              ),
-              child: Text(
-                "FAVOURITE",
-                textAlign: TextAlign.left,
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              height: 720,
-              child: WishlishProdPage(),
-            )
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Barang Favorit"),
+      ),
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 1,
+          width: MediaQuery.of(context).size.width * 1,
+          child: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("favorit")
+                  .doc(myUserCredential)
+                  .collection('barangFavoriteUser')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.docs.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot documentSnapshot =
+                            snapshot.data.docs[index];
+                        return ItemCard(
+                            documentSnapshot["nama"],
+                            documentSnapshot["merek"],
+                            documentSnapshot["tipe"],
+                            documentSnapshot["harga"],
+                            documentSnapshot["jumlah"],
+                            documentSnapshot["gambar"],
+                            documentSnapshot["detail"],
+                            documentSnapshot["dibuat"],
+                            documentSnapshot["terjual"]);
+                      });
+                } else {
+                  return Center(
+                      child: Text(
+                    'Belum ada Barang',
+                    style: TextStyle(fontFamily: "Poppins", fontSize: 15),
+                  ));
+                }
+              }),
         ),
       ),
     );

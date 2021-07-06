@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
@@ -8,7 +9,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Auth {
   FirebaseAuth auth = FirebaseAuth.instance;
-  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   getCurrentUser() async {
     return auth.currentUser;
@@ -34,7 +34,9 @@ class Auth {
           "profilePict": "DEFAULT"
         };
 
-        DatabaseMethods().tambahAkun(userDetail.uid, userInfoMap).then((value) {
+        DatabaseMethods()
+            .tambahAkun(userCredential.user.uid, userInfoMap)
+            .then((value) {
           Navigator.pop(context);
         });
       }
@@ -88,6 +90,7 @@ class Auth {
         // String myBool = "false";
         SharedPreferenceHelper().saveUserEmail(userDetail.email);
         SharedPreferenceHelper().saveUserId(userDetail.uid);
+        SharedPreferenceHelper().saveUserCredentialId(userCredential.user.uid);
         SharedPreferenceHelper().saveUserName(querySnapshot.docs[0]['name']);
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
         SharedPreferenceHelper()
@@ -168,11 +171,13 @@ class Auth {
 
   Future toSignOut(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
+
     auth.signOut();
     preferences.clear();
     Future.delayed(const Duration(milliseconds: 500), () {
       RestartWidget.restartApp(context);
     });
+
     //return new LoginPage();
   }
 }

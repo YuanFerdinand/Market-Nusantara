@@ -7,8 +7,6 @@ import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/Setting_page.dart';
-import 'package:market_nusantara/views/about_page.dart';
-import 'package:market_nusantara/views/add_item_page.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
@@ -21,9 +19,9 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
-  var imageDir = "DEFAULT";
+  var imageDir;
   String myPict = "DEFAULT", def = "DEFAULT";
-  String myUserName = "DEFAULT", myEmail = "DEFAULT", myId = "DEFAULT";
+  String myUserName, myEmail = "DEFAULT", myCredentialId = "DEFAULT";
 
   @override
   void initState() {
@@ -48,7 +46,7 @@ class _ProfilPageState extends State<ProfilPage> {
   getMyInfoFromSharedPreferences() async {
     myUserName = await SharedPreferenceHelper().getUserName();
     myEmail = await SharedPreferenceHelper().getUserEmail();
-    myId = await SharedPreferenceHelper().getUserId();
+    myCredentialId = await SharedPreferenceHelper().getUserCredentialId();
     myPict = await SharedPreferenceHelper().getUserProfilePicture();
     setState(() {});
   }
@@ -79,7 +77,7 @@ class _ProfilPageState extends State<ProfilPage> {
                 FirebaseFirestore _firestore = FirebaseFirestore.instance;
                 CollectionReference _users = _firestore.collection('users');
                 _users
-                    .doc(myId)
+                    .doc(myCredentialId)
                     .update({
                       'logedIn': "false",
                     })
@@ -113,7 +111,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myId).update({
+                                    _users.doc(myCredentialId).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()
@@ -143,7 +141,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myId).update({
+                                    _users.doc(myCredentialId).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()

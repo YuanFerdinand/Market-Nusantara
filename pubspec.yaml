@@ -37,7 +37,10 @@ dependencies:
   shared_preferences:
   easy_localization: ^3.0.0
   flutter_phoenix: ^1.0.0
+<<<<<<< HEAD
 
+=======
+>>>>>>> 980f0931e1085e4d815d643e58e4d4432334be7c
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +79,7 @@ flutter:
     - assets/icon_RAM.png
     - assets/icon_speaker.png
     - assets/icon_monitor.png
+    - assets/translates/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

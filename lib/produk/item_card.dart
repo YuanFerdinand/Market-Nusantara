@@ -27,7 +27,15 @@ class _ItemCardState extends State<ItemCard> {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return DetailPage(
-              widget.nama, widget.tipe, widget.gambar, widget.detail);
+              widget.nama,
+              widget.merek,
+              widget.tipe,
+              widget.harga,
+              widget.jumlah,
+              widget.gambar,
+              widget.detail,
+              widget.dibuat,
+              widget.terjual);
         }));
       },
       child: Card(
@@ -38,7 +46,11 @@ class _ItemCardState extends State<ItemCard> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image(fit: BoxFit.contain, image: NetworkImage(widget.gambar)),
+              Image(
+                  fit: BoxFit.fitHeight,
+                  image: NetworkImage(widget.gambar),
+                  height: MediaQuery.of(context).size.width * 0.30,
+                  width: MediaQuery.of(context).size.width * 0.30),
               Text(
                 widget.nama,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),

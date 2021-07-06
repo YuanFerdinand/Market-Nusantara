@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/views/about_page.dart';
+import 'package:market_nusantara/views/language_page.dart';
 import 'package:market_nusantara/views/profil_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -28,49 +31,56 @@ class _SettingPageState extends State<SettingPage> {
           ),
         ),
         body: Container(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: ListView(
-            children: <Widget>[
-              SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Language",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.grey[600]),
-                  ),
-                  Icon(Icons.arrow_forward)
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AboutPage();
-                  }));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "About",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
-                    ),
-                    Icon(Icons.arrow_forward)
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
+            // padding: const EdgeInsets.only(left: 30, right: 30),
+            // child: ListView(
+            //   children: <Widget>[
+            //     SizedBox(height: 30),
+            //     GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //           return LanguagePage();
+            //         }));
+            //       },
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text(
+            //             LocaleKeys.bahasa,
+            //             style: TextStyle(
+            //                 fontSize: 20,
+            //                 fontWeight: FontWeight.w500,
+            //                 color: Colors.grey[600]),
+            //           ).tr(),
+            //           Icon(Icons.arrow_forward)
+            //         ],
+            //       ),
+            //     ),
+            //     SizedBox(
+            //       height: 20,
+            //     ),
+            //     GestureDetector(
+            //       onTap: () {
+            //         Navigator.push(context, MaterialPageRoute(builder: (context) {
+            //           return AboutPage();
+            //         }));
+            //       },
+            //       child: Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text(
+            //             LocaleKeys.tentang,
+            //             style: TextStyle(
+            //                 fontSize: 20,
+            //                 fontWeight: FontWeight.w500,
+            //                 color: Colors.grey[600]),
+            //           ).tr(),
+            //           Icon(Icons.arrow_forward)
+            //         ],
+            //       ),
+            //     )
+            //   ],
+            // ),
+            ),
       ),
     );
   }
