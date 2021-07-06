@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/views/cart_page.dart';
 import 'package:market_nusantara/views/home_page.dart';
+import 'package:market_nusantara/produk/new_chat.dart';
+import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/views/message_page.dart';
 import 'package:market_nusantara/views/profil_page.dart';
 import 'package:market_nusantara/views/wishlist_page.dart';
@@ -25,7 +27,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       // DashboardSamsat(),
       HomePage(),
       WishListPage(),
-      MessagePage(),
+      ChatRoom(),
       CartPage(),
       ProfilPage()
     ];

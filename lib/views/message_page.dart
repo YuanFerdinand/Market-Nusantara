@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/produk/recent_chat.dart';
+import 'package:market_nusantara/produk/new_chat.dart';
 import 'package:market_nusantara/produk/category_chat.dart';
+import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/model/userChat_model.dart';
 import 'package:market_nusantara/views/login_page.dart';
 
@@ -41,7 +43,7 @@ class _MessagePageState extends State<MessagePage> {
               ),
               child: Column(
                 children: <Widget>[
-                  RecentChats(),
+                  //ChatRoom(),
                 ],
               ),
             ),

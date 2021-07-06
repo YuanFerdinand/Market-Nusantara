@@ -35,6 +35,9 @@ dependencies:
   firebase_storage:
   firebase_auth:
   shared_preferences:
+  easy_localization: ^3.0.0
+  flutter_phoenix: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +66,7 @@ flutter:
     - assets/corei7.png
     - assets/corei9.png
     - assets/logo.png
+    - assets/send.png
     - assets/nama.png
     - assets/icon_processor.png
     - assets/icon_vga.png
