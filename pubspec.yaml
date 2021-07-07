@@ -34,9 +34,9 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   firebase_auth:
+  firebase_database:
   shared_preferences:
   easy_localization: ^3.0.0
-  flutter_phoenix: ^1.0.0
 
 dev_dependencies:
   flutter_test:

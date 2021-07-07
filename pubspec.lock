@@ -162,6 +162,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  firebase_database:
+    dependency: "direct main"
+    description:
+      name: firebase_database
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "7.0.0"
   firebase_storage:
     dependency: "direct main"
     description:
@@ -193,13 +200,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_phoenix:
-    dependency: "direct main"
-    description:
-      name: flutter_phoenix
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:

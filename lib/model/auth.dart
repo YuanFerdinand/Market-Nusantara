@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
