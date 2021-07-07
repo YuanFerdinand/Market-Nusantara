@@ -1,189 +1,170 @@
+import 'dart:io';
+import 'package:market_nusantara/helper/constants.dart';
+import 'package:market_nusantara/model/database.dart';
+import 'package:market_nusantara/produk/widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:bubble/bubble.dart';
-import 'package:market_nusantara/model/chat_model.dart';
-import 'package:market_nusantara/model/userChat_model.dart';
 
 class ChatMessage extends StatefulWidget {
-  final User user;
+  final String chatRoomId;
 
-  ChatMessage({this.user});
+  ChatMessage({this.chatRoomId});
 
   @override
   _ChatMessageState createState() => _ChatMessageState();
 }
 
 class _ChatMessageState extends State<ChatMessage> {
-  _buildMessage(Message message, bool isMe) {
-    final Container msg = Container(
-      margin: isMe
-          ? EdgeInsets.only(
-              top: 8.0,
-              bottom: 8.0,
-              left: 100.0,
-            )
-          : EdgeInsets.only(
-              top: 8.0,
-              bottom: 8.0,
-            ),
-      padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-      width: MediaQuery.of(context).size.width * 0.75,
-      child: message.sender.name == widget.user.name ||
-              message.sender.name == currentUser.name
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Bubble(
-                  margin: isMe
-                      ? BubbleEdges.only(
-                          right: 0.0,
-                          left: 65.0,
-                        )
-                      : BubbleEdges.only(
-                          right: 0.0,
-                          left: 165.0,
-                        ),
-                  child: Text(
-                    message.time,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Bubble(
-                  color:
-                      isMe ? Color.fromRGBO(212, 234, 244, 1.0) : Colors.white,
-                  margin: BubbleEdges.only(
-                    top: 10,
-                  ),
-                  child: Text(
-                    message.text,
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : Column(),
-    );
-    if (isMe) {
-      return msg;
-    }
-    return Row(
-      children: <Widget>[
-        msg,
-      ],
+  Stream<QuerySnapshot> chats;
+  TextEditingController messageEditingController = new TextEditingController();
+
+  Widget chatMessages() {
+    return StreamBuilder(
+      stream: chats,
+      builder: (context, snapshot) {
+        return snapshot.hasData
+            ? ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, index) {
+                  return MessageTile(
+                    message: snapshot.data.docs[index].data()["message"],
+                    sendByMe: Constants.myName ==
+                        snapshot.data.docs[index].data()["sendBy"],
+                  );
+                })
+            : Container();
+      },
     );
   }
 
-  _buildMessageComposer() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.0),
-      height: 70.0,
-      color: Colors.white,
-      child: Row(
-        children: <Widget>[
-          IconButton(
-            icon: Icon(Icons.photo),
-            iconSize: 25.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () {},
-          ),
-          Expanded(
-            child: TextField(
-              textCapitalization: TextCapitalization.sentences,
-              onChanged: (value) {},
-              decoration: InputDecoration.collapsed(
-                hintText: 'Send a message...',
-              ),
-            ),
-          ),
-          IconButton(
-            icon: Icon(Icons.send),
-            iconSize: 25.0,
-            color: Theme.of(context).primaryColor,
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
+  addMessage() {
+    if (messageEditingController.text.isNotEmpty) {
+      Map<String, dynamic> chatMessageMap = {
+        "sendBy": Constants.myName,
+        "message": messageEditingController.text,
+        'time': DateTime.now(),
+      };
+
+      DatabaseMethods().addMessage(widget.chatRoomId, chatMessageMap);
+
+      setState(() {
+        messageEditingController.text = "";
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    DatabaseMethods().getChats(widget.chatRoomId).then((val) {
+      setState(() {
+        chats = val;
+      });
+    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        centerTitle: false,
-        title: Container(
-          child: Row(
-            children: [
-              CircleAvatar(
-                radius: 23.0,
-                backgroundImage: AssetImage(widget.user.imageUrl),
-              ),
-              SizedBox(
-                width: 15,
-              ),
-              Text(
-                widget.user.name,
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
-      ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Column(
-          children: <Widget>[
-            Expanded(
+      backgroundColor: Colors.grey,
+      appBar: appBarMain(context),
+      body: Container(
+        child: Stack(
+          children: [
+            chatMessages(),
+            Container(
+              alignment: Alignment.bottomCenter,
+              width: MediaQuery.of(context).size.width,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
-                  ),
-                  child: ListView.builder(
-                    reverse: true,
-                    padding: EdgeInsets.only(top: 30.0, bottom: 50.0),
-                    itemCount: messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final Message message = messages[index];
-                      final bool isMe = message.sender.id == currentUser.id;
-
-                      return _buildMessage(message, isMe);
-                    },
-                  ),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                color: Color(0x54FFFFFF),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: TextField(
+                      controller: messageEditingController,
+                      style: simpleTextStyle(),
+                      decoration: InputDecoration(
+                          hintText: "Message ...",
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                          border: InputBorder.none),
+                    )),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        addMessage();
+                      },
+                      child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                  colors: [
+                                    const Color(0x36FFFFFF),
+                                    const Color(0x0FFFFFFF)
+                                  ],
+                                  begin: FractionalOffset.topLeft,
+                                  end: FractionalOffset.bottomRight),
+                              borderRadius: BorderRadius.circular(40)),
+                          padding: EdgeInsets.all(12),
+                          child: Icon(
+                            Icons.send_outlined,
+                          )),
+                    ),
+                  ],
                 ),
               ),
             ),
-            _buildMessageComposer(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MessageTile extends StatelessWidget {
+  final String message;
+  final bool sendByMe;
+
+  MessageTile({@required this.message, @required this.sendByMe});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(
+          top: 8, bottom: 8, left: sendByMe ? 0 : 24, right: sendByMe ? 24 : 0),
+      alignment: sendByMe ? Alignment.centerRight : Alignment.centerLeft,
+      child: Container(
+        margin:
+            sendByMe ? EdgeInsets.only(left: 30) : EdgeInsets.only(right: 30),
+        padding: EdgeInsets.only(top: 17, bottom: 17, left: 20, right: 20),
+        decoration: BoxDecoration(
+            borderRadius: sendByMe
+                ? BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomLeft: Radius.circular(23))
+                : BorderRadius.only(
+                    topLeft: Radius.circular(23),
+                    topRight: Radius.circular(23),
+                    bottomRight: Radius.circular(23)),
+            gradient: LinearGradient(
+              colors: sendByMe
+                  ? [const Color(0xff007EF4), const Color(0xff2A75BC)]
+                  : [const Color(0x1AFFFFFF), const Color(0x1AFFFFFF)],
+            )),
+        child: Text(message,
+            textAlign: TextAlign.start,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontFamily: 'OverpassRegular',
+                fontWeight: FontWeight.w300)),
       ),
     );
   }
