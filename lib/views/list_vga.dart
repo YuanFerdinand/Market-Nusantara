@@ -12,6 +12,7 @@ class _ListVGAState extends State<ListVGA> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("VGA Komputer"),
       ),
       body: Center(

@@ -17,6 +17,7 @@ class _MessagePageState extends State<MessagePage> {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Chats"),
         elevation: 0.0,
         actions: <Widget>[

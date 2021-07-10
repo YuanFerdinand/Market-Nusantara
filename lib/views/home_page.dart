@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
       initialIndex: 0,
       child: Scaffold(
         appBar: new AppBar(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Color(0xff2CCACA),
           title: Container(
             height: 30,
             child: TextField(

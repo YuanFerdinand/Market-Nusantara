@@ -29,12 +29,13 @@ class Auth {
         Map<String, dynamic> userInfoMap = {
           "email": userDetail.email,
           "name": username,
-          "logedIn": "false",
-          "profilePict": "DEFAULT"
+          "logedIn": "pelanggan",
+          "profilePict": "DEFAULT",
+          "totalCheckout": 0
         };
 
         DatabaseMethods()
-            .tambahAkun(userCredential.user.uid, userInfoMap)
+            .tambahInfoAkun(userCredential.user.uid, userInfoMap)
             .then((value) {
           Navigator.pop(context);
         });
@@ -94,6 +95,8 @@ class Auth {
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
         SharedPreferenceHelper()
             .saveProfilePicture(querySnapshot.docs[0]['profilePict']);
+        SharedPreferenceHelper()
+            .saveTotal(querySnapshot.docs[0]['totalCheckout']);
 
         // myBool = await SharedPreferenceHelper().getLogedIn();
         Navigator.pushReplacement(context,

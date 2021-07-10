@@ -21,7 +21,10 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   var imageDir;
   String myPict = "DEFAULT", def = "DEFAULT";
-  String myUserName, myEmail = "DEFAULT", myCredentialId = "DEFAULT";
+  String myUserName,
+      myEmail = "DEFAULT",
+      myCredentialId = "DEFAULT",
+      myLogedIn = "USER";
 
   @override
   void initState() {
@@ -48,6 +51,7 @@ class _ProfilPageState extends State<ProfilPage> {
     myEmail = await SharedPreferenceHelper().getUserEmail();
     myCredentialId = await SharedPreferenceHelper().getUserCredentialId();
     myPict = await SharedPreferenceHelper().getUserProfilePicture();
+    myLogedIn = await SharedPreferenceHelper().getLogedIn();
     setState(() {});
   }
 
@@ -74,15 +78,6 @@ class _ProfilPageState extends State<ProfilPage> {
                 size: 35,
               ),
               onPressed: () {
-                FirebaseFirestore _firestore = FirebaseFirestore.instance;
-                CollectionReference _users = _firestore.collection('users');
-                _users
-                    .doc(myCredentialId)
-                    .update({
-                      'logedIn': "false",
-                    })
-                    .then((value) => print("User logout"))
-                    .catchError((error) => print("Gagal logout"));
                 Auth().toSignOut(context);
               }),
         ],
@@ -190,7 +185,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                   color: Color(0xffFF1192)),
                               child: Center(
                                 child: Text(
-                                  " AIRO Corps. ",
+                                  myLogedIn,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -204,39 +199,42 @@ class _ProfilPageState extends State<ProfilPage> {
                     ]),
               ),
               GestureDetector(
-                child: Card(
-                  margin: EdgeInsets.only(bottom: 20),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                      side: BorderSide(width: 3, color: Color(0xff2CCACA))),
-                  elevation: 7,
-                  child: Container(
-                    padding: EdgeInsets.only(
-                        left: 15, right: 15, top: 10, bottom: 10),
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Center(
-                          child: Container(
-                            child: Text("Buka Toko Penjualan"),
+                child: (myLogedIn == "Admin")
+                    ? Card(
+                        margin: EdgeInsets.only(bottom: 20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            side:
+                                BorderSide(width: 3, color: Color(0xff2CCACA))),
+                        elevation: 7,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 15, right: 15, top: 10, bottom: 10),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  child: Text("Buka Toko Penjualan"),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return TokoPage();
+                                  }));
+                                },
+                                icon: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return TokoPage();
-                            }));
-                          },
-                          icon: Icon(
-                            Icons.arrow_forward,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                      )
+                    : SizedBox(),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return TokoPage();

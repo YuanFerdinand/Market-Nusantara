@@ -15,7 +15,7 @@ class DatabaseMethods {
 
   /// Menambah Info User ke Cloud Firestore
 
-  Future tambahAkun(
+  Future tambahInfoAkun(
       String userCredential, Map<String, dynamic> userInfoMap) async {
     return FirebaseFirestore.instance
         .collection("users")
@@ -23,13 +23,50 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
-  Future tambahFavorit(
-      String userCredential, Map<String, dynamic> favoritInfoMap) async {
+  Future tambahFavorit(String namaBarang, userCredential,
+      Map<String, dynamic> favoritInfoMap) async {
     return FirebaseFirestore.instance
         .collection("favorit")
         .doc(userCredential)
         .collection('barangFavoriteUser')
-        .add(favoritInfoMap);
+        .doc(namaBarang)
+        .set(favoritInfoMap);
+  }
+
+  Future tambahKeranjang(String namaBarang, userCredential,
+      Map<String, dynamic> tambahKeranjangMap) async {
+    return FirebaseFirestore.instance
+        .collection("keranjang")
+        .doc(userCredential)
+        .collection('barang')
+        .doc(namaBarang)
+        .set(tambahKeranjangMap);
+  }
+
+  Future checkout(String namaBarang, userCredential,
+      Map<String, dynamic> tambahCheckoutMap) async {
+    return FirebaseFirestore.instance
+        .collection("riwayatPembelian")
+        .doc(userCredential)
+        .collection('barang')
+        .doc(namaBarang)
+        .set(tambahCheckoutMap);
+  }
+
+  Future updateHargaCheckout(String userCredential,
+      Map<String, dynamic> tambahTotalCheckoutMap) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(userCredential)
+        .update(tambahTotalCheckoutMap);
+  }
+
+  Future updateMinusStok(
+      String barangUID, Map<String, dynamic> updateStok) async {
+    return FirebaseFirestore.instance
+        .collection("barang")
+        .doc(barangUID)
+        .update(updateStok);
   }
 
   Future<QuerySnapshot> getUserInfo(String email) async {
@@ -39,9 +76,9 @@ class DatabaseMethods {
         .get();
   }
 
-  Future tambahBarang(Map<String, dynamic> infoBarang) async {
+  Future tambahBarang(namaBarang, Map<String, dynamic> infoBarang) async {
     DocumentReference barang =
-        FirebaseFirestore.instance.collection("barang").doc();
+        FirebaseFirestore.instance.collection("barang").doc(namaBarang);
     return barang.set(infoBarang);
   }
 
@@ -109,6 +146,12 @@ class DatabaseMethods {
         .catchError((e) {
       print(e);
     });
+  }
+
+  Future<String> getDataId(DocumentReference docRef) async {
+    DocumentSnapshot docSnap = await docRef.get();
+    var docId = docSnap.reference.id;
+    return docId;
   }
 
   Future<void> addMessage(String chatRoomId, chatMessageData) {

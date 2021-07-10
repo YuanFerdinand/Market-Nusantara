@@ -37,6 +37,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
         child: _listPage[_selectedNavbar],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

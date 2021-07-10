@@ -12,6 +12,7 @@ class _ListSpeakerState extends State<ListSpeaker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Speaker Komputer"),
       ),
       body: Center(

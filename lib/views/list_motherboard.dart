@@ -12,6 +12,7 @@ class _ListMotherboardState extends State<ListMotherboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Motherboard Komputer"),
       ),
       body: Center(

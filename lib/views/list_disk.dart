@@ -12,6 +12,7 @@ class _ListDiskState extends State<ListDisk> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Disk Komputer"),
       ),
       body: Center(

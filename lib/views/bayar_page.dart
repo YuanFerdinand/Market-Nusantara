@@ -10,7 +10,7 @@ class _BayarPageState extends State<BayarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color(0xff2CCACA),
         title: Text(
           'Payment',
           style: TextStyle(fontWeight: FontWeight.bold),

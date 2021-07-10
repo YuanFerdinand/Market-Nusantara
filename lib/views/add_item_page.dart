@@ -1,7 +1,7 @@
 //import 'dart:ffi';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
@@ -104,6 +104,9 @@ class _AddItemPageState extends State<AddItemPage> {
                           width: 50,
                         ),
                         TextFormField(
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(500)
+                          ],
                           onChanged: (detailBarang) {
                             this.detail =
                                 DatabaseMethods().getDetail(detailBarang);
@@ -294,10 +297,11 @@ class _AddItemPageState extends State<AddItemPage> {
                                   "harga": int.tryParse(this.harga),
                                   "jumlah": int.tryParse(this.jumlah),
                                   "merek": merek,
-                                  "terjual": null
+                                  "terjual": null,
                                 };
 
-                                DatabaseMethods().tambahBarang(infoBarang);
+                                DatabaseMethods()
+                                    .tambahBarang(nama, infoBarang);
                               },
                               child: Container(
                                 decoration: BoxDecoration(

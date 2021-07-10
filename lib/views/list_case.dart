@@ -12,6 +12,7 @@ class _ListCaseState extends State<ListCase> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Case Komputer"),
       ),
       body: Center(

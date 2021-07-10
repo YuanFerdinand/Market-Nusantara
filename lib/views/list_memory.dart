@@ -12,6 +12,7 @@ class _ListMemoryState extends State<ListMemory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("RAM Komputer"),
       ),
       body: Center(

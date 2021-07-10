@@ -12,6 +12,7 @@ class _ListMonitorState extends State<ListMonitor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Monitor Komputer"),
       ),
       body: Center(
