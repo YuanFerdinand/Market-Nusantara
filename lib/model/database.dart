@@ -23,6 +23,14 @@ class DatabaseMethods {
         .set(userInfoMap);
   }
 
+  Future updateInfoAkun(
+      String userCredential, Map<String, dynamic> userInfoMap) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(userCredential)
+        .update(userInfoMap);
+  }
+
   Future tambahFavorit(String namaBarang, userCredential,
       Map<String, dynamic> favoritInfoMap) async {
     return FirebaseFirestore.instance
@@ -54,11 +62,11 @@ class DatabaseMethods {
   }
 
   Future updateHargaCheckout(String userCredential,
-      Map<String, dynamic> tambahTotalCheckoutMap) async {
+      Map<String, dynamic> updateTotalCheckoutMap) async {
     return FirebaseFirestore.instance
         .collection("users")
         .doc(userCredential)
-        .update(tambahTotalCheckoutMap);
+        .update(updateTotalCheckoutMap);
   }
 
   Future updateMinusStok(
@@ -170,5 +178,51 @@ class DatabaseMethods {
         .collection("chatRoom")
         .where('users', arrayContains: itIsMyName)
         .snapshots();
+  }
+
+  Future<void> kirimDataPembelian(userCredential, updatePembelian) {
+    CollectionReference riwayatPembelian = FirebaseFirestore.instance
+        .collection('riwayatPembelian')
+        .doc(userCredential)
+        .collection('barang');
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    return riwayatPembelian.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((document) {
+        batch.update(document.reference, updatePembelian);
+      });
+
+      return batch.commit();
+    });
+  }
+
+  Future<void> hapusBarangKeranjang(userCredential) {
+    CollectionReference barangKeranjang = FirebaseFirestore.instance
+        .collection('keranjang')
+        .doc(userCredential)
+        .collection('barang');
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    return barangKeranjang.get().then((querySnapshot) {
+      querySnapshot.docs.forEach((document) {
+        batch.delete(document.reference);
+      });
+
+      return batch.commit();
+    });
+  }
+
+  Future addInfoToko(infoToko) {
+    return FirebaseFirestore.instance
+        .collection("dataPembayaran")
+        .doc("admin")
+        .update(infoToko);
+  }
+
+  Future addInfoTagihan(userCredential, infoTagihan) {
+    return FirebaseFirestore.instance
+        .collection("dataPembayaran")
+        .doc(userCredential)
+        .update(infoTagihan);
   }
 }

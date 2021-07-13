@@ -31,7 +31,12 @@ class Auth {
           "name": username,
           "logedIn": "pelanggan",
           "profilePict": "DEFAULT",
-          "totalCheckout": 0
+          "totalCheckout": 0,
+          "namaToko": "NAMA TOKO",
+          "alamat": "ALAMAT",
+          "nomorTelp": "NOMOR TELEPON",
+          "nomorRekening": "NOMOR REKENING",
+          "namaBank": "NAMA BANK"
         };
 
         DatabaseMethods()
@@ -95,8 +100,13 @@ class Auth {
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
         SharedPreferenceHelper()
             .saveProfilePicture(querySnapshot.docs[0]['profilePict']);
+
+        SharedPreferenceHelper().saveAlamat(querySnapshot.docs[0]['alamat']);
+        SharedPreferenceHelper().saveBank(querySnapshot.docs[0]['namaBank']);
+        SharedPreferenceHelper().saveToko(querySnapshot.docs[0]['namaToko']);
         SharedPreferenceHelper()
-            .saveTotal(querySnapshot.docs[0]['totalCheckout']);
+            .saveRekening(querySnapshot.docs[0]['nomorRekening']);
+        SharedPreferenceHelper().saveTelp(querySnapshot.docs[0]['nomorTelp']);
 
         // myBool = await SharedPreferenceHelper().getLogedIn();
         Navigator.pushReplacement(context,

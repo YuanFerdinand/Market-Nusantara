@@ -224,7 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu Pembayaran"
+                                        "status": " "
                                       };
                                       Map<String, dynamic> tambahPesanan = {
                                         "nama": widget.nama,
@@ -236,13 +236,28 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu Pembayaran"
+                                        "status": " "
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
                                         "totalCheckout": FieldValue.increment(
                                             widget.harga * counter)
                                       };
+                                      Map<String, dynamic> updateStokBarang = {
+                                        "jumlah": FieldValue.increment(-1)
+                                      };
+                                      Map<String, dynamic>
+                                          tambahTagihanPengguna = {
+                                        "tagihan": FieldValue.increment(
+                                            widget.harga * counter)
+                                      };
+
+                                      DatabaseMethods().updateHargaCheckout(
+                                          myUserCredential,
+                                          tambahTagihanPengguna);
+
+                                      DatabaseMethods().updateMinusStok(
+                                          widget.nama, updateStokBarang);
 
                                       DatabaseMethods().tambahKeranjang(
                                           widget.nama,
@@ -308,6 +323,20 @@ class _DetailPageState extends State<DetailPage> {
                                         "totalCheckout": FieldValue.increment(
                                             widget.harga * counter)
                                       };
+                                      Map<String, dynamic> updateStokBarang = {
+                                        "jumlah": FieldValue.increment(-1)
+                                      };
+                                      Map<String, dynamic>
+                                          tambahTagihanPengguna = {
+                                        "tagihan": FieldValue.increment(
+                                            widget.harga * counter)
+                                      };
+
+                                      DatabaseMethods().updateHargaCheckout(
+                                          myUserCredential,
+                                          tambahTagihanPengguna);
+                                      DatabaseMethods().updateMinusStok(
+                                          widget.nama, updateStokBarang);
 
                                       DatabaseMethods().tambahKeranjang(
                                           widget.nama,

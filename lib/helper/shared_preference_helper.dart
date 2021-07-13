@@ -2,6 +2,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferenceHelper {
   static String userIdKey = "USERKEY";
+  static String userAlamatKey = "USERBALAMAT";
+  static String userBankKey = "USERBANK";
+  static String userTokoKey = "USERTOKO";
+  static String userRekeningKey = "USERREKENING";
+  static String userTelpKey = "USERTELP";
   static String userCredentialIdKey = "USERCREDENTIALKEY";
   static String userNameKey = "USERNAMEKEY";
   static String userEmailKey = "USEREMAILKEY";
@@ -35,15 +40,34 @@ class SharedPreferenceHelper {
     return preferences.setString(userProfilePict, getProfilePicture);
   }
 
-  Future<bool> saveTotal(int getTotal) async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.setString(
-        userTotalCheckoutKey.toString(), getTotal.toString());
-  }
-
   Future<bool> saveLogedIn(String getLogedIn) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.setString(logedInKey, getLogedIn);
+  }
+
+  Future<bool> saveAlamat(String getAlamat) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userAlamatKey, getAlamat);
+  }
+
+  Future<bool> saveBank(String getBank) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userBankKey, getBank);
+  }
+
+  Future<bool> saveToko(String getToko) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userTokoKey, getToko);
+  }
+
+  Future<bool> saveRekening(String getRekening) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userRekeningKey, getRekening);
+  }
+
+  Future<bool> saveTelp(String getTelp) async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.setString(userTelpKey, getTelp);
   }
 
   //get data
@@ -72,14 +96,34 @@ class SharedPreferenceHelper {
     return preferences.getString(userProfilePict);
   }
 
-  Future<String> getTotal() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString(userTotalCheckoutKey.toString());
-  }
-
 //
   Future<String> getLogedIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     return preferences.getString(logedInKey);
+  }
+
+  Future<String> getAlamat() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userAlamatKey);
+  }
+
+  Future<String> getBank() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userBankKey);
+  }
+
+  Future<String> getToko() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userTokoKey);
+  }
+
+  Future<String> getRekening() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userRekeningKey);
+  }
+
+  Future<String> getTelp() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString(userTelpKey);
   }
 }

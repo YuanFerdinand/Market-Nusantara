@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/produk/keranjangCard.dart';
+import 'package:market_nusantara/views/bayar_page.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   var db;
-  String myUserCredential = "USERCREDENTIAL", myTotal = "0";
+  String myUserCredential = "USERCREDENTIAL";
   void initState() {
     getMyInfoFromSharedPreferences();
     super.initState();
@@ -19,7 +21,6 @@ class _CartPageState extends State<CartPage> {
   getMyInfoFromSharedPreferences() async {
     myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
 
-    myTotal = await SharedPreferenceHelper().getTotal();
     setState(() {});
   }
 
@@ -84,7 +85,26 @@ class _CartPageState extends State<CartPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Map<String, dynamic> updateStatusBarang = {
+                            "status": "Menunggu Pembayaran"
+                          };
+                          Map<String, dynamic> clearTotalKeranjang = {
+                            "totalCheckout": 0
+                          };
+
+                          DatabaseMethods().updateHargaCheckout(
+                              myUserCredential, clearTotalKeranjang);
+                          DatabaseMethods().kirimDataPembelian(
+                              myUserCredential, updateStatusBarang);
+                          DatabaseMethods()
+                              .hapusBarangKeranjang(myUserCredential);
+
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return BayarPage();
+                          }));
+                        },
                         child: Container(
                             margin: EdgeInsets.only(
                                 bottom:
