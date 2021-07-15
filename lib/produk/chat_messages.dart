@@ -66,7 +66,16 @@ class _ChatMessageState extends State<ChatMessage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarMain(context),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(
+          title: Text(
+            widget.chatRoomId
+                .replaceAll('_', '')
+                .replaceAll(Constants.myName, ""),
+          ),
+        ),
+      ),
       body: Container(
         child: Stack(
           children: [
