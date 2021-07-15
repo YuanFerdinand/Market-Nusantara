@@ -90,9 +90,6 @@ class _ChatMessageState extends State<ChatMessage> {
                   border: Border.all(
                     color: Colors.lightBlue[600],
                   ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(30),
-                  ),
                 ),
                 child: Row(
                   children: [
