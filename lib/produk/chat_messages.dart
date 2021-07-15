@@ -65,7 +65,7 @@ class _ChatMessageState extends State<ChatMessage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.white,
       appBar: appBarMain(context),
       body: Container(
         child: Stack(
@@ -75,8 +75,16 @@ class _ChatMessageState extends State<ChatMessage> {
               alignment: Alignment.bottomCenter,
               width: MediaQuery.of(context).size.width,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                color: Color(0x54FFFFFF),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xff2CCACA),
+                  border: Border.all(
+                    color: Colors.lightBlue[600],
+                  ),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -86,7 +94,7 @@ class _ChatMessageState extends State<ChatMessage> {
                       decoration: InputDecoration(
                           hintText: "Message ...",
                           hintStyle: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black,
                             fontSize: 16,
                           ),
                           border: InputBorder.none),

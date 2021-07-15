@@ -67,6 +67,9 @@ class _ChatRoomState extends State<ChatRoom> {
         centerTitle: false,
       ),
       body: Container(
+        decoration: BoxDecoration(
+          color: Color(0xff2CCACA),
+        ),
         child: chatRoomsList(),
       ),
       floatingActionButton: FloatingActionButton(
@@ -98,7 +101,7 @@ class ChatRoomsTile extends StatelessWidget {
                     )));
       },
       child: Container(
-        color: Colors.black26,
+        color: Color(0xff2CCACA),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Row(
           children: [
