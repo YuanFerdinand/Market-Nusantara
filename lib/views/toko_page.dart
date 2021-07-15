@@ -52,15 +52,17 @@ class _TokoPageState extends State<TokoPage> {
                               DocumentSnapshot documentSnapshot =
                                   snapshot.data.docs[index];
                               return ItemCard(
-                                  documentSnapshot["nama"],
-                                  documentSnapshot["merek"],
-                                  documentSnapshot["tipe"],
-                                  documentSnapshot["harga"],
-                                  documentSnapshot["jumlah"],
-                                  documentSnapshot["gambar"],
-                                  documentSnapshot["detail"],
-                                  documentSnapshot["dibuat"],
-                                  documentSnapshot["terjual"]);
+                                documentSnapshot["nama"],
+                                documentSnapshot["merek"],
+                                documentSnapshot["tipe"],
+                                documentSnapshot["harga"],
+                                documentSnapshot["jumlah"],
+                                documentSnapshot["gambar"],
+                                documentSnapshot["detail"],
+                                documentSnapshot["dibuat"],
+                                documentSnapshot["terjual"],
+                                documentSnapshot["barangUid"],
+                              );
                             });
                       } else {
                         return Center(

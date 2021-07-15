@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ class DetailPage extends StatefulWidget {
   final String detail;
   final Timestamp dibuat;
   final Timestamp terjual;
+  final String barangUid;
 
   //// Pointer to Update Function
   // final Function onUpdate;
@@ -22,7 +25,7 @@ class DetailPage extends StatefulWidget {
   // final Function onDelete;
 
   DetailPage(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
-      this.gambar, this.detail, this.dibuat, this.terjual);
+      this.gambar, this.detail, this.dibuat, this.terjual, this.barangUid);
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -32,6 +35,13 @@ class _DetailPageState extends State<DetailPage> {
   int counter = 0;
   bool fav = false;
   String myUserName, myEmail, myUserCredential, myLogedIn;
+
+  static const _chars =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  Random _rnd = Random();
+
+  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
+      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
   void initState() {
     getMyInfoFromSharedPreferences();
@@ -108,7 +118,7 @@ class _DetailPageState extends State<DetailPage> {
                     child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    (myLogedIn != "Admin")
+                    (myLogedIn != "admin")
                         ? Padding(
                             padding: const EdgeInsets.only(top: 170),
                             child: GestureDetector(
@@ -200,7 +210,7 @@ class _DetailPageState extends State<DetailPage> {
               ],
             ),
           ),
-          (myLogedIn != "Admin")
+          (myLogedIn != "admin")
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -214,6 +224,7 @@ class _DetailPageState extends State<DetailPage> {
                             (counter != 0)
                                 ? GestureDetector(
                                     onTap: () {
+                                      String barangUid = getRandomString(25);
                                       Map<String, dynamic> tambahKeranjang = {
                                         "nama": widget.nama,
                                         "detail": widget.detail,
@@ -224,7 +235,8 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": " "
+                                        "status": "Menunggu Pembayaran",
+                                        "barangUid": barangUid,
                                       };
                                       Map<String, dynamic> tambahPesanan = {
                                         "nama": widget.nama,
@@ -236,7 +248,8 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": " "
+                                        "status": "Menunggu Pembayaran",
+                                        "barangUid": barangUid,
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -244,7 +257,7 @@ class _DetailPageState extends State<DetailPage> {
                                             widget.harga * counter)
                                       };
                                       Map<String, dynamic> updateStokBarang = {
-                                        "jumlah": FieldValue.increment(-1)
+                                        "jumlah": FieldValue.increment(-counter)
                                       };
                                       Map<String, dynamic>
                                           tambahTagihanPengguna = {
@@ -255,18 +268,17 @@ class _DetailPageState extends State<DetailPage> {
                                       DatabaseMethods().updateHargaCheckout(
                                           myUserCredential,
                                           tambahTagihanPengguna);
-
                                       DatabaseMethods().updateMinusStok(
                                           widget.nama, updateStokBarang);
 
                                       DatabaseMethods().tambahKeranjang(
-                                          widget.nama,
+                                          barangUid,
                                           myUserCredential,
                                           tambahKeranjang);
                                       DatabaseMethods().updateHargaCheckout(
                                           myUserCredential,
                                           tambahTotalCheckout);
-                                      DatabaseMethods().checkout(widget.nama,
+                                      DatabaseMethods().checkout(barangUid,
                                           myUserCredential, tambahPesanan);
                                     },
                                     child: Card(
@@ -294,6 +306,7 @@ class _DetailPageState extends State<DetailPage> {
                             (counter != 0)
                                 ? GestureDetector(
                                     onTap: () {
+                                      String barangUid = getRandomString(25);
                                       Map<String, dynamic> tambahKeranjang = {
                                         "nama": widget.nama,
                                         "detail": widget.detail,
@@ -304,7 +317,8 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu Pembayaran"
+                                        "status": "Menunggu Pembayaran",
+                                        "barangUid": barangUid,
                                       };
                                       Map<String, dynamic> tambahPesanan = {
                                         "nama": widget.nama,
@@ -316,7 +330,8 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu Pembayaran"
+                                        "status": "Menunggu Pembayaran",
+                                        "barangUid": barangUid,
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -324,7 +339,7 @@ class _DetailPageState extends State<DetailPage> {
                                             widget.harga * counter)
                                       };
                                       Map<String, dynamic> updateStokBarang = {
-                                        "jumlah": FieldValue.increment(-1)
+                                        "jumlah": FieldValue.increment(-counter)
                                       };
                                       Map<String, dynamic>
                                           tambahTagihanPengguna = {
@@ -339,13 +354,13 @@ class _DetailPageState extends State<DetailPage> {
                                           widget.nama, updateStokBarang);
 
                                       DatabaseMethods().tambahKeranjang(
-                                          widget.nama,
+                                          barangUid,
                                           myUserCredential,
                                           tambahKeranjang);
                                       DatabaseMethods().updateHargaCheckout(
                                           myUserCredential,
                                           tambahTotalCheckout);
-                                      DatabaseMethods().checkout(widget.nama,
+                                      DatabaseMethods().checkout(barangUid,
                                           myUserCredential, tambahPesanan);
 
                                       Navigator.push(context,

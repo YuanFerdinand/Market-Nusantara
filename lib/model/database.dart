@@ -41,23 +41,23 @@ class DatabaseMethods {
         .set(favoritInfoMap);
   }
 
-  Future tambahKeranjang(String namaBarang, userCredential,
+  Future tambahKeranjang(String barangUid, userCredential,
       Map<String, dynamic> tambahKeranjangMap) async {
     return FirebaseFirestore.instance
         .collection("keranjang")
         .doc(userCredential)
         .collection('barang')
-        .doc(namaBarang)
+        .doc(barangUid)
         .set(tambahKeranjangMap);
   }
 
-  Future checkout(String namaBarang, userCredential,
+  Future checkout(String barangUid, userCredential,
       Map<String, dynamic> tambahCheckoutMap) async {
     return FirebaseFirestore.instance
         .collection("riwayatPembelian")
         .doc(userCredential)
         .collection('barang')
-        .doc(namaBarang)
+        .doc(barangUid)
         .set(tambahCheckoutMap);
   }
 
@@ -75,6 +75,24 @@ class DatabaseMethods {
         .collection("barang")
         .doc(barangUID)
         .update(updateStok);
+  }
+
+  Future updateTambahStok(
+      String barangUID, Map<String, dynamic> updateStok) async {
+    return FirebaseFirestore.instance
+        .collection("barang")
+        .doc(barangUID)
+        .update(updateStok);
+  }
+
+  Future hapusBarangKeranjangTerpilih(
+      String userCredential, String barangUid) async {
+    return FirebaseFirestore.instance
+        .collection("keranjang")
+        .doc(userCredential)
+        .collection("barang")
+        .doc(barangUid)
+        .delete();
   }
 
   Future<QuerySnapshot> getUserInfo(String email) async {

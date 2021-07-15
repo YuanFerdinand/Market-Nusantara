@@ -58,15 +58,17 @@ class _CartPageState extends State<CartPage> {
                             DocumentSnapshot documentSnapshot =
                                 snapshot.data.docs[index];
                             return KeranjangCard(
-                                documentSnapshot["nama"],
-                                documentSnapshot["merek"],
-                                documentSnapshot["tipe"],
-                                documentSnapshot["harga"],
-                                documentSnapshot["jumlah"],
-                                documentSnapshot["gambar"],
-                                documentSnapshot["detail"],
-                                documentSnapshot["dibuat"],
-                                documentSnapshot["terjual"]);
+                              documentSnapshot["nama"],
+                              documentSnapshot["merek"],
+                              documentSnapshot["tipe"],
+                              documentSnapshot["harga"],
+                              documentSnapshot["jumlah"],
+                              documentSnapshot["gambar"],
+                              documentSnapshot["detail"],
+                              documentSnapshot["dibuat"],
+                              documentSnapshot["terjual"],
+                              documentSnapshot["barangUid"],
+                            );
                           });
                     } else {
                       return Center(

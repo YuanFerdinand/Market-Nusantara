@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/model/database.dart';
 
 class KeranjangCard extends StatefulWidget {
   final String nama;
@@ -12,14 +14,27 @@ class KeranjangCard extends StatefulWidget {
   final String detail;
   final Timestamp dibuat;
   final Timestamp terjual;
+  final String barangUid;
 
   KeranjangCard(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
-      this.gambar, this.detail, this.dibuat, this.terjual);
+      this.gambar, this.detail, this.dibuat, this.terjual, this.barangUid);
   @override
   _KeranjangCardState createState() => _KeranjangCardState();
 }
 
 class _KeranjangCardState extends State<KeranjangCard> {
+  String myUserCredential;
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
+
+  getMyInfoFromSharedPreferences() async {
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -72,9 +87,46 @@ class _KeranjangCardState extends State<KeranjangCard> {
                       ),
                     ],
                   ),
-                  Text(
-                    widget.merek,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.merek,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Map<String, dynamic> updateStock = {
+                                'jumlah': FieldValue.increment(widget.jumlah)
+                              };
+                              Map<String, dynamic> updateTotalCheckoutMap = {
+                                'totalCheckout':
+                                    FieldValue.increment(-widget.harga)
+                              };
+
+                              DatabaseMethods()
+                                  .updateTambahStok(widget.nama, updateStock);
+                              DatabaseMethods().hapusBarangKeranjangTerpilih(
+                                  myUserCredential, widget.barangUid);
+                              DatabaseMethods().updateHargaCheckout(
+                                  myUserCredential, updateTotalCheckoutMap);
+                            },
+                            child: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
                   )
                 ],
               ),

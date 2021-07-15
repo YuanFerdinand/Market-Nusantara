@@ -318,7 +318,8 @@ class _HomePageState extends State<HomePage> {
                                   documentSnapshot["gambar"],
                                   documentSnapshot["detail"],
                                   documentSnapshot["dibuat"],
-                                  documentSnapshot["terjual"]);
+                                  documentSnapshot["terjual"],
+                                  documentSnapshot["barangUid"]);
                             });
                       } else {
                         return Center(
