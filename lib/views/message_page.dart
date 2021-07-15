@@ -18,7 +18,6 @@ class _MessagePageState extends State<MessagePage> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Chats"),
         elevation: 0.0,
         actions: <Widget>[
           IconButton(
@@ -31,7 +30,7 @@ class _MessagePageState extends State<MessagePage> {
       ),
       body: Column(
         children: <Widget>[
-          CategoryChat(),
+          //CategoryChat(),
           Expanded(
             child: Container(
               padding: EdgeInsets.only(top: 15),
@@ -44,7 +43,7 @@ class _MessagePageState extends State<MessagePage> {
               ),
               child: Column(
                 children: <Widget>[
-                  //ChatRoom(),
+                  ChatRoom(),
                 ],
               ),
             ),

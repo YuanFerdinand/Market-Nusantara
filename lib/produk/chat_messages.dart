@@ -65,8 +65,17 @@ class _ChatMessageState extends State<ChatMessage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
-      appBar: appBarMain(context),
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(60.0),
+        child: AppBar(
+          title: Text(
+            widget.chatRoomId
+                .replaceAll('_', '')
+                .replaceAll(Constants.myName, ""),
+          ),
+        ),
+      ),
       body: Container(
         child: Stack(
           children: [
@@ -75,8 +84,13 @@ class _ChatMessageState extends State<ChatMessage> {
               alignment: Alignment.bottomCenter,
               width: MediaQuery.of(context).size.width,
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
-                color: Color(0x54FFFFFF),
+                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Color(0xff2CCACA),
+                  border: Border.all(
+                    color: Colors.lightBlue[600],
+                  ),
+                ),
                 child: Row(
                   children: [
                     Expanded(
@@ -86,7 +100,7 @@ class _ChatMessageState extends State<ChatMessage> {
                       decoration: InputDecoration(
                           hintText: "Message ...",
                           hintStyle: TextStyle(
-                            color: Colors.grey,
+                            color: Colors.black,
                             fontSize: 16,
                           ),
                           border: InputBorder.none),

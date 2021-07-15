@@ -138,7 +138,7 @@ class _SearchState extends State<Search> {
                 children: [
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                    color: Colors.grey,
+                    color: Colors.lightBlue[600],
                     child: Row(
                       children: [
                         Expanded(
@@ -146,7 +146,7 @@ class _SearchState extends State<Search> {
                             controller: searchEditingController,
                             style: simpleTextStyle(),
                             decoration: InputDecoration(
-                                hintText: "search username ...",
+                                hintText: "search username ... (e.g. Yuan)",
                                 hintStyle: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,

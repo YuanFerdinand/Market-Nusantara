@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/helper/constants.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/produk/keranjangCard.dart';
+import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 
 class CartPage extends StatefulWidget {
@@ -12,10 +14,20 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   var db;
+  DatabaseMethods databaseMethods = new DatabaseMethods();
+  TextEditingController messageEditingController = new TextEditingController();
   String myUserCredential = "USERCREDENTIAL";
   void initState() {
     getMyInfoFromSharedPreferences();
     super.initState();
+  }
+
+  getChatRoomId(String a, String b) {
+    if (a.substring(0, 1).codeUnitAt(0) > b.substring(0, 1).codeUnitAt(0)) {
+      return "$b\_$a";
+    } else {
+      return "$a\_$b";
+    }
   }
 
   getMyInfoFromSharedPreferences() async {
@@ -94,6 +106,21 @@ class _CartPageState extends State<CartPage> {
                           Map<String, dynamic> clearTotalKeranjang = {
                             "totalCheckout": 0
                           };
+
+                          List<String> users = [
+                            Constants.myName,
+                            Constants.myAdmin
+                          ];
+
+                          String chatRoomId = getChatRoomId(
+                              Constants.myName, Constants.myAdmin);
+
+                          Map<String, dynamic> chatRoom = {
+                            "users": users,
+                            "chatRoomId": chatRoomId,
+                          };
+
+                          databaseMethods.addChatRoom(chatRoom, chatRoomId);
 
                           DatabaseMethods().updateHargaCheckout(
                               myUserCredential, clearTotalKeranjang);
