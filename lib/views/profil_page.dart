@@ -11,6 +11,7 @@ import 'package:market_nusantara/views/bayar_page.dart';
 import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
+import 'package:market_nusantara/views/edit_profile.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -21,7 +22,15 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   var imageDir;
   String myPict = "DEFAULT", def = "DEFAULT";
-  String myUserName, myEmail = "DEFAULT", myCredentialId = "DEFAULT";
+  String myUserName = "DEFAULT",
+      myEmail = "DEFAULT",
+      myUserCredential = "DEFAULT",
+      myLogedIn = "USER",
+      myAlamat = "USER",
+      myBank = "USER",
+      myToko = "USER",
+      myRekening = "USER",
+      myTelp = "USER";
 
   @override
   void initState() {
@@ -46,8 +55,14 @@ class _ProfilPageState extends State<ProfilPage> {
   getMyInfoFromSharedPreferences() async {
     myUserName = await SharedPreferenceHelper().getUserName();
     myEmail = await SharedPreferenceHelper().getUserEmail();
-    myCredentialId = await SharedPreferenceHelper().getUserCredentialId();
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
     myPict = await SharedPreferenceHelper().getUserProfilePicture();
+    myLogedIn = await SharedPreferenceHelper().getLogedIn();
+    myAlamat = await SharedPreferenceHelper().getAlamat();
+    myBank = await SharedPreferenceHelper().getBank();
+    myToko = await SharedPreferenceHelper().getToko();
+    myRekening = await SharedPreferenceHelper().getRekening();
+    myTelp = await SharedPreferenceHelper().getTelp();
     setState(() {});
   }
 
@@ -74,15 +89,6 @@ class _ProfilPageState extends State<ProfilPage> {
                 size: 35,
               ),
               onPressed: () {
-                FirebaseFirestore _firestore = FirebaseFirestore.instance;
-                CollectionReference _users = _firestore.collection('users');
-                _users
-                    .doc(myCredentialId)
-                    .update({
-                      'logedIn': "false",
-                    })
-                    .then((value) => print("User logout"))
-                    .catchError((error) => print("Gagal logout"));
                 Auth().toSignOut(context);
               }),
         ],
@@ -111,7 +117,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myCredentialId).update({
+                                    _users.doc(myUserCredential).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()
@@ -141,7 +147,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                         FirebaseFirestore.instance;
                                     CollectionReference _users =
                                         _firestore.collection('users');
-                                    _users.doc(myCredentialId).update({
+                                    _users.doc(myUserCredential).update({
                                       'profilePict': myPict,
                                     });
                                     SharedPreferenceHelper()
@@ -190,7 +196,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                   color: Color(0xffFF1192)),
                               child: Center(
                                 child: Text(
-                                  " AIRO Corps. ",
+                                  myLogedIn,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 16,
@@ -204,6 +210,11 @@ class _ProfilPageState extends State<ProfilPage> {
                     ]),
               ),
               GestureDetector(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return EditProfile();
+                  }));
+                },
                 child: Card(
                   margin: EdgeInsets.only(bottom: 20),
                   shape: RoundedRectangleBorder(
@@ -219,14 +230,14 @@ class _ProfilPageState extends State<ProfilPage> {
                       children: <Widget>[
                         Center(
                           child: Container(
-                            child: Text("Buka Toko Penjualan"),
+                            child: Text("Edit Profile"),
                           ),
                         ),
                         IconButton(
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return TokoPage();
+                              return EditProfile();
                             }));
                           },
                           icon: Icon(
@@ -237,6 +248,44 @@ class _ProfilPageState extends State<ProfilPage> {
                     ),
                   ),
                 ),
+              ),
+              GestureDetector(
+                child: (myLogedIn == "admin")
+                    ? Card(
+                        margin: EdgeInsets.only(bottom: 20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            side:
+                                BorderSide(width: 3, color: Color(0xff2CCACA))),
+                        elevation: 7,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 15, right: 15, top: 10, bottom: 10),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  child: Text("Buka Toko Penjualan"),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return TokoPage();
+                                  }));
+                                },
+                                icon: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    : SizedBox(),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return TokoPage();

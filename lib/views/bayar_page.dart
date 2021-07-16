@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
 
 class BayarPage extends StatefulWidget {
   @override
@@ -6,11 +8,27 @@ class BayarPage extends StatefulWidget {
 }
 
 class _BayarPageState extends State<BayarPage> {
+  String myUserCredential = "USERCREDENTIAL";
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
+
+  getMyInfoFromSharedPreferences() async {
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore dbInfo = FirebaseFirestore.instance;
+    CollectionReference info = dbInfo.collection('dataPembayaran');
+    FirebaseFirestore dbTotal = FirebaseFirestore.instance;
+    CollectionReference total = dbTotal.collection('users');
     return Scaffold(
       appBar: new AppBar(
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Color(0xff2CCACA),
         title: Text(
           'Payment',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -23,38 +41,57 @@ class _BayarPageState extends State<BayarPage> {
             Center(),
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: Text(
-                "BNI",
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                ),
-              ),
+              child: StreamBuilder<DocumentSnapshot>(
+                  stream: info.doc("admin").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData)
+                      return Text(
+                        snapshot.data['namaBank'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      );
+                    else {
+                      return Text("Mohon Tunggu");
+                    }
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Text(
-                "0786178",
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                ),
-              ),
+              child: StreamBuilder<DocumentSnapshot>(
+                  stream: info.doc("admin").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData)
+                      return Text(
+                        snapshot.data['nomorRekening'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      );
+                    else {
+                      return Text("Mohon Tunggu");
+                    }
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Text(
-                "Yuan Ferdinand",
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.lightBlue,
-                ),
-              ),
+              child: StreamBuilder<DocumentSnapshot>(
+                  stream: info.doc("admin").snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData)
+                      return Text(
+                        snapshot.data['namaAdmin'].toString(),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      );
+                    else {
+                      return Text("Mohon Tunggu");
+                    }
+                  }),
             ),
           ],
         ),
@@ -94,15 +131,22 @@ class _BayarPageState extends State<BayarPage> {
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 40, left: 20, right: 20, bottom: 40),
-                  child: Text(
-                    "9.200.000",
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  child: StreamBuilder<DocumentSnapshot>(
+                      stream: total.doc(myUserCredential).snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData)
+                          return Text(
+                            "Rp. " + snapshot.data['tagihan'].toString(),
+                            style: TextStyle(
+                                fontFamily: "RedHatDisplay",
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          );
+                        else {
+                          return Text("Mohon Tunggu");
+                        }
+                      }),
                 ),
                 Padding(
                   padding:
@@ -125,15 +169,21 @@ class _BayarPageState extends State<BayarPage> {
                   Padding(
                     padding: const EdgeInsets.only(
                         top: 15, left: 20, right: 10, bottom: 13),
-                    child: Text(
-                      "082189839012",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
+                    child: StreamBuilder<DocumentSnapshot>(
+                        stream: info.doc("admin").snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData)
+                            return Text(
+                              snapshot.data['nomorTelp'].toString(),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          else {
+                            return Text("Mohon Tunggu");
+                          }
+                        }),
                   ),
                 ]),
               ],

@@ -67,6 +67,9 @@ class _ChatRoomState extends State<ChatRoom> {
         centerTitle: false,
       ),
       body: Container(
+        decoration: BoxDecoration(
+          color: Color(0xff2CCACA),
+        ),
         child: chatRoomsList(),
       ),
       floatingActionButton: FloatingActionButton(
@@ -98,21 +101,21 @@ class ChatRoomsTile extends StatelessWidget {
                     )));
       },
       child: Container(
-        color: Colors.black26,
+        color: Color(0xff2CCACA),
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Row(
           children: [
             Container(
-              height: 30,
-              width: 30,
+              height: 36,
+              width: 36,
               decoration: BoxDecoration(
                   color: CustomTheme.colorAccent,
-                  borderRadius: BorderRadius.circular(30)),
+                  borderRadius: BorderRadius.circular(50)),
               child: Text(userName.substring(0, 1),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 24,
                       fontFamily: 'OverpassRegular',
                       fontWeight: FontWeight.w300)),
             ),
@@ -122,7 +125,7 @@ class ChatRoomsTile extends StatelessWidget {
             Text(userName,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 16,
                     fontFamily: 'OverpassRegular',
                     fontWeight: FontWeight.w300))

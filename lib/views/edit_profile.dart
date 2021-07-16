@@ -1,36 +1,38 @@
 //import 'dart:ffi';
 import 'dart:io';
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
 
-class AddItemPage extends StatefulWidget {
+class EditProfile extends StatefulWidget {
   @override
-  _AddItemPageState createState() => _AddItemPageState();
+  _EditProfileState createState() => _EditProfileState();
 }
 
-class _AddItemPageState extends State<AddItemPage> {
-  String nama = "NAMA", merek = "MEREK", tipe = "TIPE";
-  String harga = "1000000", jumlah = "1";
-  String imagePath = "GAMBAR", detail = "Detail";
-  String _chosenValue;
+class _EditProfileState extends State<EditProfile> {
+  String namaUser, toko, alamatUser, bank, myUserCredential;
+  int rek, telp;
   var imageDir;
+  TextEditingController nama = new TextEditingController();
+  TextEditingController namaToko = new TextEditingController();
+  TextEditingController nomorRekening = new TextEditingController();
+  TextEditingController alamat = new TextEditingController();
+  TextEditingController nomorTelp = new TextEditingController();
+  TextEditingController namaBank = new TextEditingController();
+  @override
+  void initState() {
+    getMyInfoFromSharedPreferences();
+    super.initState();
+  }
 
-  Future<File> getImage() async {
-    var imageFile;
-    final picker = ImagePicker();
-    PickedFile pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        imageFile = File(pickedFile.path);
-      });
-      return imageDir = imageFile;
-    } else {
-      return imageDir = imageFile;
-    }
+  getMyInfoFromSharedPreferences() async {
+    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
+
+    setState(() {});
   }
 
   @override
@@ -66,7 +68,7 @@ class _AddItemPageState extends State<AddItemPage> {
                     //   width: 5.0, // Underline thickness
                     // ))),
                     child: Text(
-                      "TAMBAH BARANG",
+                      "EDIT PROFILE",
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Popppins",
@@ -87,8 +89,9 @@ class _AddItemPageState extends State<AddItemPage> {
                     child: ListView(
                       children: [
                         TextFormField(
-                          onChanged: (namaBarang) {
-                            nama = DatabaseMethods().getNama(namaBarang);
+                          controller: nama,
+                          onChanged: (nama) {
+                            this.namaUser = nama;
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(left: 5),
@@ -96,7 +99,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Nama",
+                              hintText: "Masukan Nama",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -108,9 +111,9 @@ class _AddItemPageState extends State<AddItemPage> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(500)
                           ],
-                          onChanged: (detailBarang) {
-                            this.detail =
-                                DatabaseMethods().getDetail(detailBarang);
+                          controller: namaToko,
+                          onChanged: (namaToko) {
+                            this.toko = namaToko;
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(left: 5),
@@ -118,7 +121,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Detail",
+                              hintText: "Masukan Nama Toko",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -127,9 +130,31 @@ class _AddItemPageState extends State<AddItemPage> {
                           width: 50,
                         ),
                         TextFormField(
-                          onChanged: (hargaBarang) {
-                            this.harga =
-                                DatabaseMethods().getHarga(hargaBarang);
+                          controller: alamat,
+                          onChanged: (alamat) {
+                            this.alamatUser = alamat;
+                          },
+                          textInputAction: TextInputAction.next,
+                          keyboardType: TextInputType.streetAddress,
+                          cursorColor: Colors.black,
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(left: 5),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(50)),
+                              fillColor: Colors.white,
+                              filled: true,
+                              hintText: "Masukan Nama Alamat",
+                              hintStyle: TextStyle(
+                                  fontFamily: 'Poppins', fontSize: 12)),
+                        ),
+                        SizedBox(
+                          height: 50,
+                          width: 50,
+                        ),
+                        TextFormField(
+                          controller: nomorTelp,
+                          onChanged: (nomorTelp) {
+                            this.telp = int.tryParse(nomorTelp);
                           },
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.number,
@@ -140,7 +165,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Harga",
+                              hintText: "Masukan No Telepon",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -148,59 +173,10 @@ class _AddItemPageState extends State<AddItemPage> {
                           height: 50,
                           width: 50,
                         ),
-                        DropdownButtonFormField(
-                          decoration: InputDecoration.collapsed(hintText: ''),
-                          validator: (value) =>
-                              value == null ? 'Kantor belum dipilih' : null,
-                          value: _chosenValue,
-                          items: [
-                            'Prosesor',
-                            'VGA',
-                            'RAM',
-                            'Case',
-                            'Disk',
-                            'Motherboard',
-                            'Monitor',
-                            'Speaker'
-                          ].map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem(
-                              child: Text(value),
-                              value: value,
-                            );
-                          }).toList(),
-                          hint: Text("Pilih Tipe"),
-                          onChanged: (value) {
-                            setState(() {
-                              _chosenValue = value;
-                              this.tipe = _chosenValue;
-                            });
-                          },
-                        ),
-                        // TextFormField(
-                        //   onChanged: (tipeBarang) {
-                        //     this.tipe = DatabaseMethods().getTipe(tipeBarang);
-                        //   },
-                        //   textInputAction: TextInputAction.next,
-                        //   keyboardType: TextInputType.name,
-                        //   cursorColor: Colors.black,
-                        //   decoration: InputDecoration(
-                        //       contentPadding: EdgeInsets.only(left: 5),
-                        //       border: OutlineInputBorder(
-                        //           borderRadius: BorderRadius.circular(50)),
-                        //       fillColor: Colors.white,
-                        //       filled: true,
-                        //       hintText: "Tipe",
-                        //       hintStyle: TextStyle(
-                        //           fontFamily: 'Poppins', fontSize: 12)),
-                        // ),
-                        SizedBox(
-                          height: 50,
-                          width: 50,
-                        ),
                         TextFormField(
-                          onChanged: (merekBarang) {
-                            this.merek =
-                                DatabaseMethods().getMerek(merekBarang);
+                          controller: namaBank,
+                          onChanged: (namaBank) {
+                            this.bank = namaBank;
                           },
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.name,
@@ -211,7 +187,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Merek",
+                              hintText: "Masukan Nama Bank",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -220,9 +196,9 @@ class _AddItemPageState extends State<AddItemPage> {
                           width: 25,
                         ),
                         TextFormField(
-                          onChanged: (jumlahBarang) {
-                            this.jumlah =
-                                DatabaseMethods().getJumlah(jumlahBarang);
+                          controller: nomorRekening,
+                          onChanged: (nomorRekening) {
+                            this.rek = int.tryParse(nomorRekening);
                           },
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.number,
@@ -233,76 +209,37 @@ class _AddItemPageState extends State<AddItemPage> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Jumlah",
+                              hintText: "Masukan Nomor Rekening",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
                         SizedBox(
-                          height: 50,
+                          height: MediaQuery.of(context).size.height * 0.05,
                           width: 25,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                    color: Color(0xff2CCACA),
-                                    borderRadius: BorderRadius.circular(50)),
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                width: MediaQuery.of(context).size.width * 0.43,
-                                child: (imageDir == null)
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Text("Upload file",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18)),
-                                          IconButton(
-                                              icon: Icon(Icons.upload_file),
-                                              color: Colors.white,
-                                              iconSize: 30,
-                                              onPressed: () {
-                                                getImage();
-                                              })
-                                        ],
-                                      )
-                                    : Text(
-                                        imageDir.toString(),
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12),
-                                      )),
                             GestureDetector(
                               onTap: () async {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(builder: (context) {
-                                  return BottomNavigation();
-                                }));
-                                if (imageDir != null) {
-                                  imagePath =
-                                      await DatabaseMethods.uploadGambar(
-                                          imageDir);
-                                }
-                                Map<String, dynamic> infoBarang = {
-                                  "nama": nama,
-                                  "detail": detail,
-                                  "tipe": tipe,
-                                  "dibuat": DateTime.now(),
-                                  "gambar": imagePath,
-                                  "harga": int.tryParse(this.harga),
-                                  "jumlah": int.tryParse(this.jumlah),
-                                  "merek": merek,
-                                  "terjual": null,
+                                Map<String, dynamic> infoProfile = {
+                                  "name": namaUser,
+                                  "namaToko": toko,
+                                  "alamat": alamatUser,
+                                  "nomorTelp": telp.toString(),
+                                  "nomorRekening": rek.toString(),
+                                  "namaBank": bank,
                                 };
-
-                                DatabaseMethods()
-                                    .tambahBarang(nama, infoBarang);
+                                Map<String, dynamic> infoToko = {
+                                  "namaAdmin": namaUser,
+                                  "nomorTelp": telp.toString(),
+                                  "nomorRekening": rek.toString(),
+                                  "namaBank": bank,
+                                };
+                                DatabaseMethods().addInfoToko(infoToko);
+                                DatabaseMethods().updateInfoAkun(
+                                    myUserCredential, infoProfile);
+                                Auth().toSignOut(context);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -314,7 +251,7 @@ class _AddItemPageState extends State<AddItemPage> {
                                 width: MediaQuery.of(context).size.width * 0.43,
                                 child: Center(
                                   child: Text(
-                                    "Tambah",
+                                    "Update Profile",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,

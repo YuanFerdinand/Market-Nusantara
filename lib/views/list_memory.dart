@@ -12,6 +12,7 @@ class _ListMemoryState extends State<ListMemory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("RAM Komputer"),
       ),
       body: Center(
@@ -35,15 +36,17 @@ class _ListMemoryState extends State<ListMemory> {
                         DocumentSnapshot documentSnapshot =
                             snapshot.data.docs[index];
                         return ItemCard(
-                            documentSnapshot["nama"],
-                            documentSnapshot["merek"],
-                            documentSnapshot["tipe"],
-                            documentSnapshot["harga"],
-                            documentSnapshot["jumlah"],
-                            documentSnapshot["gambar"],
-                            documentSnapshot["detail"],
-                            documentSnapshot["dibuat"],
-                            documentSnapshot["terjual"]);
+                          documentSnapshot["nama"],
+                          documentSnapshot["merek"],
+                          documentSnapshot["tipe"],
+                          documentSnapshot["harga"],
+                          documentSnapshot["jumlah"],
+                          documentSnapshot["gambar"],
+                          documentSnapshot["detail"],
+                          documentSnapshot["dibuat"],
+                          documentSnapshot["terjual"],
+                          documentSnapshot["barangUid"],
+                        );
                       });
                 } else {
                   return Center(

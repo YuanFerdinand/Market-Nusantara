@@ -29,12 +29,18 @@ class Auth {
         Map<String, dynamic> userInfoMap = {
           "email": userDetail.email,
           "name": username,
-          "logedIn": "false",
-          "profilePict": "DEFAULT"
+          "logedIn": "pelanggan",
+          "profilePict": "DEFAULT",
+          "totalCheckout": 0,
+          "namaToko": "NAMA TOKO",
+          "alamat": "ALAMAT",
+          "nomorTelp": "NOMOR TELEPON",
+          "nomorRekening": "NOMOR REKENING",
+          "namaBank": "NAMA BANK"
         };
 
         DatabaseMethods()
-            .tambahAkun(userCredential.user.uid, userInfoMap)
+            .tambahInfoAkun(userCredential.user.uid, userInfoMap)
             .then((value) {
           Navigator.pop(context);
         });
@@ -94,6 +100,13 @@ class Auth {
         SharedPreferenceHelper().saveLogedIn(querySnapshot.docs[0]['logedIn']);
         SharedPreferenceHelper()
             .saveProfilePicture(querySnapshot.docs[0]['profilePict']);
+
+        SharedPreferenceHelper().saveAlamat(querySnapshot.docs[0]['alamat']);
+        SharedPreferenceHelper().saveBank(querySnapshot.docs[0]['namaBank']);
+        SharedPreferenceHelper().saveToko(querySnapshot.docs[0]['namaToko']);
+        SharedPreferenceHelper()
+            .saveRekening(querySnapshot.docs[0]['nomorRekening']);
+        SharedPreferenceHelper().saveTelp(querySnapshot.docs[0]['nomorTelp']);
 
         // myBool = await SharedPreferenceHelper().getLogedIn();
         Navigator.pushReplacement(context,

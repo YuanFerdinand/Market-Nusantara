@@ -12,6 +12,7 @@ class _ListCaseState extends State<ListCase> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff2CCACA),
         title: Text("Case Komputer"),
       ),
       body: Center(
@@ -35,15 +36,17 @@ class _ListCaseState extends State<ListCase> {
                         DocumentSnapshot documentSnapshot =
                             snapshot.data.docs[index];
                         return ItemCard(
-                            documentSnapshot["nama"],
-                            documentSnapshot["merek"],
-                            documentSnapshot["tipe"],
-                            documentSnapshot["harga"],
-                            documentSnapshot["jumlah"],
-                            documentSnapshot["gambar"],
-                            documentSnapshot["detail"],
-                            documentSnapshot["dibuat"],
-                            documentSnapshot["terjual"]);
+                          documentSnapshot["nama"],
+                          documentSnapshot["merek"],
+                          documentSnapshot["tipe"],
+                          documentSnapshot["harga"],
+                          documentSnapshot["jumlah"],
+                          documentSnapshot["gambar"],
+                          documentSnapshot["detail"],
+                          documentSnapshot["dibuat"],
+                          documentSnapshot["terjual"],
+                          documentSnapshot["barangUid"],
+                        );
                       });
                 } else {
                   return Center(

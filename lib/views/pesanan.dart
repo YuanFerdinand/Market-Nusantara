@@ -3,30 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 
-class TokoPage extends StatefulWidget {
+class PesananPage extends StatefulWidget {
   @override
-  _TokoPageState createState() => _TokoPageState();
+  _PesananPageState createState() => _PesananPageState();
 }
 
-class _TokoPageState extends State<TokoPage> {
+class _PesananPageState extends State<PesananPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Toko Anda"),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.add,
-                size: 35,
-              ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return AddItemPage();
-                }));
-              }),
-        ],
+        title: Text("Pesanan Anda"),
       ),
       body: Container(
         child: ListView(

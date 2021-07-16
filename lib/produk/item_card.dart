@@ -4,7 +4,7 @@ import 'package:market_nusantara/views/detail_page.dart';
 
 class ItemCard extends StatefulWidget {
   ItemCard(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
-      this.gambar, this.detail, this.dibuat, this.terjual);
+      this.gambar, this.detail, this.dibuat, this.terjual, this.barangUid);
 
   final String nama;
   final String merek;
@@ -15,6 +15,7 @@ class ItemCard extends StatefulWidget {
   final String detail;
   final Timestamp dibuat;
   final Timestamp terjual;
+  final String barangUid;
 
   @override
   _ItemCardState createState() => _ItemCardState();
@@ -35,7 +36,8 @@ class _ItemCardState extends State<ItemCard> {
               widget.gambar,
               widget.detail,
               widget.dibuat,
-              widget.terjual);
+              widget.terjual,
+              widget.barangUid);
         }));
       },
       child: Card(
@@ -47,12 +49,14 @@ class _ItemCardState extends State<ItemCard> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image(
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                   image: NetworkImage(widget.gambar),
-                  height: MediaQuery.of(context).size.width * 0.30,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   width: MediaQuery.of(context).size.width * 0.30),
               Text(
                 widget.nama,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               )
             ],
