@@ -69,6 +69,24 @@ class DatabaseMethods {
         .set(tambahPesananMasukMap);
   }
 
+  Future updateStatusPesananMasuk(
+      String barangUid, Map<String, dynamic> tambahPesananMasukMap) async {
+    return FirebaseFirestore.instance
+        .collection("pesananMasuk")
+        .doc(barangUid)
+        .update(tambahPesananMasukMap);
+  }
+
+  Future updateStatusRiwayatPembelian(String myUserCredential, String barangUid,
+      Map<String, dynamic> updateStatus) async {
+    return FirebaseFirestore.instance
+        .collection('riwayatPembelian')
+        .doc(myUserCredential)
+        .collection("barang")
+        .doc(barangUid)
+        .update(updateStatus);
+  }
+
   Future updateHargaCheckout(String userCredential,
       Map<String, dynamic> updateTotalCheckoutMap) async {
     return FirebaseFirestore.instance
