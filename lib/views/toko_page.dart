@@ -60,7 +60,9 @@ class _TokoPageState extends State<TokoPage> {
                                   documentSnapshot["gambar"],
                                   documentSnapshot["detail"],
                                   documentSnapshot["dibuat"],
-                                  documentSnapshot["terjual"]);
+                                  documentSnapshot["terjual"],
+                                  documentSnapshot["barangUid"],
+                                  documentSnapshot["searchKey"]);
                             });
                       } else {
                         return Center(

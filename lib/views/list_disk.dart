@@ -44,7 +44,9 @@ class _ListDiskState extends State<ListDisk> {
                             documentSnapshot["gambar"],
                             documentSnapshot["detail"],
                             documentSnapshot["dibuat"],
-                            documentSnapshot["terjual"]);
+                            documentSnapshot["terjual"],
+                            documentSnapshot["barangUid"],
+                            documentSnapshot["searchKey"]);
                       });
                 } else {
                   return Center(

@@ -1,5 +1,6 @@
 //import 'dart:ffi';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -298,6 +299,8 @@ class _AddItemPageState extends State<AddItemPage> {
                                   "jumlah": int.tryParse(this.jumlah),
                                   "merek": merek,
                                   "terjual": null,
+                                  "barangUid": "EMPTY",
+                                  "searchKey": nama.substring(0, 1)
                                 };
 
                                 DatabaseMethods()

@@ -44,7 +44,9 @@ class _ListMonitorState extends State<ListMonitor> {
                             documentSnapshot["gambar"],
                             documentSnapshot["detail"],
                             documentSnapshot["dibuat"],
-                            documentSnapshot["terjual"]);
+                            documentSnapshot["terjual"],
+                            documentSnapshot["barangUid"],
+                            documentSnapshot["searchKey"]);
                       });
                 } else {
                   return Center(

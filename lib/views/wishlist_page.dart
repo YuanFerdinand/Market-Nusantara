@@ -59,7 +59,9 @@ class _WishListPageState extends State<WishListPage> {
                             documentSnapshot["gambar"],
                             documentSnapshot["detail"],
                             documentSnapshot["dibuat"],
-                            documentSnapshot["terjual"]);
+                            documentSnapshot["terjual"],
+                            documentSnapshot["barangUid"],
+                            documentSnapshot["searchKey"]);
                       });
                 } else {
                   return Center(

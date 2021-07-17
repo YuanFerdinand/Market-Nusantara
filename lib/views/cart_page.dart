@@ -75,15 +75,17 @@ class _CartPageState extends State<CartPage> {
                             DocumentSnapshot documentSnapshot =
                                 snapshot.data.docs[index];
                             return KeranjangCard(
-                                documentSnapshot["nama"],
-                                documentSnapshot["merek"],
-                                documentSnapshot["tipe"],
-                                documentSnapshot["harga"],
-                                documentSnapshot["jumlah"],
-                                documentSnapshot["gambar"],
-                                documentSnapshot["detail"],
-                                documentSnapshot["dibuat"],
-                                documentSnapshot["terjual"]);
+                              documentSnapshot["nama"],
+                              documentSnapshot["merek"],
+                              documentSnapshot["tipe"],
+                              documentSnapshot["harga"],
+                              documentSnapshot["jumlah"],
+                              documentSnapshot["gambar"],
+                              documentSnapshot["detail"],
+                              documentSnapshot["dibuat"],
+                              documentSnapshot["terjual"],
+                              documentSnapshot["barangUid"],
+                            );
                           });
                     } else {
                       return Center(
@@ -110,20 +112,20 @@ class _CartPageState extends State<CartPage> {
                             "totalCheckout": 0
                           };
 
-                          List<String> users = [
-                            Constants.myName,
-                            Constants.myAdmin
-                          ];
+                          // List<String> users = [
+                          //   Constants.myName,
+                          //   Constants.myAdmin
+                          // ];
 
-                          String chatRoomId = getChatRoomId(
-                              Constants.myName, Constants.myAdmin);
+                          // String chatRoomId = getChatRoomId(
+                          //     Constants.myName, Constants.myAdmin);
 
-                          Map<String, dynamic> chatRoom = {
-                            "users": users,
-                            "chatRoomId": chatRoomId,
-                          };
+                          // Map<String, dynamic> chatRoom = {
+                          //   "users": users,
+                          //   "chatRoomId": chatRoomId,
+                          // };
 
-                          databaseMethods.addChatRoom(chatRoom, chatRoomId);
+                          // databaseMethods.addChatRoom(chatRoom, chatRoomId);
 
                           DatabaseMethods().updateHargaCheckout(
                               myUserCredential, clearTotalKeranjang);
