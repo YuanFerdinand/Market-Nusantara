@@ -19,6 +19,7 @@ class _CartPageState extends State<CartPage> {
   String myUserCredential = "USERCREDENTIAL";
   void initState() {
     getMyInfoFromSharedPreferences();
+    getUserInfogetChats();
     super.initState();
   }
 
@@ -28,6 +29,10 @@ class _CartPageState extends State<CartPage> {
     } else {
       return "$a\_$b";
     }
+  }
+
+  getUserInfogetChats() async {
+    Constants.myName = await SharedPreferenceHelper().getUserName();
   }
 
   getMyInfoFromSharedPreferences() async {
