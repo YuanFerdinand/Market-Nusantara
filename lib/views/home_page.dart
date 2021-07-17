@@ -325,7 +325,8 @@ class _HomePageState extends State<HomePage> {
                                   documentSnapshot["detail"],
                                   documentSnapshot["dibuat"],
                                   documentSnapshot["terjual"],
-                                  documentSnapshot["barangUid"]);
+                                  documentSnapshot["barangUid"],
+                                  documentSnapshot["searchKey"]);
                             });
                       } else {
                         return Center(

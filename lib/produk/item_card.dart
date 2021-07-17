@@ -3,8 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:market_nusantara/views/detail_page.dart';
 
 class ItemCard extends StatefulWidget {
-  ItemCard(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
-      this.gambar, this.detail, this.dibuat, this.terjual, this.barangUid);
+  ItemCard(
+      this.nama,
+      this.merek,
+      this.tipe,
+      this.harga,
+      this.jumlah,
+      this.gambar,
+      this.detail,
+      this.dibuat,
+      this.terjual,
+      this.barangUid,
+      this.searchKey);
 
   final String nama;
   final String merek;
@@ -16,6 +26,7 @@ class ItemCard extends StatefulWidget {
   final Timestamp dibuat;
   final Timestamp terjual;
   final String barangUid;
+  final String searchKey;
 
   @override
   _ItemCardState createState() => _ItemCardState();

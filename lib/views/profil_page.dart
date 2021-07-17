@@ -12,6 +12,7 @@ import 'package:market_nusantara/views/dikirim_page.dart';
 import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
 import 'package:market_nusantara/views/edit_profile.dart';
+import 'package:market_nusantara/views/menungguPembayaran.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -295,6 +296,13 @@ class _ProfilPageState extends State<ProfilPage> {
               // Container(
               //   height: MediaQuery.of(context).size.height * 0.09,
               // ),
+              Text(
+                (myLogedIn == "admin") ? "Pesanan Masuk" : "Pesanan Anda",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 23,
+                    color: Color(0xff2CCACA)),
+              ),
               Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -313,7 +321,7 @@ class _ProfilPageState extends State<ProfilPage> {
                               onTap: () {
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return BayarPage();
+                                  return MenungguPembayaran();
                                 }));
                               },
                               child: Container(
@@ -328,7 +336,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                 onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return BayarPage();
+                                    return MenungguPembayaran();
                                   }));
                                 },
                                 child: Text("Bayar"))

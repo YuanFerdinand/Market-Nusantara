@@ -299,6 +299,8 @@ class _AddItemPageState extends State<AddItemPage> {
                                   "jumlah": int.tryParse(this.jumlah),
                                   "merek": merek,
                                   "terjual": null,
+                                  "barangUid": "EMPTY",
+                                  "searchKey": nama.substring(0, 1)
                                 };
 
                                 DatabaseMethods()

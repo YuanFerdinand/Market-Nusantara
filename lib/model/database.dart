@@ -61,6 +61,14 @@ class DatabaseMethods {
         .set(tambahCheckoutMap);
   }
 
+  Future pesananMasuk(
+      String barangUid, Map<String, dynamic> tambahPesananMasukMap) async {
+    return FirebaseFirestore.instance
+        .collection("pesananMasuk")
+        .doc(barangUid)
+        .set(tambahPesananMasukMap);
+  }
+
   Future updateHargaCheckout(String userCredential,
       Map<String, dynamic> updateTotalCheckoutMap) async {
     return FirebaseFirestore.instance

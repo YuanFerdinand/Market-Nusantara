@@ -235,8 +235,9 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu Pembayaran",
+                                        "status": "Menunggu",
                                         "barangUid": barangUid,
+                                        "searchKey": widget.nama.substring(0, 1)
                                       };
                                       Map<String, dynamic> tambahPesanan = {
                                         "nama": widget.nama,
@@ -248,8 +249,9 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu Pembayaran",
+                                        "status": "Menunggu",
                                         "barangUid": barangUid,
+                                        "searchKey": widget.nama.substring(0, 1)
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -317,8 +319,9 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu Pembayaran",
+                                        "status": "Menunggu",
                                         "barangUid": barangUid,
+                                        "searchKey": widget.nama.substring(0, 1)
                                       };
                                       Map<String, dynamic> tambahPesanan = {
                                         "nama": widget.nama,
@@ -330,8 +333,9 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu Pembayaran",
+                                        "status": "Menunggu",
                                         "barangUid": barangUid,
+                                        "searchKey": widget.nama.substring(0, 1)
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -352,6 +356,8 @@ class _DetailPageState extends State<DetailPage> {
                                           tambahTagihanPengguna);
                                       DatabaseMethods().updateMinusStok(
                                           widget.nama, updateStokBarang);
+                                      DatabaseMethods().pesananMasuk(
+                                          widget.barangUid, tambahPesanan);
 
                                       DatabaseMethods().tambahKeranjang(
                                           barangUid,

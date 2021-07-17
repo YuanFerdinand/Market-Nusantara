@@ -107,20 +107,20 @@ class _CartPageState extends State<CartPage> {
                             "totalCheckout": 0
                           };
 
-                          List<String> users = [
-                            Constants.myName,
-                            Constants.myAdmin
-                          ];
+                          // List<String> users = [
+                          //   Constants.myName,
+                          //   Constants.myAdmin
+                          // ];
 
-                          String chatRoomId = getChatRoomId(
-                              Constants.myName, Constants.myAdmin);
+                          // String chatRoomId = getChatRoomId(
+                          //     Constants.myName, Constants.myAdmin);
 
-                          Map<String, dynamic> chatRoom = {
-                            "users": users,
-                            "chatRoomId": chatRoomId,
-                          };
+                          // Map<String, dynamic> chatRoom = {
+                          //   "users": users,
+                          //   "chatRoomId": chatRoomId,
+                          // };
 
-                          databaseMethods.addChatRoom(chatRoom, chatRoomId);
+                          // databaseMethods.addChatRoom(chatRoom, chatRoomId);
 
                           DatabaseMethods().updateHargaCheckout(
                               myUserCredential, clearTotalKeranjang);

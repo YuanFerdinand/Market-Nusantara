@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:market_nusantara/produk/searchhome.dart';
-import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/produk/searchhomecard.dart';
 import 'package:market_nusantara/views/detail_page.dart';
 
@@ -84,7 +83,25 @@ class _SearchHomePageState extends State<SearchHomePage> {
             primary: false,
             shrinkWrap: true,
             children: tempSearchStore.map((element) {
-              return buildResultCard(element);
+              return GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return DetailPage(
+                        element['nama'],
+                        element['merek'],
+                        element['tipe'],
+                        element['harga'],
+                        element['jumlah'],
+                        element['gambar'],
+                        element['detail'],
+                        element['dibuat'],
+                        element['terjual'],
+                        element['barangUid'],
+                      );
+                    }));
+                  },
+                  child: SearchHomeCard(element));
             }).toList(),
           )
         ],
@@ -93,37 +110,30 @@ class _SearchHomePageState extends State<SearchHomePage> {
   }
 }
 
-Widget buildResultCard(data) {
-  return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      elevation: 2.0,
-      child: Container(
-          child: Center(
-              child: GestureDetector(
-                  onTap: () {
-                    // Navigator.push(context,
-                    //                     MaterialPageRoute(builder: (context) {
-                    //                   return DetailPage;
-                    //                 }));
-                  },
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        height: 200,
-                        width: 200,
-                        child: Image(image: NetworkImage(data['gambar'])),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        data['nama'],
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ],
-                  )))));
-}
+// Widget buildResultCard(data) {
+//   return Card(
+//       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+//       elevation: 2.0,
+//       child: Container(
+//           child: Center(
+//               child: Column(
+//         children: <Widget>[
+//           Container(
+//             height: 200,
+//             width: 200,
+//             child: Image(image: NetworkImage(data['gambar'])),
+//           ),
+//           SizedBox(
+//             height: 10,
+//           ),
+//           Text(
+//             data['nama'],
+//             textAlign: TextAlign.center,
+//             style: TextStyle(
+//               color: Colors.black,
+//               fontSize: 20.0,
+//             ),
+//           ),
+//         ],
+//       ))));
+// }
