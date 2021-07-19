@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:market_nusantara/views/detail_page.dart';
-import 'package:market_nusantara/views/searchhome_page.dart';
 
 class SearchHomeCard extends StatefulWidget {
   final data;

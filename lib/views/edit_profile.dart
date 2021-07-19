@@ -1,12 +1,9 @@
 //import 'dart:ffi';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
-import 'package:market_nusantara/views/bottom_navigation.dart';
 
 class EditProfile extends StatefulWidget {
   @override

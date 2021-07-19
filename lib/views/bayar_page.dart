@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/model/database.dart';
 
 class BayarPage extends StatefulWidget {
   @override
@@ -114,12 +115,13 @@ class _BayarPageState extends State<BayarPage> {
                     end: Alignment.bottomCenter,
                     colors: <Color>[Color(0xff2CCACA), Color(0xffFF1192)])),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Center(),
                 Padding(
                   padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
                   child: Text(
-                    "Please transfer to following number with amount below: ",
+                    "Berikut besar tagihan anda saat ini :  ",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -152,40 +154,66 @@ class _BayarPageState extends State<BayarPage> {
                   padding:
                       const EdgeInsets.only(left: 20, right: 20, bottom: 35),
                   child: Text(
-                    "After completing the payment, please confirm to following number with payment bill",
+                    "Mohon melakukan pembayaran dengan jumlah diatas kepada rekening yang tertera, tekan tombol dibawah jika sudah melakukan pembayaran. Lalu kirimkan bukti pembayaran melalui fitur chat yang terbuat otomatis",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundImage: AssetImage("assets/etc/wa.png"),
+                // Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                //   CircleAvatar(
+                //     radius: 20,
+                //     backgroundImage: AssetImage("assets/etc/wa.png"),
+                //   ),
+                //   Padding(
+                //     padding: const EdgeInsets.only(
+                //         top: 15, left: 20, right: 10, bottom: 13),
+                //     child: StreamBuilder<DocumentSnapshot>(
+                //         stream: info.doc("admin").snapshots(),
+                //         builder: (context, snapshot) {
+                //           if (snapshot.hasData)
+                //             return Text(
+                //               snapshot.data['nomorTelp'].toString(),
+                //               style: TextStyle(
+                //                   color: Colors.white,
+                //                   fontSize: 20,
+                //                   fontWeight: FontWeight.bold),
+                //             );
+                //           else {
+                //             return Text("Mohon Tunggu");
+                //           }
+                //         }),
+                //   ),
+                // ]),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.green),
+                  width: MediaQuery.of(context).size.width * 0.48,
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        Map<String, dynamic> updateTotalTagihanMap = {
+                          "tagihan": 0
+                        };
+                        DatabaseMethods().updateHargaTagihan(
+                            myUserCredential, updateTotalTagihanMap);
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Saya Sudah Bayar",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      ),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 15, left: 20, right: 10, bottom: 13),
-                    child: StreamBuilder<DocumentSnapshot>(
-                        stream: info.doc("admin").snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData)
-                            return Text(
-                              snapshot.data['nomorTelp'].toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            );
-                          else {
-                            return Text("Mohon Tunggu");
-                          }
-                        }),
-                  ),
-                ]),
+                )
               ],
             ),
           ),

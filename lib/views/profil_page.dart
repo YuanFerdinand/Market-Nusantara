@@ -13,6 +13,7 @@ import 'package:market_nusantara/views/diproses_page.dart';
 import 'package:market_nusantara/views/diterima_page.dart';
 import 'package:market_nusantara/views/edit_profile.dart';
 import 'package:market_nusantara/views/menungguPembayaran.dart';
+import 'package:market_nusantara/views/pesanan_saya.dart';
 import 'package:market_nusantara/views/toko_page.dart';
 
 class ProfilPage extends StatefulWidget {
@@ -303,128 +304,227 @@ class _ProfilPageState extends State<ProfilPage> {
                     fontSize: 23,
                     color: Color(0xff2CCACA)),
               ),
-              Card(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    side: BorderSide(width: 3, color: Color(0xff2CCACA))),
-                elevation: 7,
-                child: Container(
-                  padding:
-                      EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return MenungguPembayaran();
-                                }));
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 20, bottom: 10),
-                                  height: 30,
-                                  width: 30,
-                                  child: Image(
-                                      image: AssetImage(
-                                          "assets/belumdibayar.png"))),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return MenungguPembayaran();
-                                  }));
-                                },
-                                child: Text("Bayar"))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return DiprosesPage();
-                                }));
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 20, bottom: 10),
-                                  height: 30,
-                                  width: 30,
-                                  child: Image(
-                                      image:
-                                          AssetImage("assets/diproses.png"))),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return DiprosesPage();
-                                  }));
-                                },
-                                child: Text("Diproses"))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return DikirimPage();
-                                }));
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 20, bottom: 10),
-                                  height: 30,
-                                  width: 30,
-                                  child: Image(
-                                      image: AssetImage("assets/dikirim.jpg"))),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return DikirimPage();
-                                  }));
-                                },
-                                child: Text("Dikirim"))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return DiterimaPage();
-                                }));
-                              },
-                              child: Container(
-                                  margin: EdgeInsets.only(top: 20, bottom: 10),
-                                  height: 30,
-                                  width: 30,
-                                  child: Image(
-                                      image:
-                                          AssetImage("assets/diterima.png"))),
-                            ),
-                            GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return DiterimaPage();
-                                  }));
-                                },
-                                child: Text("Diterima"))
-                          ],
-                        ),
-                      ]),
-                ),
+              Container(
+                height: 20,
               ),
+              (myLogedIn == "admin")
+                  ? Card(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          side: BorderSide(width: 3, color: Color(0xff2CCACA))),
+                      elevation: 7,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            left: 15, right: 15, top: 10, bottom: 10),
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return MenungguPembayaran();
+                                      }));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 20, bottom: 10),
+                                        height: 30,
+                                        width: 30,
+                                        child: Image(
+                                            image: AssetImage(
+                                                "assets/belumdibayar.png"))),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return MenungguPembayaran();
+                                        }));
+                                      },
+                                      child: Text("Bayar"))
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return DiprosesPage();
+                                      }));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 20, bottom: 10),
+                                        height: 30,
+                                        width: 30,
+                                        child: Image(
+                                            image: AssetImage(
+                                                "assets/diproses.png"))),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return DiprosesPage();
+                                        }));
+                                      },
+                                      child: Text("Diproses"))
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return DikirimPage();
+                                      }));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 20, bottom: 10),
+                                        height: 30,
+                                        width: 30,
+                                        child: Image(
+                                            image: AssetImage(
+                                                "assets/dikirim.jpg"))),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return DikirimPage();
+                                        }));
+                                      },
+                                      child: Text("Dikirim"))
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return DiterimaPage();
+                                      }));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.only(
+                                            top: 20, bottom: 10),
+                                        height: 30,
+                                        width: 30,
+                                        child: Image(
+                                            image: AssetImage(
+                                                "assets/diterima.png"))),
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return DiterimaPage();
+                                        }));
+                                      },
+                                      child: Text("Diterima"))
+                                ],
+                              ),
+                            ]),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return PesananSaya();
+                        }));
+                      },
+                      child: Card(
+                        margin: EdgeInsets.only(bottom: 20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            side:
+                                BorderSide(width: 3, color: Color(0xff2CCACA))),
+                        elevation: 7,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 15, right: 15, top: 10, bottom: 10),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  child: Text("Riwayat Pembelian"),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return PesananSaya();
+                                  }));
+                                },
+                                icon: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+              (myLogedIn != "admin")
+                  ? GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return BayarPage();
+                        }));
+                      },
+                      child: Card(
+                        margin: EdgeInsets.only(bottom: 20),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            side:
+                                BorderSide(width: 3, color: Color(0xff2CCACA))),
+                        elevation: 7,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                              left: 15, right: 15, top: 10, bottom: 10),
+                          width: MediaQuery.of(context).size.width * 0.8,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  child: Text("Lihat Tagihan Pesanan Saya"),
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return BayarPage();
+                                  }));
+                                },
+                                icon: Icon(
+                                  Icons.arrow_forward,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : SizedBox()
             ],
           ),
         ),

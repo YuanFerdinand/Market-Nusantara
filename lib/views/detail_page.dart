@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/database.dart';
@@ -235,7 +234,7 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu",
+                                        "status": "Menunggu Pembayaran",
                                         "barangUid": barangUid,
                                         "searchKey": widget.nama.substring(0, 1)
                                       };
@@ -249,9 +248,11 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu",
+                                        "status": "Menunggu Pembayaran",
                                         "barangUid": barangUid,
-                                        "searchKey": widget.nama.substring(0, 1)
+                                        "searchKey":
+                                            widget.nama.substring(0, 1),
+                                        "pemesan": myUserCredential
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -272,6 +273,8 @@ class _DetailPageState extends State<DetailPage> {
                                           tambahTagihanPengguna);
                                       DatabaseMethods().updateMinusStok(
                                           widget.nama, updateStokBarang);
+                                      DatabaseMethods().pesananMasuk(
+                                          barangUid, tambahPesanan);
 
                                       DatabaseMethods().tambahKeranjang(
                                           barangUid,
@@ -280,8 +283,6 @@ class _DetailPageState extends State<DetailPage> {
                                       DatabaseMethods().updateHargaCheckout(
                                           myUserCredential,
                                           tambahTotalCheckout);
-                                      DatabaseMethods().checkout(barangUid,
-                                          myUserCredential, tambahPesanan);
                                     },
                                     child: Card(
                                         shape: RoundedRectangleBorder(
@@ -319,7 +320,7 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": null,
-                                        "status": "Menunggu",
+                                        "status": "Menunggu Pembayaran",
                                         "barangUid": barangUid,
                                         "searchKey": widget.nama.substring(0, 1)
                                       };
@@ -333,9 +334,11 @@ class _DetailPageState extends State<DetailPage> {
                                         "jumlah": counter,
                                         "merek": widget.merek,
                                         "terjual": DateTime.now(),
-                                        "status": "Menunggu",
+                                        "status": "Menunggu Pembayaran",
                                         "barangUid": barangUid,
-                                        "searchKey": widget.nama.substring(0, 1)
+                                        "searchKey":
+                                            widget.nama.substring(0, 1),
+                                        "pemesan": myUserCredential
                                       };
                                       Map<String, dynamic> tambahTotalCheckout =
                                           {
@@ -357,7 +360,7 @@ class _DetailPageState extends State<DetailPage> {
                                       DatabaseMethods().updateMinusStok(
                                           widget.nama, updateStokBarang);
                                       DatabaseMethods().pesananMasuk(
-                                          widget.barangUid, tambahPesanan);
+                                          barangUid, tambahPesanan);
 
                                       DatabaseMethods().tambahKeranjang(
                                           barangUid,
@@ -366,8 +369,6 @@ class _DetailPageState extends State<DetailPage> {
                                       DatabaseMethods().updateHargaCheckout(
                                           myUserCredential,
                                           tambahTotalCheckout);
-                                      DatabaseMethods().checkout(barangUid,
-                                          myUserCredential, tambahPesanan);
 
                                       Navigator.push(context,
                                           MaterialPageRoute(builder: (context) {

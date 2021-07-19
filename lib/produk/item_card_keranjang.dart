@@ -111,13 +111,21 @@ class _KeranjangCardState extends State<KeranjangCard> {
                                 'totalCheckout':
                                     FieldValue.increment(-widget.harga)
                               };
+                              Map<String, dynamic> updateTotalTagihanMap = {
+                                'tagihan': FieldValue.increment(-widget.harga)
+                              };
 
                               DatabaseMethods()
                                   .updateTambahStok(widget.nama, updateStock);
                               DatabaseMethods().hapusBarangKeranjangTerpilih(
                                   myUserCredential, widget.barangUid);
+
+                              DatabaseMethods().hapusPesananMasukTerpilih(
+                                  myUserCredential, widget.barangUid);
                               DatabaseMethods().updateHargaCheckout(
                                   myUserCredential, updateTotalCheckoutMap);
+                              DatabaseMethods().updateHargaTagihan(
+                                  myUserCredential, updateTotalTagihanMap);
                             },
                             child: Icon(
                               Icons.delete,

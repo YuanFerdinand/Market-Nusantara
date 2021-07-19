@@ -69,12 +69,11 @@ class DatabaseMethods {
         .set(tambahPesananMasukMap);
   }
 
-  Future updateStatusPesananMasuk(
-      String barangUid, Map<String, dynamic> tambahPesananMasukMap) async {
+  Future<void> updateStatusPesananMasuk(String barangUid, updatePembelian) {
     return FirebaseFirestore.instance
         .collection("pesananMasuk")
         .doc(barangUid)
-        .update(tambahPesananMasukMap);
+        .update(updatePembelian);
   }
 
   Future updateStatusRiwayatPembelian(String myUserCredential, String barangUid,
@@ -82,7 +81,7 @@ class DatabaseMethods {
     return FirebaseFirestore.instance
         .collection('riwayatPembelian')
         .doc(myUserCredential)
-        .collection("barang")
+        .collection('barang')
         .doc(barangUid)
         .update(updateStatus);
   }
@@ -93,6 +92,14 @@ class DatabaseMethods {
         .collection("users")
         .doc(userCredential)
         .update(updateTotalCheckoutMap);
+  }
+
+  Future updateHargaTagihan(
+      String userCredential, Map<String, dynamic> updateTotalTagihanMap) async {
+    return FirebaseFirestore.instance
+        .collection("users")
+        .doc(userCredential)
+        .update(updateTotalTagihanMap);
   }
 
   Future updateMinusStok(
@@ -115,6 +122,24 @@ class DatabaseMethods {
       String userCredential, String barangUid) async {
     return FirebaseFirestore.instance
         .collection("keranjang")
+        .doc(userCredential)
+        .collection("barang")
+        .doc(barangUid)
+        .delete();
+  }
+
+  Future hapusPesananMasukTerpilih(
+      String userCredential, String barangUid) async {
+    return FirebaseFirestore.instance
+        .collection("pesananMasuk")
+        .doc(barangUid)
+        .delete();
+  }
+
+  Future hapusRiwayatPembelianTerpilih(
+      String userCredential, String barangUid) async {
+    return FirebaseFirestore.instance
+        .collection("riwayatPembelian")
         .doc(userCredential)
         .collection("barang")
         .doc(barangUid)
@@ -224,21 +249,21 @@ class DatabaseMethods {
         .snapshots();
   }
 
-  Future<void> kirimDataPembelian(userCredential, updatePembelian) {
-    CollectionReference riwayatPembelian = FirebaseFirestore.instance
-        .collection('riwayatPembelian')
-        .doc(userCredential)
-        .collection('barang');
-    WriteBatch batch = FirebaseFirestore.instance.batch();
+  // Future<void> kirimDataPembelian(userCredential, updatePembelian) {
+  //   CollectionReference riwayatPembelian = FirebaseFirestore.instance
+  //       .collection('riwayatPembelian')
+  //       .doc(userCredential)
+  //       .collection('barang');
+  //   WriteBatch batch = FirebaseFirestore.instance.batch();
 
-    return riwayatPembelian.get().then((querySnapshot) {
-      querySnapshot.docs.forEach((document) {
-        batch.update(document.reference, updatePembelian);
-      });
+  //   return riwayatPembelian.get().then((querySnapshot) {
+  //     querySnapshot.docs.forEach((document) {
+  //       batch.update(document.reference, updatePembelian);
+  //     });
 
-      return batch.commit();
-    });
-  }
+  //     return batch.commit();
+  //   });
+  // }
 
   Future<void> hapusBarangKeranjang(userCredential) {
     CollectionReference barangKeranjang = FirebaseFirestore.instance

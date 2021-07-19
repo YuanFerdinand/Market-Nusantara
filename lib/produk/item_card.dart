@@ -35,45 +35,88 @@ class ItemCard extends StatefulWidget {
 class _ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DetailPage(
-              widget.nama,
-              widget.merek,
-              widget.tipe,
-              widget.harga,
-              widget.jumlah,
-              widget.gambar,
-              widget.detail,
-              widget.dibuat,
-              widget.terjual,
-              widget.barangUid);
-        }));
-      },
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        child: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return (widget.jumlah > 0)
+        ? GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return DetailPage(
+                    widget.nama,
+                    widget.merek,
+                    widget.tipe,
+                    widget.harga,
+                    widget.jumlah,
+                    widget.gambar,
+                    widget.detail,
+                    widget.dibuat,
+                    widget.terjual,
+                    widget.barangUid);
+              }));
+            },
+            child: Card(
+              elevation: 5,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Image(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(widget.gambar),
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.30),
+                    Text(
+                      widget.nama,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          )
+        : Stack(
+            fit: StackFit.expand,
             children: [
-              Image(
-                  fit: BoxFit.fill,
-                  image: NetworkImage(widget.gambar),
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  width: MediaQuery.of(context).size.width * 0.30),
-              Text(
-                widget.nama,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-              )
+              Card(
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  padding: EdgeInsets.all(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(widget.gambar),
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          width: MediaQuery.of(context).size.width * 0.30),
+                      Text(
+                        widget.nama,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Center(
+                  child: Container(
+                      padding: EdgeInsets.all(20),
+                      child: Image(
+                        image: AssetImage("assets/soldout.png"),
+                        width: 200,
+                        height: 200,
+                      )))
             ],
-          ),
-        ),
-      ),
-    );
+          );
   }
 }

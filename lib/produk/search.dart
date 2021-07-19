@@ -1,5 +1,4 @@
 import 'package:market_nusantara/helper/constants.dart';
-import 'package:market_nusantara/model/userChat_model.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/produk/widget.dart';
