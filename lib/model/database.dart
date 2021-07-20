@@ -31,6 +31,14 @@ class DatabaseMethods {
         .update(userInfoMap);
   }
 
+  Future updateInfoBarang(
+      String namaBarang, Map<String, dynamic> barangInfoMap) async {
+    return FirebaseFirestore.instance
+        .collection("barang")
+        .doc(namaBarang)
+        .update(barangInfoMap);
+  }
+
   Future tambahFavorit(String namaBarang, userCredential,
       Map<String, dynamic> favoritInfoMap) async {
     return FirebaseFirestore.instance

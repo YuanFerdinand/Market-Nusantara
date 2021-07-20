@@ -113,54 +113,56 @@ class _DetailPageState extends State<DetailPage> {
                       fontWeight: FontWeight.bold),
                 ),
                 Container(
-                    // margin: EdgeInsets.only(bottom: 20, top: 50, right: 20),
+                    margin: EdgeInsets.only(bottom: 20, top: 50, right: 20),
                     child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    (myLogedIn != "admin")
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 170),
-                            child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    Map<String, dynamic> favoritInfoMap = {
-                                      "nama": widget.nama,
-                                      "detail": widget.detail,
-                                      "tipe": widget.tipe,
-                                      "dibuat": DateTime.now(),
-                                      "gambar": widget.gambar,
-                                      "harga": widget.harga,
-                                      "jumlah": widget.jumlah,
-                                      "merek": widget.merek,
-                                      "terjual": null,
-                                      "favorit": "Difavoritkan"
-                                    };
-                                    DatabaseMethods().tambahFavorit(widget.nama,
-                                        myUserCredential, favoritInfoMap);
-                                  });
-                                },
-                                child: (fav)
-                                    ? Icon(
-                                        Icons.favorite_border_outlined,
-                                        size: 45,
-                                      )
-                                    : Icon(
-                                        Icons.favorite,
-                                        color: Colors.pink,
-                                        size: 45,
-                                      )),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.only(top: 190),
-                            child: SizedBox(),
-                          ),
-                    Image(
-                      image: NetworkImage(widget.gambar),
-                      // height: MediaQuery.of(context).size.height * 0.4,
-                      width: MediaQuery.of(context).size.width * 0.4,
-                    )
-                  ],
-                )),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        (myLogedIn == "admin")
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 170),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        Map<String, dynamic> favoritInfoMap = {
+                                          "nama": widget.nama,
+                                          "detail": widget.detail,
+                                          "tipe": widget.tipe,
+                                          "dibuat": DateTime.now(),
+                                          "gambar": widget.gambar,
+                                          "harga": widget.harga,
+                                          "jumlah": widget.jumlah,
+                                          "merek": widget.merek,
+                                          "terjual": null,
+                                          "favorit": "Difavoritkan"
+                                        };
+                                        DatabaseMethods().tambahFavorit(
+                                            widget.nama,
+                                            myUserCredential,
+                                            favoritInfoMap);
+                                      });
+                                    },
+                                    child: (fav)
+                                        ? Icon(
+                                            Icons.favorite_border_outlined,
+                                            size: 45,
+                                          )
+                                        : Icon(
+                                            Icons.favorite,
+                                            color: Colors.pink,
+                                            size: 45,
+                                          )),
+                              )
+                            : Padding(
+                                padding: const EdgeInsets.only(top: 190),
+                                child: SizedBox(),
+                              ),
+                        Image(
+                          image: NetworkImage(widget.gambar),
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          width: MediaQuery.of(context).size.width * 0.4,
+                        )
+                      ],
+                    )),
                 Container(
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

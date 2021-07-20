@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/produk/item_card.dart';
+import 'package:market_nusantara/produk/item_card_edit_barang.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
 
 class TokoPage extends StatefulWidget {
@@ -51,7 +52,7 @@ class _TokoPageState extends State<TokoPage> {
                             itemBuilder: (context, index) {
                               DocumentSnapshot documentSnapshot =
                                   snapshot.data.docs[index];
-                              return ItemCard(
+                              return ItemCardEditBarang(
                                   documentSnapshot["nama"],
                                   documentSnapshot["merek"],
                                   documentSnapshot["tipe"],
