@@ -49,7 +49,8 @@ class _ItemCardState extends State<ItemCard> {
                     widget.detail,
                     widget.dibuat,
                     widget.terjual,
-                    widget.barangUid);
+                    widget.barangUid,
+                    widget.searchKey);
               }));
             },
             child: Card(
