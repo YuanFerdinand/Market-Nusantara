@@ -98,6 +98,7 @@ class _SearchHomePageState extends State<SearchHomePage> {
                         element['dibuat'],
                         element['terjual'],
                         element['barangUid'],
+                        element['searchKey'],
                       );
                     }));
                   },

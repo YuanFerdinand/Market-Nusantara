@@ -17,14 +17,25 @@ class DetailPage extends StatefulWidget {
   final Timestamp dibuat;
   final Timestamp terjual;
   final String barangUid;
+  final String searchKey;
 
   //// Pointer to Update Function
   // final Function onUpdate;
   // //// Pointer to Delete Function
   // final Function onDelete;
 
-  DetailPage(this.nama, this.merek, this.tipe, this.harga, this.jumlah,
-      this.gambar, this.detail, this.dibuat, this.terjual, this.barangUid);
+  DetailPage(
+      this.nama,
+      this.merek,
+      this.tipe,
+      this.harga,
+      this.jumlah,
+      this.gambar,
+      this.detail,
+      this.dibuat,
+      this.terjual,
+      this.barangUid,
+      this.searchKey);
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -117,7 +128,7 @@ class _DetailPageState extends State<DetailPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        (myLogedIn == "admin")
+                        (myLogedIn != "admin")
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 170),
                                 child: GestureDetector(
@@ -125,15 +136,17 @@ class _DetailPageState extends State<DetailPage> {
                                       setState(() {
                                         Map<String, dynamic> favoritInfoMap = {
                                           "nama": widget.nama,
-                                          "detail": widget.detail,
+                                          "merek": widget.merek,
                                           "tipe": widget.tipe,
-                                          "dibuat": DateTime.now(),
-                                          "gambar": widget.gambar,
                                           "harga": widget.harga,
                                           "jumlah": widget.jumlah,
-                                          "merek": widget.merek,
+                                          "gambar": widget.gambar,
+                                          "detail": widget.detail,
+                                          "dibuat": DateTime.now(),
                                           "terjual": null,
-                                          "favorit": "Difavoritkan"
+                                          "favorit": "Difavoritkan",
+                                          "barangUid": widget.barangUid,
+                                          "searchKey": widget.searchKey,
                                         };
                                         DatabaseMethods().tambahFavorit(
                                             widget.nama,
