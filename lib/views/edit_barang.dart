@@ -211,11 +211,32 @@ class _EditBarangState extends State<EditBarang> {
                                 ),
                               ),
                             ),
+                            GestureDetector(
+                                onTap: () {
+                                  DatabaseMethods().hapusBarang(widget.nama);
+                                  Navigator.pop(context);
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(50),
+                                  ),
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.05,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.43,
+                                  child: Center(
+                                    child: Text(
+                                      "Hapus Barang",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w900),
+                                    ),
+                                  ),
+                                ))
                           ],
                         ),
-                        SizedBox(
-                          height: 25,
-                        )
                       ],
                     ),
                   ),
