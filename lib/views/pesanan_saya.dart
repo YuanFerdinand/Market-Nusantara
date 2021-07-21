@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/produk/item_card_history_pelanggan.dart';
 import 'package:market_nusantara/produk/item_card_pesanan_pelanggan.dart';
 
-class MenungguPembayaran extends StatefulWidget {
+class PesananSaya extends StatefulWidget {
   @override
-  _MenungguPembayaranState createState() => _MenungguPembayaranState();
+  _PesananSayaState createState() => _PesananSayaState();
 }
 
-class _MenungguPembayaranState extends State<MenungguPembayaran> {
+class _PesananSayaState extends State<PesananSaya> {
   String myLogedIn = "ROLEID", myUserCredential = "USERCREDENTIAL";
   @override
   void initState() {
@@ -31,7 +32,7 @@ class _MenungguPembayaranState extends State<MenungguPembayaran> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Pesanan Menunggu Pembayaran"),
+        title: Text("Pesanan Saya"),
       ),
       body: Center(
         child: Container(
@@ -39,20 +40,16 @@ class _MenungguPembayaranState extends State<MenungguPembayaran> {
             width: MediaQuery.of(context).size.width * 1,
             child: StreamBuilder(
                 stream: barang
-                    .where('status', isEqualTo: "Menunggu Pembayaran")
+                    .where('pemesan', isEqualTo: myUserCredential)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
-                        shrinkWrap: true,
+                    return ListView.builder(
                         itemCount: snapshot.data.docs.length,
                         itemBuilder: (context, index) {
                           DocumentSnapshot documentSnapshot =
                               snapshot.data.docs[index];
-                          return ItemCardPesanan(
+                          return ItemCardHistory(
                               documentSnapshot["nama"],
                               documentSnapshot["merek"],
                               documentSnapshot["tipe"],

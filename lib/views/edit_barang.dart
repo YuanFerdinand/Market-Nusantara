@@ -5,32 +5,21 @@ import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
 
-class EditProfile extends StatefulWidget {
+class EditBarang extends StatefulWidget {
+  final String nama;
+
+  EditBarang(this.nama);
   @override
-  _EditProfileState createState() => _EditProfileState();
+  _EditBarangState createState() => _EditBarangState();
 }
 
-class _EditProfileState extends State<EditProfile> {
-  String namaUser, toko, alamatUser, bank, myUserCredential;
-  int rek, telp;
+class _EditBarangState extends State<EditBarang> {
+  String detailBarang, hargaBarang, jumlahBarang, tipeBarang, _chosenValue;
   var imageDir;
-  TextEditingController nama = new TextEditingController();
-  TextEditingController namaToko = new TextEditingController();
-  TextEditingController nomorRekening = new TextEditingController();
-  TextEditingController alamat = new TextEditingController();
-  TextEditingController nomorTelp = new TextEditingController();
-  TextEditingController namaBank = new TextEditingController();
-  @override
-  void initState() {
-    getMyInfoFromSharedPreferences();
-    super.initState();
-  }
-
-  getMyInfoFromSharedPreferences() async {
-    myUserCredential = await SharedPreferenceHelper().getUserCredentialId();
-
-    setState(() {});
-  }
+  TextEditingController detail = new TextEditingController();
+  TextEditingController harga = new TextEditingController();
+  TextEditingController jumlah = new TextEditingController();
+  TextEditingController tipe = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +54,7 @@ class _EditProfileState extends State<EditProfile> {
                     //   width: 5.0, // Underline thickness
                     // ))),
                     child: Text(
-                      "EDIT PROFILE",
+                      widget.nama,
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Popppins",
@@ -86,9 +75,9 @@ class _EditProfileState extends State<EditProfile> {
                     child: ListView(
                       children: [
                         TextFormField(
-                          controller: nama,
-                          onChanged: (nama) {
-                            this.namaUser = nama;
+                          controller: detail,
+                          onChanged: (detail) {
+                            this.detailBarang = detail;
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(left: 5),
@@ -96,7 +85,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama",
+                              hintText: "Masukan Detail Barang",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -108,9 +97,9 @@ class _EditProfileState extends State<EditProfile> {
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(500)
                           ],
-                          controller: namaToko,
-                          onChanged: (namaToko) {
-                            this.toko = namaToko;
+                          controller: harga,
+                          onChanged: (harga) {
+                            this.hargaBarang = harga;
                           },
                           decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(left: 5),
@@ -118,7 +107,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama Toko",
+                              hintText: "Masukan Harga Barang",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -126,76 +115,50 @@ class _EditProfileState extends State<EditProfile> {
                           height: 50,
                           width: 50,
                         ),
-                        TextFormField(
-                          controller: alamat,
-                          onChanged: (alamat) {
-                            this.alamatUser = alamat;
-                          },
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.streetAddress,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 5),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: "Masukan Nama Alamat",
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 12)),
-                        ),
                         SizedBox(
                           height: 50,
                           width: 50,
                         ),
-                        TextFormField(
-                          controller: nomorTelp,
-                          onChanged: (nomorTelp) {
-                            this.telp = int.tryParse(nomorTelp);
+                        DropdownButtonFormField(
+                          decoration: InputDecoration.collapsed(hintText: ''),
+                          validator: (value) =>
+                              value == null ? 'Tipe belum dipilih' : null,
+                          value: _chosenValue,
+                          items: [
+                            'Prosesor',
+                            'VGA',
+                            'RAM',
+                            'Case',
+                            'Disk',
+                            'Motherboard',
+                            'Monitor',
+                            'Speaker'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem(
+                              child: Text(value),
+                              value: value,
+                            );
+                          }).toList(),
+                          hint: Text("Pilih Tipe"),
+                          onChanged: (value) {
+                            setState(() {
+                              _chosenValue = value;
+                              this.tipeBarang = _chosenValue;
+                            });
                           },
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.number,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 5),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: "Masukan No Telepon",
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 12)),
                         ),
                         SizedBox(
                           height: 50,
                           width: 50,
-                        ),
-                        TextFormField(
-                          controller: namaBank,
-                          onChanged: (namaBank) {
-                            this.bank = namaBank;
-                          },
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.name,
-                          cursorColor: Colors.black,
-                          decoration: InputDecoration(
-                              contentPadding: EdgeInsets.only(left: 5),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(50)),
-                              fillColor: Colors.white,
-                              filled: true,
-                              hintText: "Masukan Nama Bank",
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 12)),
                         ),
                         SizedBox(
                           height: 50,
                           width: 25,
                         ),
                         TextFormField(
-                          controller: nomorRekening,
-                          onChanged: (nomorRekening) {
-                            this.rek = int.tryParse(nomorRekening);
+                          controller: jumlah,
+                          onChanged: (jumlah) {
+                            this.jumlahBarang = jumlah;
                           },
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.number,
@@ -206,7 +169,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nomor Rekening",
+                              hintText: "Masukan Jumlah Barang",
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -219,24 +182,15 @@ class _EditProfileState extends State<EditProfile> {
                           children: [
                             GestureDetector(
                               onTap: () async {
-                                Map<String, dynamic> infoProfile = {
-                                  "name": namaUser,
-                                  "namaToko": toko,
-                                  "alamat": alamatUser,
-                                  "nomorTelp": telp.toString(),
-                                  "nomorRekening": rek.toString(),
-                                  "namaBank": bank,
+                                Map<String, dynamic> updateBarang = {
+                                  "detail": detailBarang,
+                                  "harga": int.tryParse(hargaBarang),
+                                  "jumlah": int.tryParse(jumlahBarang),
+                                  "tipe": tipeBarang,
                                 };
-                                Map<String, dynamic> infoToko = {
-                                  "namaAdmin": namaUser,
-                                  "nomorTelp": telp.toString(),
-                                  "nomorRekening": rek.toString(),
-                                  "namaBank": bank,
-                                };
-                                DatabaseMethods().addInfoToko(infoToko);
-                                DatabaseMethods().updateInfoAkun(
-                                    myUserCredential, infoProfile);
-                                Auth().toSignOut(context);
+                                DatabaseMethods().updateInfoBarang(
+                                    widget.nama, updateBarang);
+                                Navigator.pop(context);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -248,7 +202,7 @@ class _EditProfileState extends State<EditProfile> {
                                 width: MediaQuery.of(context).size.width * 0.43,
                                 child: Center(
                                   child: Text(
-                                    "Update Profile",
+                                    "Update Info Barang",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,

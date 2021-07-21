@@ -36,7 +36,8 @@ class Auth {
           "alamat": "ALAMAT",
           "nomorTelp": "NOMOR TELEPON",
           "nomorRekening": "NOMOR REKENING",
-          "namaBank": "NAMA BANK"
+          "namaBank": "NAMA BANK",
+          "tagihan": 0
         };
 
         DatabaseMethods()

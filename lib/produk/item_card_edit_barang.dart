@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/views/detail_page.dart';
+import 'package:market_nusantara/views/edit_barang.dart';
 
-class ItemCard extends StatefulWidget {
-  ItemCard(
+class ItemCardEditBarang extends StatefulWidget {
+  ItemCardEditBarang(
       this.nama,
       this.merek,
       this.tipe,
@@ -29,27 +30,19 @@ class ItemCard extends StatefulWidget {
   final String searchKey;
 
   @override
-  _ItemCardState createState() => _ItemCardState();
+  _ItemCardEditBarangState createState() => _ItemCardEditBarangState();
 }
 
-class _ItemCardState extends State<ItemCard> {
+class _ItemCardEditBarangState extends State<ItemCardEditBarang> {
   @override
   Widget build(BuildContext context) {
     return (widget.jumlah > 0)
         ? GestureDetector(
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return DetailPage(
-                    widget.nama,
-                    widget.merek,
-                    widget.tipe,
-                    widget.harga,
-                    widget.jumlah,
-                    widget.gambar,
-                    widget.detail,
-                    widget.dibuat,
-                    widget.terjual,
-                    widget.barangUid);
+                return EditBarang(
+                  widget.nama,
+                );
               }));
             },
             child: Card(

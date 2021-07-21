@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/helper/constants.dart';
 import 'package:market_nusantara/model/database.dart';
-import 'package:market_nusantara/produk/keranjangCard.dart';
+import 'package:market_nusantara/produk/item_card_keranjang.dart';
 import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
 
@@ -105,9 +105,6 @@ class _CartPageState extends State<CartPage> {
                     children: <Widget>[
                       GestureDetector(
                         onTap: () {
-                          Map<String, dynamic> updateStatusBarang = {
-                            "status": "Menunggu Pembayaran"
-                          };
                           Map<String, dynamic> clearTotalKeranjang = {
                             "totalCheckout": 0
                           };
@@ -129,8 +126,7 @@ class _CartPageState extends State<CartPage> {
 
                           DatabaseMethods().updateHargaCheckout(
                               myUserCredential, clearTotalKeranjang);
-                          DatabaseMethods().kirimDataPembelian(
-                              myUserCredential, updateStatusBarang);
+
                           DatabaseMethods()
                               .hapusBarangKeranjang(myUserCredential);
 
