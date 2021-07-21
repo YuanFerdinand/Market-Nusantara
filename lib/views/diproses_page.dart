@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/produk/item_card_pesanan_pelanggan.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DiprosesPage extends StatefulWidget {
   @override
@@ -31,7 +33,7 @@ class _DiprosesPageState extends State<DiprosesPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Pesanan Diproses"),
+        title: Text(LocaleKeys.pesanan_diproses).tr(),
       ),
       body: Center(
         child: Container(
@@ -67,7 +69,7 @@ class _DiprosesPageState extends State<DiprosesPage> {
                   } else {
                     return Center(
                         child: Text(
-                      'Belum ada Barang',
+                      LocaleKeys.belum_ada.tr(),
                       style: TextStyle(fontFamily: "Poppins", fontSize: 15),
                     ));
                   }

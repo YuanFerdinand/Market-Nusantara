@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/cart_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DetailPage extends StatefulWidget {
   final String nama;
@@ -140,6 +141,10 @@ class _DetailPageState extends State<DetailPage> {
                                             myUserCredential,
                                             favoritInfoMap);
                                       });
+                                      Fluttertoast.showToast(
+                                          msg: 'Tercatat di list',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          gravity: ToastGravity.BOTTOM);
                                     },
                                     child: (fav)
                                         ? Icon(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/views/Setting_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,7 +15,7 @@ class _LanguagePageState extends State<LanguagePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Language"),
+        title: Text(LocaleKeys.bahasa).tr(),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,

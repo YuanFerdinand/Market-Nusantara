@@ -2,8 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class EditProfile extends StatefulWidget {
   @override
@@ -61,11 +64,11 @@ class _EditProfileState extends State<EditProfile> {
                     // decoration: BoxDecoration(
                     //     border: Border(
                     //         bottom: BorderSide(
-                    //   color: Color(0xff8142FC),
+                    //   color: Color(0xFF030303),
                     //   width: 5.0, // Underline thickness
                     // ))),
                     child: Text(
-                      "EDIT PROFILE",
+                      LocaleKeys.Edit_Profile.tr(),
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: "Popppins",
@@ -96,7 +99,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama",
+                              hintText: LocaleKeys.masukkan_nama.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -118,7 +121,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama Toko",
+                              hintText: LocaleKeys.masukan_nama_toko.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -140,7 +143,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama Alamat",
+                              hintText: LocaleKeys.masukan_nama_alamat.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -162,7 +165,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan No Telepon",
+                              hintText: LocaleKeys.masukkan_no_telepon.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -184,7 +187,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nama Bank",
+                              hintText: LocaleKeys.masukan_nama_bank.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -206,7 +209,7 @@ class _EditProfileState extends State<EditProfile> {
                                   borderRadius: BorderRadius.circular(50)),
                               fillColor: Colors.white,
                               filled: true,
-                              hintText: "Masukan Nomor Rekening",
+                              hintText: LocaleKeys.masukkan_nama_rekening.tr(),
                               hintStyle: TextStyle(
                                   fontFamily: 'Poppins', fontSize: 12)),
                         ),
@@ -237,6 +240,10 @@ class _EditProfileState extends State<EditProfile> {
                                 DatabaseMethods().updateInfoAkun(
                                     myUserCredential, infoProfile);
                                 Auth().toSignOut(context);
+                                Fluttertoast.showToast(
+                                    msg: 'Profil telah di update',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM);
                               },
                               child: Container(
                                 decoration: BoxDecoration(
@@ -248,7 +255,7 @@ class _EditProfileState extends State<EditProfile> {
                                 width: MediaQuery.of(context).size.width * 0.43,
                                 child: Center(
                                   child: Text(
-                                    "Update Profile",
+                                    LocaleKeys.update_profil.tr(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 18,

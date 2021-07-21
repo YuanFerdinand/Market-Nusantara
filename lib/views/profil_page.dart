@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/Setting_page.dart';
@@ -15,6 +16,7 @@ import 'package:market_nusantara/views/edit_profile.dart';
 import 'package:market_nusantara/views/menungguPembayaran.dart';
 import 'package:market_nusantara/views/pesanan_saya.dart';
 import 'package:market_nusantara/views/toko_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProfilPage extends StatefulWidget {
   @override
@@ -73,7 +75,7 @@ class _ProfilPageState extends State<ProfilPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Profile"),
+        title: Text(LocaleKeys.Profile).tr(),
         actions: <Widget>[
           IconButton(
               icon: Icon(
@@ -232,7 +234,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       children: <Widget>[
                         Center(
                           child: Container(
-                            child: Text("Edit Profile"),
+                            child: Text(LocaleKeys.Edit_Profile).tr(),
                           ),
                         ),
                         IconButton(
@@ -269,7 +271,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             children: <Widget>[
                               Center(
                                 child: Container(
-                                  child: Text("Buka Toko Penjualan"),
+                                  child: Text(LocaleKeys.buka_toko).tr(),
                                 ),
                               ),
                               IconButton(
@@ -298,7 +300,9 @@ class _ProfilPageState extends State<ProfilPage> {
               //   height: MediaQuery.of(context).size.height * 0.09,
               // ),
               Text(
-                (myLogedIn == "admin") ? "Pesanan Masuk" : "Pesanan Anda",
+                (myLogedIn == "admin")
+                    ? LocaleKeys.pesanan_masuk.tr()
+                    : LocaleKeys.pesanan_anda.tr(),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 23,
@@ -346,7 +350,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                           return MenungguPembayaran();
                                         }));
                                       },
-                                      child: Text("Bayar"))
+                                      child: Text(LocaleKeys.bayar).tr())
                                 ],
                               ),
                               Column(
@@ -375,7 +379,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                           return DiprosesPage();
                                         }));
                                       },
-                                      child: Text("Diproses"))
+                                      child: Text(LocaleKeys.diproses).tr())
                                 ],
                               ),
                               Column(
@@ -404,7 +408,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                           return DikirimPage();
                                         }));
                                       },
-                                      child: Text("Dikirim"))
+                                      child: Text(LocaleKeys.dikirim).tr())
                                 ],
                               ),
                               Column(
@@ -433,7 +437,7 @@ class _ProfilPageState extends State<ProfilPage> {
                                           return DiterimaPage();
                                         }));
                                       },
-                                      child: Text("Diterima"))
+                                      child: Text(LocaleKeys.diterima).tr())
                                 ],
                               ),
                             ]),
@@ -462,7 +466,8 @@ class _ProfilPageState extends State<ProfilPage> {
                             children: <Widget>[
                               Center(
                                 child: Container(
-                                  child: Text("Riwayat Pembelian"),
+                                  child:
+                                      Text(LocaleKeys.riwayat_pembelian).tr(),
                                 ),
                               ),
                               IconButton(
@@ -505,7 +510,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             children: <Widget>[
                               Center(
                                 child: Container(
-                                  child: Text("Lihat Tagihan Pesanan Saya"),
+                                  child: Text(LocaleKeys.lihat_tagihan).tr(),
                                 ),
                               ),
                               IconButton(

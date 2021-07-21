@@ -17,7 +17,7 @@ class _SettingPageState extends State<SettingPage> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xff2CCACA),
-          title: Text("Setting"),
+          title: Text(LocaleKeys.pengaturan).tr(),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,

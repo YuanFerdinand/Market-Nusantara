@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
 import 'package:market_nusantara/helper/constants.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/produk/item_card_keranjang.dart';
 import 'package:market_nusantara/produk/chat_messages.dart';
 import 'package:market_nusantara/views/bayar_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -50,7 +52,7 @@ class _CartPageState extends State<CartPage> {
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
         title: Text(
-          "Keranjang",
+          LocaleKeys.keranjang.tr(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
@@ -145,7 +147,7 @@ class _CartPageState extends State<CartPage> {
                                 color: Color(0xff2CCACA),
                                 borderRadius: BorderRadius.circular(15)),
                             child: Center(
-                                child: Text("PESAN",
+                                child: Text(LocaleKeys.pesan.tr(),
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,

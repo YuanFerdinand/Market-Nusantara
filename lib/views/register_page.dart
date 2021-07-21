@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/model/auth.dart';
 import 'package:market_nusantara/views/login_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -241,6 +242,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                       usernameController.text,
                                       context)
                                   : print("Password yang dimasukan berbeda");
+
+                              Fluttertoast.showToast(
+                                  msg: 'Akun berhasil dibuat, silahkan login',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM);
                             },
                             child: Center(
                               child: Container(

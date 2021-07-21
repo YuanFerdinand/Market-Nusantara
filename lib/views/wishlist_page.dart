@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class WishListPage extends StatefulWidget {
   @override
@@ -27,7 +29,7 @@ class _WishListPageState extends State<WishListPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Barang Favorit"),
+        title: Text(LocaleKeys.barang_favorite).tr(),
       ),
       body: Center(
         child: Container(
@@ -66,7 +68,7 @@ class _WishListPageState extends State<WishListPage> {
                 } else {
                   return Center(
                       child: Text(
-                    'Belum ada Barang',
+                    LocaleKeys.belum_ada.tr(),
                     style: TextStyle(fontFamily: "Poppins", fontSize: 15),
                   ));
                 }

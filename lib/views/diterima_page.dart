@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/helper/shared_preference_helper.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/produk/item_card_pesanan_pelanggan.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class DiterimaPage extends StatefulWidget {
   @override
@@ -31,7 +33,7 @@ class _DiterimaPageState extends State<DiterimaPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Pesanan Diterima"),
+        title: Text(LocaleKeys.pesanan_diterima).tr(),
       ),
       body: Center(
         child: Container(

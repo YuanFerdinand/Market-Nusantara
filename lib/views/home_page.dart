@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/views/list_case.dart';
 import 'package:market_nusantara/views/list_disk.dart';
@@ -8,6 +9,7 @@ import 'package:market_nusantara/views/list_motherboard.dart';
 import 'package:market_nusantara/views/list_processor.dart';
 import 'package:market_nusantara/views/list_vga.dart';
 import 'package:market_nusantara/views/searchhome_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                   Icons.search,
                   color: Colors.grey,
                 ),
-                labelText: "Search Product...",
+                labelText: LocaleKeys.search_product.tr(),
                 enabledBorder: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: const BorderSide(

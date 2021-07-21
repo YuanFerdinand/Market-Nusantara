@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:market_nusantara/model/database.dart';
 import 'package:market_nusantara/views/bottom_navigation.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddItemPage extends StatefulWidget {
   @override
@@ -304,6 +305,11 @@ class _AddItemPageState extends State<AddItemPage> {
 
                                 DatabaseMethods()
                                     .tambahBarang(nama, infoBarang);
+
+                                Fluttertoast.showToast(
+                                    msg: 'Barang Berhasil DiTambah',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM);
                               },
                               child: Container(
                                 decoration: BoxDecoration(

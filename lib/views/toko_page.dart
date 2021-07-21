@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:market_nusantara/locale/locale_keys.g.dart';
 import 'package:market_nusantara/produk/item_card.dart';
 import 'package:market_nusantara/produk/item_card_edit_barang.dart';
 import 'package:market_nusantara/views/add_item_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class TokoPage extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class _TokoPageState extends State<TokoPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff2CCACA),
-        title: Text("Toko Anda"),
+        title: Text(LocaleKeys.toko_anda).tr(),
         actions: <Widget>[
           IconButton(
               icon: Icon(
@@ -68,7 +70,7 @@ class _TokoPageState extends State<TokoPage> {
                       } else {
                         return Center(
                             child: Text(
-                          'Belum ada Barang',
+                          LocaleKeys.belum_ada.tr(),
                           style: TextStyle(fontFamily: "Poppins", fontSize: 15),
                         ));
                       }
