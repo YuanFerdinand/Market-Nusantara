@@ -126,6 +126,13 @@ class DatabaseMethods {
         .update(updateStok);
   }
 
+  Future hapusBarang(String namaBarang) async {
+    return FirebaseFirestore.instance
+        .collection("barang")
+        .doc(namaBarang)
+        .delete();
+  }
+
   Future hapusBarangKeranjangTerpilih(
       String userCredential, String barangUid) async {
     return FirebaseFirestore.instance
