@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:market_nusantara/views/Setting_page.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LanguagePage extends StatefulWidget {
   @override
@@ -32,7 +33,13 @@ class _LanguagePageState extends State<LanguagePage> {
           children: <Widget>[
             SizedBox(height: 30),
             GestureDetector(
-              onTap: () async => context.setLocale(Locale('id')),
+              onTap: () async => {
+                context.setLocale(Locale('id')),
+                Fluttertoast.showToast(
+                    msg: 'Berhasil',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM)
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -53,6 +60,10 @@ class _LanguagePageState extends State<LanguagePage> {
             GestureDetector(
               onTap: () async => {
                 context.setLocale(Locale('en')),
+                Fluttertoast.showToast(
+                    msg: 'Successful',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM)
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -72,7 +83,13 @@ class _LanguagePageState extends State<LanguagePage> {
               height: 20,
             ),
             GestureDetector(
-              onTap: () async => context.setLocale(Locale('pl')),
+              onTap: () async => {
+                context.setLocale(Locale('pl')),
+                Fluttertoast.showToast(
+                    msg: 'odnoszący sukcesy',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM)
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
